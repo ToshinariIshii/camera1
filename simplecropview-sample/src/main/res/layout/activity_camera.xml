@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_camera"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <SurfaceView
+        android:id="@+id/surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="368dp"
+        android:layout_above="@+id/buttonSave" />
+
+    <TextView
+        android:text="撮影する際は正確な結果を出すために明るい環境で撮影してください"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/surface_view"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="182dp"
+            android:layout_height="match_parent"
+            android:text="Save"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom|center_vertical|center_horizontal"
+            android:layout_centerHorizontal="true"
+            style="@android:style/Widget.Button.Toggle"
+            android:textSize="36sp">
+
+        </Button>
+
+        <ImageView
+            app:srcCompat="@drawable/baby_face"
+            android:id="@+id/imageView"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>
