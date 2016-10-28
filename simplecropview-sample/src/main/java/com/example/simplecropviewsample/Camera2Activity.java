@@ -39,6 +39,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -55,12 +56,17 @@ import java.util.List;
 
 public class Camera2Activity extends Activity {
     public static String name;
+    public static String name2;
+    public static String strSaveDir;
+    public static String strSaveFileName;
+    public static String strSaveFileNameunk;
+
     private Size mPreviewSize;
     private TextureView mTextureView;
     private CameraDevice mCameraDevice;
     private CaptureRequest.Builder mPreviewBuilder;
     private CameraCaptureSession mPreviewSession;
-    private Button mBtnTakingPhoto;
+    private ImageButton mBtnTakingPhoto;
 
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
@@ -87,7 +93,7 @@ public class Camera2Activity extends Activity {
         mTextureView = (TextureView) findViewById(R.id.textureView);
         mTextureView.setSurfaceTextureListener(mCameraViewStatusChanged);
 
-        mBtnTakingPhoto = (Button) findViewById(R.id.picture);
+        mBtnTakingPhoto = (ImageButton) findViewById(R.id.picture);
         mBtnTakingPhoto.setOnClickListener(mBtnShotClicked);
     }
 
@@ -259,9 +265,11 @@ public class Camera2Activity extends Activity {
             // ファイルの保存先のディレクトリとファイル名.
             Date mDate = new Date();
             SimpleDateFormat fileNameDate = new SimpleDateFormat("yyyyMMdd_HHmm");
-            String strSaveDir = Environment.getExternalStorageDirectory().toString() + "/MyPhoto";
-            String strSaveFileName = "pic_" + fileNameDate.format(mDate) + ".jpg";
-            name =strSaveDir + "/"+strSaveFileName;
+            strSaveDir = Environment.getExternalStorageDirectory().toString() + "/MyPhoto";
+            strSaveFileName = "pic_" + fileNameDate.format(mDate) + ".jpg";
+            strSaveFileNameunk = "pic_" + fileNameDate.format(mDate) + "unk.jpg";
+            name = strSaveDir + "/"+strSaveFileName;//picture path
+            name2 = strSaveDir + "/"+strSaveFileNameunk;//triming path
             final File file = new File(strSaveDir, strSaveFileName);
             final File file2 = new File(strSaveDir);
            try{
