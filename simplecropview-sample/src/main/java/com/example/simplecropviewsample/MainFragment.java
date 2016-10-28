@@ -74,7 +74,7 @@ public class MainFragment extends Fragment {
         // set bitmap to CropImageView
         if (mCropView.getImageBitmap() == null) {
 
-            String test = CameraActivity.AttachName;
+            String test = Camera2Activity.name;
             Bitmap bmImg = BitmapFactory.decodeFile(test);
             mCropView.setImageBitmap(bmImg);
         }
