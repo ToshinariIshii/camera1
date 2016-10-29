@@ -9,4 +9,5 @@
     <string name="action_settings">settings</string>
     <string name="action_settings2">settings2</string>
     <string name="push">押せ</string>
+    <string name="result">ここに判別結果が表示されます。</string>
 </resources>

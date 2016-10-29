@@ -21,9 +21,11 @@
         android:id="@+id/picture"
         android:layout_weight="1"
         android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:contentDescription="@string/push"
+        android:layout_marginBottom="28dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="70dp" />
+        android:layout_centerHorizontal="true" />
 
     <!--<Button-->
         <!--android:id="@+id/picture"-->

@@ -5,7 +5,7 @@
     <color name="colorAccent">#5DAC81</color>
     <color name="windowBackground">#1C1C1C</color>
     <color name="colorButtonNormal">#FFFFFB</color>
-    <color name="textColorPrimary">#FFFFFB</color>
+    <color name="textColorPrimary">#4e4e23</color>
     <color name="textColorPrimaryInverse">#1C1C1C</color>
     <color name="overlay">#AA1C1C1C</color>
     <color name="divider">#333333</color>

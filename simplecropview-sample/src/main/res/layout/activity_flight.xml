@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="ここに判別結果が表示されます。"
+        android:text="@string/result"
         android:id="@+id/textview1"
         android:textSize="14sp"
         android:fontFamily="sans-serif"
