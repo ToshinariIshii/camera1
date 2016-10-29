@@ -30,7 +30,11 @@
             android:name=".MainActivity">
         </activity>
         <activity
-            android:name=".ResultActivity">
+            android:name=".dump">
+        </activity>
+        <activity
+            android:name=".ResultActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
