@@ -41,7 +41,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView imgView;
     public static Bitmap bitmap;
     public static Button button1;
-
+    private static int backhome=0;//ホームに戻る
     public static int reqC;// int requestCode保存しておく
     public static int resC;// int resultCode保存しておく
     public static Intent I;// Intent data保存しておく
@@ -94,8 +94,8 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 //        }
 @Override
    public void onClick(View view) {
+    if(backhome==0) {
         /* ビットマップ取得 */
-
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         pixels = new int[width * height];
@@ -104,7 +104,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
 
         /* rgb[][]にRGB値を格納 */
-        for(int i=0; i<width*height; i++){
+        for (int i = 0; i < width * height; i++) {
             rgb[i][0] = Color.red(pixels[i]);
             rgb[i][1] = Color.green(pixels[i]);
             rgb[i][2] = Color.blue(pixels[i]);
@@ -123,6 +123,13 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         TextView textView = (TextView) findViewById(R.id.textview1);
         // テキストビューのテキストを設定します
         textView.setText(output);
+        button1.setText("もどる");
+        backhome = 1;
+    }else{
+        backhome = 0;
+        Intent intent = new Intent(getApplication(),MainTabActivity.class);
+        startActivity(intent);
+    }
     }
 
     public int calcImageSize() {

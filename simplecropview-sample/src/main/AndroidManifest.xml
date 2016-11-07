@@ -17,22 +17,20 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Light.NoActionBar">
         <activity
-                android:configChanges="orientation|screenSize"
-                android:name=".Camera2Activity"
-                android:label="@string/app_name"
-                >
+            android:name=".MainTabActivity"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity">
         </activity>
         <activity
             android:name=".ResultActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".Camera2Activity" />
+        <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>
