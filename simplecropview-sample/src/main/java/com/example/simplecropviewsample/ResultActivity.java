@@ -64,7 +64,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         int maxSize = Utils.getMaxSize();
         int requestSize = Math.min(calcImageSize(), maxSize);
         bitmap = Utils.decodeSampledBitmapFromUri(this, uri, requestSize);
-//        imgView.setImageBitmap(bitmap);
+        imgView.setImageBitmap(bitmap);
         // ギャラリー呼び出し
         /*Intent intent = new Intent();
         intent.setType("image/*");

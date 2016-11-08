@@ -3,6 +3,8 @@ package com.example.simplecropviewsample;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -22,7 +24,15 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabhost);
-        
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                startTextActivity();
+            }
+        });
         mTabHost = (TabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup();        
         
@@ -46,8 +56,7 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         
 
         mTabHost.setOnTabChangedListener(this);
-
-        // �����^�u�I��
+        
         onTabChanged("tab1");        
     }
 
@@ -91,6 +100,9 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
     public void startCamera2Activity() {
         Intent intent = new Intent(this,Camera2Activity.class);
         startActivity(intent);
-
+    }
+    public void startTextActivity() {
+        Intent intent = new Intent(this,TextActivity.class);
+        startActivity(intent);
     }
 }
