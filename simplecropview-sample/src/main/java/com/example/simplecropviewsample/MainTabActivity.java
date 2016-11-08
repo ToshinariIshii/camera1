@@ -15,7 +15,7 @@ import android.widget.TabHost.TabSpec;
 
 public class MainTabActivity extends FragmentActivity implements TabHost.OnTabChangeListener {
 
-	// TabHost
+	// TabHost 
     private TabHost mTabHost;
     // Last selected tabId
     private String mLastTabId;
@@ -56,7 +56,7 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         
 
         mTabHost.setOnTabChangedListener(this);
-        
+
         onTabChanged("tab1");        
     }
 
