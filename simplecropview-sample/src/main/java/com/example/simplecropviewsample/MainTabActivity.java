@@ -12,10 +12,11 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
+import android.widget.Toast;
 
 public class MainTabActivity extends FragmentActivity implements TabHost.OnTabChangeListener {
 
-	// TabHost 
+	// TabHost
     private TabHost mTabHost;
     // Last selected tabId
     private String mLastTabId;
@@ -56,7 +57,7 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         
 
         mTabHost.setOnTabChangedListener(this);
-
+        
         onTabChanged("tab1");        
     }
 
@@ -74,7 +75,7 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
             		.replace(R.id.realtabcontent, new Tab2Fragment());
             }else if("tab3" == tabId){
             	fragmentTransaction
-            		.replace(R.id.realtabcontent, new Tab3Fragment());
+            		.replace(R.id.realtabcontent, new SeekBar_Activity());
             }
     		mLastTabId = tabId;
     		fragmentTransaction.commit();
@@ -104,5 +105,13 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
     public void startTextActivity() {
         Intent intent = new Intent(this,TextActivity.class);
         startActivity(intent);
+    }
+
+    public void SeekToast1() {
+        Toast.makeText(this, "保存した(してない)", Toast.LENGTH_SHORT).show();
+    }
+
+    public void SeekToast2() {
+        Toast.makeText(this, "殺す", Toast.LENGTH_SHORT).show();
     }
 }

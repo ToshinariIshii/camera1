@@ -58,7 +58,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight);
-        imgView = (ImageView) findViewById(R.id.imageView1);
+        imgView = (ImageView) findViewById(R.id.imageView);
         button1 = (Button)findViewById(R.id.button1);
         final Uri uri = getIntent().getData();
         int maxSize = Utils.getMaxSize();
