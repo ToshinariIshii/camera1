@@ -24,8 +24,8 @@ public class SeekBar_Activity extends Fragment {
     private TextView st1, bm, cv1, yaku, ml, mv;//seek, breastMilk, check, yaku, ml, milk
     private Button cb;
     private Button sb;
-    static int sbTri = 0;
-    private EditText et;
+    static int sbTri;
+    private EditText et,memo;
 
     String s = "うわあぁあぁｳﾝﾁｳﾝﾁｳﾝﾁ";
 
@@ -35,6 +35,8 @@ public class SeekBar_Activity extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_seek, container, false);
+
+        sbTri = 0;//初期化
 
         seekBar = (SeekBar)v.findViewById(R.id.SeekBar01);
         st1 = (TextView)v. findViewById(R.id.seekText);
@@ -47,8 +49,10 @@ public class SeekBar_Activity extends Fragment {
         cb = (Button)v. findViewById(R.id.cancelButton1);
         sb = (Button)v. findViewById(R.id.saveButton1);
         et = (EditText)v. findViewById(R.id.editText);
+        memo = (EditText)v. findViewById(R.id.memo);
 
 
+        memo.setVisibility(View.INVISIBLE); // checkView1 の非表示
         cv1.setVisibility(View.INVISIBLE); // checkView1 の非表示
 
         st1.setText(s);
@@ -104,11 +108,11 @@ public class SeekBar_Activity extends Fragment {
                 else milkValue = 0;
 
                 cv1.setText("以下の内容で保存してもよろしいですか？\n\n"
-                        + "---------------------------------------------------------\n"
+                        + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
                         + "母乳: " + s + "\n\n"
                         + "粉ミルク: 約 " + milkValue + " ml\n"
-                        + "---------------------------------------------------------\n");
+                        + "--------------------------------------------------------------\n");
                 //非表示
                 st1.setVisibility(View.INVISIBLE);
                 bm.setVisibility(View.INVISIBLE);

@@ -9,17 +9,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.simplecropviewsample.SeekBar_Activity">
+    tools:context="com.example.simplecropviewsample.SeekBar_Activity"
+    android:background="#FFFFFF">
 
     <TextView
         android:text="TextView"
         android:id="@+id/checkView1"
         android:layout_alignTop="@+id/seekText"
         android:layout_centerHorizontal="true"
-        android:layout_width="300dp"
         android:layout_height="400dp"
         android:background="@drawable/lavel_background"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_width="350dp" />
 
     <SeekBar
         android:id="@+id/SeekBar01"
@@ -51,7 +52,8 @@
         android:id="@+id/editText"
         android:background="@drawable/text_background"
         android:layout_width="100dp"
-        android:layout_marginTop="250dp" />
+        android:layout_marginTop="250dp"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:text="母乳の摂取量(見た感覚で)"
@@ -98,7 +100,7 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="cancel"
+        android:text="キャンセル"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="51dp"
@@ -108,7 +110,7 @@
         android:layout_toStartOf="@+id/editText" />
 
     <Button
-        android:text="save"
+        android:text="進む"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/saveButton1"
@@ -116,5 +118,69 @@
         android:layout_alignBottom="@+id/cancelButton1"
         android:layout_toRightOf="@+id/editText"
         android:layout_toEndOf="@+id/editText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/memo"
+        android:layout_alignTop="@+id/checkView1"
+        android:layout_alignRight="@+id/checkView1"
+        android:layout_alignEnd="@+id/checkView1"
+        android:layout_alignLeft="@+id/checkView1"
+        android:layout_alignStart="@+id/checkView1"
+        android:layout_height="150dp"
+        android:background="@drawable/text_background"
+        android:layout_above="@+id/cancelButton1" />
+
+    <TextView
+        android:text="体温:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cancelButton1"
+        android:layout_alignStart="@+id/cancelButton1"
+        android:id="@+id/degree"
+        android:layout_alignBottom="@+id/spinner2"
+        android:layout_alignTop="@+id/spinner2"
+        android:textSize="36sp" />
+
+    <TextView
+        android:text="体重:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/degree"
+        android:layout_alignLeft="@+id/degree"
+        android:layout_alignStart="@+id/degree"
+        android:layout_marginTop="19dp"
+        android:id="@+id/textView5"
+        android:textSize="36sp"
+        android:layout_alignRight="@+id/degree"
+        android:layout_alignEnd="@+id/degree" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner3"
+        android:layout_alignLeft="@+id/spinner2"
+        android:layout_alignStart="@+id/spinner2"
+        android:layout_alignTop="@+id/textView5"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignRight="@+id/spinner2"
+        android:layout_alignEnd="@+id/spinner2"
+        android:background="#CCCCCC" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"
+
+
+        android:entries="@array/list"
+        android:background="#CCCCCC"
+        android:textColor
+
+        android:layout_alignTop="@+id/checkView1"
+        android:layout_alignLeft="@+id/ml"
+        android:layout_alignStart="@+id/ml" />
 
 </RelativeLayout>
