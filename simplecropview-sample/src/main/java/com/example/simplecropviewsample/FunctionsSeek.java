@@ -15,14 +15,12 @@ public class FunctionsSeek {
             case 0:
                 return "0: ぜんぜん飲んでいない";
             case 1:
-                return "1: ほんの少しだけ飲んだ";
-            case 2:
                 return "2: 少し飲んだ";
-            case 3:
+            case 2:
                 return "3: いつもくらい";
-            case 4:
+            case 3:
                 return "4: けっこう飲んだ";
-            case 5:
+            case 4:
                 return "5: ものすごく飲んだ";
             default:
                 return "うんちまみれ"; // 例外処理

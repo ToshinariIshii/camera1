@@ -16,6 +16,7 @@
     <string name="homeMenuText">ホーム画面</string>
 
     <string-array name="list">
+        <item>(未入力)</item>
         <item>35.0</item>
         <item>35.1</item>
         <item>35.2</item>
