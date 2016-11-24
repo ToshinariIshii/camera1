@@ -36,6 +36,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     public static double rgb[][];// rgb[ピクセル番号][RかGかBか]
     public static double hsv[][];// hsv[ピクセル番号][HかSかVか]
     public static double[] majorHSV = { 0, 0, 0 };// HSVそれぞれの平均値を格納する
+    public static int[] majorRGB = {0, 0, 0};
     public static int dResult;//discriminationResult 判別結果
     private static final int REQUEST_GALLERY = 0;
     private ImageView imgView;
@@ -113,13 +114,20 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         /* RGBをHSVに変換 */
         hsv = Functions.convertRGBIntoHSV(rgb, width, height);
 
+        double[] anal = {325,95,210};
+
         /* 全ピクセルのHSVの平均値を格納 */
         majorHSV = Functions.MajorHSV(hsv, width, height);
+        //majorHSV = anal;
+
+        majorRGB = Functions.convertHSVIntoRGB(majorHSV);
 
         dResult = Functions.result(majorHSV);
 
         String output = Functions.outputResult(dResult);
         output += "\nmajorH: " + majorHSV[0] + "\nmajorS: " + majorHSV[1] + "\nmajorV: " + majorHSV[2];
+        output += "\nmajorR: " + majorRGB[0] + "\nmajorG: " + majorRGB[1] + "\nmajorB: " + majorRGB[2];
+
         TextView textView = (TextView) findViewById(R.id.textview1);
         // テキストビューのテキストを設定します
         textView.setText(output);

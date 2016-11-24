@@ -39,12 +39,14 @@ public class Functions {
 
 			/* 彩度S */
 			if(sort[0]!=sort[2])
-				hsv[i][1] = ((sort[0] - sort[2]) / sort[0]) * 100;// Sが0~100の場合
+				hsv[i][1] = ((sort[0] - sort[2]) / sort[0]) * 255;// Sが0~255の場合
+				//hsv[i][1] = ((sort[0] - sort[2]) / sort[0]) * 100;// Sが0~100の場合
 			else
 				hsv[i][1] = 0;
 
 			/* 明度V */
-			hsv[i][2] = sort[0] / 255 * 100;// Vが0~100の場合
+			hsv[i][2] = sort[0];// Vが0~255の場合
+			//hsv[i][2] = sort[0] / 255 * 100;// Vが0~100の場合
 		}
 		
 		return hsv;
@@ -55,23 +57,27 @@ public class Functions {
 		double[] majorHSV = new double[] {0,0,0};//HSVそれぞれの平均値を格納する
 		int maxh = 0,maxs = 0,maxv = 0;//ここ int maxh,maxs,maxv = 0; って書き方してたのが、上書きされない原因だった
 		int fh[] = new int[360];
-		int fs[] = new int[100];
-		int fv[] = new int[100];
-
+		//int fs[] = new int[100];
+		//int fv[] = new int[100];
+		int fs[] = new int[255];
+		int fv[] = new int[255];
 
 		/* 初期値 */
 		for (int i = 0; i < 360; i++) {
 			fh[i] = 0;
 		}
-		for (int i = 0; i < 100; i++) {
+		//for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 255; i++) {
 			fs[i] = 0;
 			fv[i] = 0;
 		}
 
 		/* 頻度(検出されるたび+1する) */
 		for (int i = 0; i < xsize * ysize; i++) {
-			if(hsv[i][1] >= 99) hsv[i][1] = 99;
-			if(hsv[i][2] >= 99) hsv[i][2] = 99;
+			//if(hsv[i][1] >= 99) hsv[i][1] = 99;
+			//if(hsv[i][2] >= 99) hsv[i][2] = 99;
+			if(hsv[i][1] >= 254) hsv[i][1] = 254;
+			if(hsv[i][2] >= 254) hsv[i][2] = 254;
 			fh[(int)hsv[i][0]]++;
 			fs[(int)hsv[i][1]]++;
 			fv[(int)hsv[i][2]]++;
@@ -85,7 +91,8 @@ public class Functions {
 			}
 		}
 		/* いちばん出現頻度の高いSとVをだす */
-		for(int i = 0; i < 100; i++){
+		//for(int i = 0; i < 100; i++){
+		for(int i = 0; i < 255; i++){
 			if(maxs < fs[i]){
 				majorHSV[1] = i;
 				maxs = fs[i];
@@ -96,6 +103,60 @@ public class Functions {
 			}
 		}
 		return majorHSV;
+	}
+
+
+	/*RGBそれぞれの平均値をだすメソッド*/
+	public static int[] convertHSVIntoRGB(double[] majorHSV) {
+		int[] majorRGB = new int[] {0,0,0};//HSVそれぞれの平均値を格納する
+		double max = majorHSV[2];
+		double min = max - ((majorHSV[1] / 255) * max);
+
+		switch((int)(majorHSV[0]/60)){
+			//0 ~ 60
+			case 0:
+				majorRGB[0] = (int)max;
+				majorRGB[1] = (int)((majorHSV[0] / 60) * (max - min) + min);
+				majorRGB[2] = (int)min;
+				break;
+			//60 ~ 120
+			case 1:
+				majorRGB[0] = (int)(((120 - majorHSV[0]) / 60) * (max - min) + min);
+				majorRGB[1] = (int)max;
+				majorRGB[2] = (int)min;
+				break;
+			//120 ~ 180
+			case 2:
+				majorRGB[0] = (int)min;
+				majorRGB[1] = (int)max;
+				majorRGB[2] = (int)(((majorHSV[0] - 120) / 60) * (max - min) + min);;
+				break;
+			//180 ~ 240
+			case 3:
+				majorRGB[0] = (int)min;
+				majorRGB[1] = (int)(((240 - majorHSV[0]) / 60) * (max - min) + min);
+				majorRGB[2] = (int)max;
+				break;
+			//240 ~ 300
+			case 4:
+				majorRGB[0] = (int)(((majorHSV[0] - 240) / 60) * (max - min) + min);
+				majorRGB[1] = (int)min;
+				majorRGB[2] = (int)max;
+				break;
+			//300 ~ 360
+			case 5:
+				majorRGB[0] = (int)max;
+				majorRGB[1] = (int)min;
+				majorRGB[2] = (int)(((360 - majorHSV[0]) / 60) * (max - min) + min);
+				break;
+			default:
+				majorRGB[0] = 0;
+				majorRGB[1] = 0;
+				majorRGB[2] = 0;
+				break;
+
+		}
+		return majorRGB;
 	}
 
 

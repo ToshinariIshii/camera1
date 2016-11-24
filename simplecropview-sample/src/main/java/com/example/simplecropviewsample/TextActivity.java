@@ -1,5 +1,6 @@
 package com.example.simplecropviewsample;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +22,9 @@ public class TextActivity extends AppCompatActivity {
     public static CheckBox cb1,cb2,cb3,cb4,cb5;
     public static EditText editMemo;
 
+    MyOpenHelper helper = new MyOpenHelper(this);
+    final SQLiteDatabase db = helper.getReadableDatabase();
+
     public static int actTri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,8 @@ public class TextActivity extends AppCompatActivity {
 
         actCheckView.setVisibility(View.INVISIBLE);
 
-
     }
+
     public void ClickActSave(View view) {
         switch(actTri){
             case 0:
