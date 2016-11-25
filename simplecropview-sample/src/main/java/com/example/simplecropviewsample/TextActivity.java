@@ -1,10 +1,8 @@
 package com.example.simplecropviewsample;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,9 +19,6 @@ public class TextActivity extends AppCompatActivity {
     public static TextView textViewCheck, textViewMemo, actCheckView;
     public static CheckBox cb1,cb2,cb3,cb4,cb5;
     public static EditText editMemo;
-
-    MyOpenHelper helper = new MyOpenHelper(this);
-    final SQLiteDatabase db = helper.getReadableDatabase();
 
     public static int actTri;
     @Override

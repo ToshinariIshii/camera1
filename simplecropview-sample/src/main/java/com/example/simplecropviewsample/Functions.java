@@ -176,17 +176,17 @@ public class Functions {
 		double dmin = 360;//difference HSVの差分の最小
 		double d;//difference
 
-		if(majorHSV[2] < 20)// うんこ黒かったら9に分類
+		if(majorHSV[2] < 20*255/100)// うんこ黒かったら9に分類
 			return 9;
-		if((majorHSV[0] < 30 || majorHSV[0] > 200) && majorHSV[1] > 17)// うんこ赤かったら8に分類
+		if((majorHSV[0] < 30 || majorHSV[0] > 200) && majorHSV[1] > 17*255/100)// うんこ赤かったら8に分類
 			return 8;
-		if(majorHSV[1] >= 0 && majorHSV[1] < 25 && majorHSV[2] > 75)// 白さと明度に応じて1 ~ 4判別
+		if(majorHSV[1] >= 0 && majorHSV[1] < 25*255/100 && majorHSV[2] > 75*255/100)// 白さと明度に応じて1 ~ 4判別
 			return 1;
-		if(majorHSV[1] < 39 && majorHSV[2] > 75)
+		if(majorHSV[1] < 39*255/100 && majorHSV[2] > 75*255/100)
 			return 2;
-		if(majorHSV[1] < 55 && majorHSV[2] > 75)
+		if(majorHSV[1] < 55*255/100 && majorHSV[2] > 75*255/100)
 			return 3;
-		if(majorHSV[1] < 70 && majorHSV[2] > 75)
+		if(majorHSV[1] < 70*255/100 && majorHSV[2] > 75*255/100)
 			return 4;
 		for(int i=4; i<7; i++){ // 色相に応じて5 ~ 7判別
 			d = majorHSV[0] - sampleHSV[i][0];
@@ -206,16 +206,39 @@ public class Functions {
 	public static String outputResult(int dResult){
 		String r;
 		r = "ウンチ判別結果: 「" + dResult + "」\n\n";
-		if(dResult >= 1 && dResult < 4)
-			r += "2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。\n";
-		else if(dResult == 4)
-			r += "6~7日観察を続け、判別結果が「4」のまま、あるいは1~3へと変化したら\n最寄りの小児科(もしくは産科)を受診しましょう。\n";
-		else if(dResult == 8)
-			r += "ウンチに赤みがかかっています。\n" + "2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。\n";
-		else if(dResult == 9)
-			r += "ウンチの黒みが非常に強いです。\n";
-		else
-			r += "健康なウンチであると思われます。\n";
+		switch(dResult) {
+			case 1:
+				r += "2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。\n";
+				break;
+			case 2:
+				r += "2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。\n";
+				break;
+			case 3:
+				r += "2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。\n";
+				break;
+			case 4:
+				r += "6~7日観察を続け、判別結果が「4」のまま、あるいは1~3へと変化したら\n最寄りの小児科(もしくは産科)を受診しましょう。\n";
+				break;
+			case 5:
+				r += "健康なウンチであると思われます。\n";
+				break;
+			case 6:
+				r += "健康なウンチであると思われます。\n";
+				break;
+			case 7:
+				r += "健康なウンチであると思われます。\n";
+				break;
+			case 8:
+				r += "ウンチに赤みがかかっています。\n" + "2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。\n";
+				break;
+			case 9:
+				r += "ウンチの黒みが非常に強いです。\n";
+				break;
+			default:
+
+				break;
+
+		}
 
         return r;
 	}

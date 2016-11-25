@@ -10,43 +10,168 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.simplecropviewsample.ResultActivity"
+    android:orientation="vertical"
     android:background="#64ff64">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1"
+    <TextView
+        android:text="TextView"
+        android:id="@+id/unkoCheckView"
+        android:background="@drawable/lavel_background"
+        android:textSize="18sp"
+        android:layout_width="450dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:gravity="center">
+        android:layout_height="450dp" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            app:srcCompat="@drawable/boku"
-            android:id="@+id/imageView"
-            android:layout_height="150dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:text="@string/result"
+        android:id="@+id/textview1"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:background="@drawable/text_background"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:text="@string/result"
-            android:id="@+id/textview1"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif"
-            android:background="@drawable/text_background"
-            android:layout_height="300dp" />
+    <TextView
+        android:text="におい"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/nioi"
+        android:textSize="30sp"
+        android:textColor="@android:color/black" />
 
-        <Button
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/nioi"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:text="無臭"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/musyuu"
+            android:layout_weight="1"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:text="酸臭"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button1"
+            android:layout_alignStart="@+id/button1"
+            android:id="@+id/suppai"
+            android:layout_below="@+id/otona"
+            android:layout_weight="1"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:text="大人に近い"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/otona"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/button1"
+            android:layout_alignStart="@+id/button1"
+            android:layout_weight="1"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:text="腐敗臭"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/huhai"
+            android:layout_weight="1"
+            android:textColor="#000000" />
+    </RadioGroup>
+
+    <TextView
+        android:text="排泄量"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nioi"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/haisetuText"
+        android:layout_marginTop="30dp"
+        android:textSize="30sp"
+        android:textColor="#000000" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/haisetuText"
+        android:layout_toEndOf="@+id/nioi"
+        android:id="@+id/haisetuSeek"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:max="4"
+        android:progress="0" />
+
+    <TextView
+        android:text="水っぽさ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mizupposaText"
+        android:layout_below="@+id/haisetuView"
+        android:textColor="#000000"
+        android:textSize="30sp" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mizupposaText"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/mizupposaSeek"
+        android:max="4"
+        android:progress="0" />
+
+    <TextView
+        android:text="(未入力)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/haisetuView"
+        android:textColor="#333333"
+        android:layout_below="@+id/haisetuSeek"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="(未入力)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView11"
+        android:layout_below="@+id/mizupposaSeek"
+        android:layout_centerHorizontal="true"
+        android:textColor="#333333" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_height="100dp" />
+
+    <Button
             android:text="@string/push"
             android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:id="@+id/button1"
             android:onClick="onClick"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_weight="0.56" />
-    </LinearLayout>
+        android:layout_weight="0.56"
+        android:layout_alignParentLeft="false"
+        android:layout_alignLeft="@+id/unkoCheckView"
+        android:layout_alignBottom="@+id/unkoCheckView"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp" />
 
     <!--android:background="@android:color/background_light" /> -->
 

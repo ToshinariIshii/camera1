@@ -18,8 +18,6 @@ import android.widget.TextView;
 
 public class SeekBar_Activity extends Fragment {
 
-    MyOpenHelper helper = new MyOpenHelper(getActivity());
-    final SQLiteDatabase db = helper.getReadableDatabase();
 
     /*最終的に渡す値*/
     public static String realTime; // 桁数の関係でStringにした "yyyyMMddHHmm"

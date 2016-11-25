@@ -1,14 +1,16 @@
 package com.example.simplecropviewsample;
 
 
+import android.support.v7.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 /**
  * Created by hanekawanal on 2016/11/05.
  */
 
-public class FunctionsSeek {
+public class FunctionsSeek extends AppCompatActivity {
 
     public static String valueOfBreastMilk(int seek){
         switch (seek){
