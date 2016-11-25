@@ -31,6 +31,7 @@
         <activity android:name=".Camera2Activity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".TextActivity" />
+        <activity android:name=".TestgraphActivity" />
 
 
     </application>

@@ -1,5 +1,7 @@
 package com.example.simplecropviewsample;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,9 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 public class SeekBar_Activity extends Fragment {
+
+//    MyOpenHelper helper = new MyOpenHelper(getActivity());
+//    final SQLiteDatabase db = helper.getReadableDatabase();
 
     /*最終的に渡す値*/
     public static String realTime; // 桁数の関係でStringにした "yyyyMMddHHmm"
@@ -43,7 +48,6 @@ public class SeekBar_Activity extends Fragment {
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.activity_seek, container, false);
         View vtabhost = inflater.inflate(R.layout.activity_tabhost, container, false);
-
         sbTri = 0;//初期化
 
         seekBar = (SeekBar)v.findViewById(R.id.SeekBar01);
@@ -155,6 +159,7 @@ public class SeekBar_Activity extends Fragment {
                 break;
             case 1:
                 ((MainTabActivity)getActivity()).SeekToast1();
+                ((MainTabActivity)getActivity()).DBsave(milkValue);
                 break;
             default:
                 break;
