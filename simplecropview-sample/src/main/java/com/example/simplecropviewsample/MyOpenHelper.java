@@ -16,6 +16,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table person(" + " date text," + " milk integer"
                         +");");
+        db.execSQL("INSERT INTO person(date,milk) values ('開始日','0');");
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

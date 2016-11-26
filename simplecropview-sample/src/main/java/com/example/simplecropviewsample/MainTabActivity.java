@@ -221,10 +221,10 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         formatter =new SimpleDateFormat("HH:mm.ss");
         // フォーマット
         String date = formatter.format(now);
-
         ContentValues insertValues = new ContentValues();
         insertValues.put("date", date);
         insertValues.put("milk", milk);
+
         long id = db.insert("person", date, insertValues);
     }
 
