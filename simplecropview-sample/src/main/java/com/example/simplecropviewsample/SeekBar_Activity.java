@@ -16,6 +16,8 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import static com.example.simplecropviewsample.MainTabActivity.chart;
+
 public class SeekBar_Activity extends Fragment {
 
 //    MyOpenHelper helper = new MyOpenHelper(getActivity());
@@ -36,7 +38,7 @@ public class SeekBar_Activity extends Fragment {
     private EditText editText;
     private RadioGroup milkGroup;
 
-    private FloatingActionButton fab;
+//    private FloatingActionButton fab;
     static View v;
 
     String s = "(未入力)";//"うわあぁあぁｳﾝﾁｳﾝﾁｳﾝﾁ";
@@ -70,7 +72,7 @@ public class SeekBar_Activity extends Fragment {
         milkGroup.check(R.id.RadioButton1);
         ///////////
 
-        fab = (FloatingActionButton)vtabhost.findViewById(R.id.fab);
+//        fab = (FloatingActionButton)vtabhost.findViewById(R.id.fab);
 
         checkView.setVisibility(View.INVISIBLE); // checkView1 の非表示
 
@@ -149,7 +151,7 @@ public class SeekBar_Activity extends Fragment {
                 ml.setVisibility(View.INVISIBLE);
 
                 ////////
-                fab.setVisibility(View.INVISIBLE);
+//                fab.setVisibility(View.INVISIBLE);
                 milkGroup.setVisibility(View.INVISIBLE);
 
                 cancelButton.setText("戻る");
@@ -160,6 +162,7 @@ public class SeekBar_Activity extends Fragment {
             case 1:
                 ((MainTabActivity)getActivity()).SeekToast1();
                 ((MainTabActivity)getActivity()).DBsave(milkValue);
+            chart=1;
                 break;
             default:
                 break;

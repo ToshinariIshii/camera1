@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,19 +21,26 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.BubbleData;
+import com.github.mikephil.charting.data.BubbleDataSet;
+import com.github.mikephil.charting.data.BubbleEntry;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import static android.graphics.Color.rgb;
 import static com.example.simplecropviewsample.TestgraphActivity.barlabel;
+import static com.example.simplecropviewsample.TestgraphActivity.bubblelabel;
 
 public class MainTabActivity extends FragmentActivity implements TabHost.OnTabChangeListener {
-
+public static int chart=0;
 	// TabHost
     private TabHost mTabHost;
     // Last selected tabId
@@ -41,7 +49,6 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_tabhost);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +96,9 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
             	fragmentTransaction
             		.replace(R.id.realtabcontent, new Tab1Fragment());
             }else if("tab2" == tabId){
-            	fragmentTransaction
-            		.replace(R.id.realtabcontent, new Tab2Fragment());
+//            	fragmentTransaction
+//            		.replace(R.id.realtabcontent, new Tab2Fragment());
+                startCamera2Activity();
             }else if("tab3" == tabId){
             	fragmentTransaction
             		.replace(R.id.realtabcontent, new SeekBar_Activity());
@@ -105,7 +113,6 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
 
         /* Context */
         private final Context mContext;
-
         DummyTabFactory(Context context) {
             mContext = context;
         }
@@ -127,6 +134,8 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
 //        String width = "Width = " + size.x;
 //        String height = "Height = " + size.y;
     }
+
+    //グラフ表示画面で機種によって違う画面の大きさを取得する（削除予定かも）
     public double Windowsize_Y() {
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         // ディスプレイのインスタンス生成
@@ -143,7 +152,7 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milk"}, null,
+        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
@@ -166,6 +175,7 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         db.close();
         return labels;
     }
+
     public void startCamera2Activity() {
         Intent intent = new Intent(this,Camera2Activity.class);
         startActivity(intent);
@@ -186,7 +196,7 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milk"}, null,
+        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
@@ -210,6 +220,53 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         return barData;
     }
 
+    public BubbleData BubbleData(){
+//        final float[] hsv = new float[]{108,243,135};
+        bubblelabel=0;
+        List<Integer> colors = new ArrayList();
+        ArrayList<BubbleEntry> bubble = new ArrayList();
+
+        MyOpenHelper helper = new MyOpenHelper(this);
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        // queryメソッドの実行例
+        Cursor c = db.query("person", new String[]{"date","milk","r", "g", "b","resultnumber"}, null,
+                null, null, null, null);
+        boolean mov = c.moveToFirst();
+        while (mov) {
+            if(c.getInt(5)==0){
+//                bubble.add(new BubbleEntry(bubblelabel,0,0));
+//            }else {
+//            if(bubblelabel==0) {
+                bubble.add(new BubbleEntry(bubblelabel, c.getInt(5), 0f));
+            }else{
+                bubble.add(new BubbleEntry(bubblelabel, c.getInt(5), 1f));
+            }
+//            if(bubblelabel%2==0) {
+//            colors.add(Color.HSVToColor(hsv));
+                colors.add(rgb(c.getInt(2), c.getInt(3), c.getInt(4)));
+//            colors.add(rgb((int)R,(int)G,(int)B));
+//            }
+            bubblelabel++;
+            mov = c.moveToNext();
+        }
+//        bubble.add(new BubbleEntry(0,10f, 3));
+//        bubble.add(new BubbleEntry(1,20f, 6));
+//        bubble.add(new BubbleEntry(2,30f, 9));
+//        bubble.add(new BubbleEntry(3,40f, 12));
+//        bubble.add(new BubbleEntry(4,50f, 15));
+//        bubble.add(new BubbleEntry(5,60f, 18));
+        c.close();
+        db.close();
+        BubbleDataSet bubbleDataSet = new BubbleDataSet( bubble ,"色");
+        bubbleDataSet.setDrawValues(false);
+//        bubbleDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        bubbleDataSet.setColors(colors);
+        BubbleDataSet dataSet = bubbleDataSet; // get a dataset
+        dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);//右のy軸を基準に
+        BubbleData bubbleData = new BubbleData(getXAxisValues(),bubbleDataSet);
+        return bubbleData;
+    }
+
     public void DBsave(int milk) {//DBの保存機能の設定予定いいいいいい
         MyOpenHelper helper = new MyOpenHelper(this);
     final SQLiteDatabase db = helper.getReadableDatabase();
@@ -224,7 +281,10 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
         ContentValues insertValues = new ContentValues();
         insertValues.put("date", date);
         insertValues.put("milk", milk);
-
+        insertValues.put("r", 0);
+        insertValues.put("g", 0);
+        insertValues.put("b", 0);
+        insertValues.put("resultnumber", 0);
         long id = db.insert("person", date, insertValues);
     }
 
@@ -234,5 +294,36 @@ public class MainTabActivity extends FragmentActivity implements TabHost.OnTabCh
 
     public void SeekToast2() {
         Toast.makeText(this, "殺す", Toast.LENGTH_SHORT).show();
+    }
+
+    public int countINIT(){//bubblechartとbarchartのデータがあるかの判定
+        int i=0;
+        int milkcount=0;
+        int resultcount=0;
+        MyOpenHelper helper = new MyOpenHelper(this);
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        // queryメソッドの実行例
+        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
+                null, null, null, null);
+        boolean mov = c.moveToFirst();
+        while (mov) {
+            if(c.getInt(1)>0){
+                milkcount=1;
+            }
+            if(c.getInt(5)>0){
+                resultcount=2;
+            }
+            mov = c.moveToNext();
+        }
+        c.close();
+        db.close();
+        if(milkcount>0 && resultcount>0){
+            i=3;
+        }else if(milkcount>0 && resultcount==0){//milkのみでーたある
+            i=1;
+        }else if(milkcount==0&&resultcount>0){//画像１ッ回取ってる
+            i=2;
+        }
+        return i;
     }
 }
