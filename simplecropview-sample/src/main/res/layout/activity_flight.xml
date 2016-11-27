@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.simplecropviewsample.ResultActivity"
     android:orientation="vertical"
-    android:background="#64ff64">
+    android:background="#66ff66">
 
     <TextView
         android:text="TextView"
@@ -27,7 +27,7 @@
     <TextView
         android:layout_width="match_parent"
         android:text="@string/result"
-        android:id="@+id/textview1"
+        android:id="@+id/resultView"
         android:textSize="14sp"
         android:fontFamily="sans-serif"
         android:background="@drawable/text_background"
@@ -40,7 +40,7 @@
         android:text="におい"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textview1"
+        android:layout_below="@+id/ika"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/nioi"
@@ -52,7 +52,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/nioi"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/nioiGroup">
 
         <RadioButton
             android:text="無臭"
@@ -66,8 +67,8 @@
             android:text="酸臭"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button1"
-            android:layout_alignStart="@+id/button1"
+            android:layout_alignLeft="@+id/haisetuCancelButton"
+            android:layout_alignStart="@+id/haisetuCancelButton"
             android:id="@+id/suppai"
             android:layout_below="@+id/otona"
             android:layout_weight="1"
@@ -79,8 +80,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/otona"
             android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/button1"
-            android:layout_alignStart="@+id/button1"
+            android:layout_alignLeft="@+id/haisetuCancelButton"
+            android:layout_alignStart="@+id/haisetuCancelButton"
             android:layout_weight="1"
             android:textColor="#000000" />
 
@@ -100,7 +101,7 @@
         android:layout_below="@+id/nioi"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/haisetuText"
+        android:id="@+id/haisetu"
         android:layout_marginTop="30dp"
         android:textSize="30sp"
         android:textColor="#000000" />
@@ -108,7 +109,7 @@
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/haisetuText"
+        android:layout_below="@+id/haisetu"
         android:layout_toEndOf="@+id/nioi"
         android:id="@+id/haisetuSeek"
         android:layout_alignParentLeft="true"
@@ -120,7 +121,7 @@
         android:text="水っぽさ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mizupposaText"
+        android:id="@+id/mizupposa"
         android:layout_below="@+id/haisetuView"
         android:textColor="#000000"
         android:textSize="30sp" />
@@ -128,7 +129,7 @@
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mizupposaText"
+        android:layout_below="@+id/mizupposa"
         android:layout_centerHorizontal="true"
         android:id="@+id/mizupposaSeek"
         android:max="4"
@@ -147,7 +148,7 @@
         android:text="(未入力)"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView11"
+        android:id="@+id/mizupposaView"
         android:layout_below="@+id/mizupposaSeek"
         android:layout_centerHorizontal="true"
         android:textColor="#333333" />
@@ -161,17 +162,39 @@
         android:layout_height="100dp" />
 
     <Button
-            android:text="@string/push"
-            android:layout_width="131dp"
+            android:text="戻る"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button1"
-            android:onClick="onClick"
+            android:id="@+id/haisetuCancelButton"
+            android:onClick="ClickHaisetuCancelButton"
         android:layout_weight="0.56"
         android:layout_alignParentLeft="false"
         android:layout_alignLeft="@+id/unkoCheckView"
         android:layout_alignBottom="@+id/unkoCheckView"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp" />
+
+    <Button
+        android:text="進む"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/haisetuSaveButton"
+        android:layout_alignBottom="@+id/unkoCheckView"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignRight="@+id/unkoCheckView"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:onClick="ClickHaisetuSaveButton" />
+
+    <TextView
+        android:text="- 以下入力 -"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ika"
+        android:textSize="24sp"
+        android:layout_below="@+id/resultView"
+        android:layout_centerHorizontal="true" />
 
     <!--android:background="@android:color/background_light" /> -->
 

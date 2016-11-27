@@ -3,7 +3,6 @@ package com.example.simplecropviewsample;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,28 +12,32 @@ import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.isseiaoki.simplecropview.util.Utils;
 
-import java.io.InputStream;
-
-public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
+public class ResultActivity extends AppCompatActivity{
     public static int pixels[];
     public static double rgb[][];// rgb[ピクセル番号][RかGかBか]
     public static double hsv[][];// hsv[ピクセル番号][HかSかVか]
     public static double[] majorHSV = {0, 0, 0};// HSVそれぞれの平均値を格納する
     public static int[] majorRGB = {0, 0, 0};
     public static int dResult;//discriminationResult 判別結果
-    private static final int REQUEST_GALLERY = 0;
-    private ImageView imgView;
+    private static TextView ika, unkoCheckView, nioi, haisetu, mizupposa, haisetuView, mizupposaView;
+    private static ImageView imgView;
     public static Bitmap bitmap;
-    public static Button button1;
+    public static Button haisetuCancelButton, haisetuSaveButton;
+    public static RadioGroup nioiGroup;
+
+
     private static int backhome = 0;//ホームに戻る
     public static int reqC;// int requestCode保存しておく
     public static int resC;// int resultCode保存しておく
     public static Intent I;// Intent data保存しておく
+
+    private static int haisetuTri = 0;//初期化
 
 
     public static Intent createIntent(Activity activity, Uri uri) {//画像の受取
@@ -49,7 +52,17 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight);
         imgView = (ImageView) findViewById(R.id.imageView);
-        button1 = (Button) findViewById(R.id.button1);
+        haisetuCancelButton = (Button) findViewById(R.id.haisetuCancelButton);
+
+        ika = (TextView) findViewById(R.id.ika);
+        unkoCheckView = (TextView) findViewById(R.id.unkoCheckView);
+        nioi = (TextView) findViewById(R.id.nioi);
+        haisetu = (TextView) findViewById(R.id.haisetu);
+        mizupposa = (TextView) findViewById(R.id.mizupposa);
+        haisetuView = (TextView) findViewById(R.id.haisetuView);
+        mizupposaView = (TextView) findViewById(R.id.mizupposaView);
+        nioiGroup = (RadioGroup) findViewById(R.id.nioiGroup);
+
         final Uri uri = getIntent().getData();
         int maxSize = Utils.getMaxSize();
         int requestSize = Math.min(calcImageSize(), maxSize);
@@ -88,10 +101,9 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             output += "\nmajorR: " + majorRGB[0] + "\nmajorG: " + majorRGB[1] + "\nmajorB: " + majorRGB[2];
 
 
-            TextView textView = (TextView) findViewById(R.id.textview1);
+            TextView textView = (TextView) findViewById(R.id.resultView);
             // テキストビューのテキストを設定します
             textView.setText(output);
-            button1.setText("もどる");
             backhome = 1;
         } else {
             backhome = 0;
@@ -108,27 +120,30 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     /* クリックした時の処理 */
-    @Override
-    public void onClick(View view) {
-        Toast.makeText(this, "ギャラリーへリクエストした", Toast.LENGTH_SHORT).show();
+    public void ClickHaisetuCancelButton(View view) {
+        switch(haisetuTri) {
+            case 0:
+                Toast.makeText(this, "殺す", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                haisetuTri--;
+                break;
+            default:
+                break;
+        }
+    }
 
-        /* ギャラリー呼び出し */
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, REQUEST_GALLERY);
+    public void ClickHaisetuSaveButton(View view) {
+        switch(haisetuTri) {
+            case 0:
 
-        /* ギャラリーから画像ファイル選択 */
-        if (reqC == REQUEST_GALLERY && resC == RESULT_OK) {
-            try {
-                InputStream in = getContentResolver().openInputStream(I.getData());
-                bitmap = BitmapFactory.decodeStream(in);
-                in.close();
-                // 選択した画像を表示
-                imgView.setImageBitmap(bitmap);
-            } catch (Exception e) {
-                //うんち
-            }
+                haisetuTri++;
+                break;
+            case 1:
+                Toast.makeText(this, "保存した(してない)", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
         }
     }
 }
