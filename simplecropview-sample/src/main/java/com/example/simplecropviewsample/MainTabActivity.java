@@ -21,6 +21,7 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -28,6 +29,9 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.BubbleData;
 import com.github.mikephil.charting.data.BubbleDataSet;
 import com.github.mikephil.charting.data.BubbleEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,7 +43,7 @@ import static android.graphics.Color.rgb;
 import static com.example.simplecropviewsample.TestgraphActivity.barlabel;
 import static com.example.simplecropviewsample.TestgraphActivity.bubblelabel;
 
-public class MainTabActivity extends FragmentActivity implements TabHost.OnTabChangeListener {
+public class MainTabActivity extends FragmentActivity implements TabHost.OnTabChangeListener, OnChartValueSelectedListener {
 public static int chart=0;
 	// TabHost
     private TabHost mTabHost;
@@ -106,6 +110,16 @@ public static int chart=0;
     		mLastTabId = tabId;
     		fragmentTransaction.commit();
     	}
+    }
+
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+
+    }
+
+    @Override
+    public void onNothingSelected() {
+
     }
 
 
@@ -266,7 +280,26 @@ public static int chart=0;
         BubbleData bubbleData = new BubbleData(getXAxisValues(),bubbleDataSet);
         return bubbleData;
     }
+public void combine(CombinedChart combinedChart) {
+    combinedChart.setOnChartValueSelectedListener(this);
+    combinedChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+        @Override
+        public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+            if (e == null)
+                return;
+            Toast.makeText(MainTabActivity.this, getXAxisValues().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
+//            Intent dbIntent = new Intent(this,TestgraphActivity.class);
+//            startActivity(dbIntent);
+            startTestgraphActivity();
 
+        }
+
+        @Override
+        public void onNothingSelected() {
+
+        }
+    });
+}
     public void DBsave(int milk) {//DBの保存機能の設定予定いいいいいい
         MyOpenHelper helper = new MyOpenHelper(this);
     final SQLiteDatabase db = helper.getReadableDatabase();
@@ -287,6 +320,8 @@ public static int chart=0;
         insertValues.put("resultnumber", 0);
         long id = db.insert("person", date, insertValues);
     }
+
+
 
     public void SeekToast1() {
         Toast.makeText(this, "保存した(してない)", Toast.LENGTH_SHORT).show();
