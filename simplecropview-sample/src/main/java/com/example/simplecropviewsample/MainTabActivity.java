@@ -218,7 +218,7 @@ public static int chart=0;
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            group1.add(new BarEntry(c.getInt(1),barlabel,(boku)));
+            group1.add(new BarEntry(c.getInt(1),barlabel,boku));
             barlabel++;
             mov = c.moveToNext();
         }
@@ -229,7 +229,7 @@ public static int chart=0;
 //        group1.add(new BarEntry(180f,4));
 //        group1.add(new BarEntry(90f,5));
         BarDataSet barDataSet = new BarDataSet(group1,"ミルクの量");
-        barDataSet.setDrawValues(false);
+//        barDataSet.setDrawValues(false);
         //barDataSet.setColor(Color.rgb(0, 155, 0));
 //        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         BarData barData = new BarData(getXAxisValues(),barDataSet);

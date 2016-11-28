@@ -1,11 +1,8 @@
 package com.example.simplecropviewsample;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,46 +12,35 @@ import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.isseiaoki.simplecropview.util.Utils;
 
-import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static com.example.simplecropviewsample.MainTabActivity.chart;
-/*
-import android.content.res.Resources;
-import android.os.Build;
-import android.provider.MediaStore;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.graphics.Canvas;
-import android.app.Activity;
-import static android.R.attr.id;
-*/
-
-
-public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
+public class ResultActivity extends AppCompatActivity{
     public static int pixels[];
     public static double rgb[][];// rgb[ピクセル番号][RかGかBか]
     public static double hsv[][];// hsv[ピクセル番号][HかSかVか]
     public static double[] majorHSV = {0, 0, 0};// HSVそれぞれの平均値を格納する
     public static int[] majorRGB = {0, 0, 0};
     public static int dResult;//discriminationResult 判別結果
-    private static final int REQUEST_GALLERY = 0;
-    private ImageView imgView;
+    private static TextView ika, unkoCheckView, nioi, haisetu, mizupposa, haisetuView, mizupposaView;
+    private static ImageView imgView;
     public static Bitmap bitmap;
-    public static Button button1;
+    public static Button haisetuCancelButton, haisetuSaveButton;
+    public static RadioGroup nioiGroup;
+
+
     private static int backhome = 0;//ホームに戻る
     public static int reqC;// int requestCode保存しておく
     public static int resC;// int resultCode保存しておく
     public static Intent I;// Intent data保存しておく
+
+    private static int haisetuTri = 0;//初期化
     public static String date;
     public static int bubbleinit;
+
 
     public static Intent createIntent(Activity activity, Uri uri) {//画像の受取
         Intent intent = new Intent(activity, ResultActivity.class);
@@ -68,15 +54,23 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight);
         imgView = (ImageView) findViewById(R.id.imageView);
-        button1 = (Button) findViewById(R.id.button1);
+        haisetuCancelButton = (Button) findViewById(R.id.haisetuCancelButton);
+
+        ika = (TextView) findViewById(R.id.ika);
+        unkoCheckView = (TextView) findViewById(R.id.unkoCheckView);
+        nioi = (TextView) findViewById(R.id.nioi);
+        haisetu = (TextView) findViewById(R.id.haisetu);
+        mizupposa = (TextView) findViewById(R.id.mizupposa);
+        haisetuView = (TextView) findViewById(R.id.haisetuView);
+        mizupposaView = (TextView) findViewById(R.id.mizupposaView);
+        nioiGroup = (RadioGroup) findViewById(R.id.nioiGroup);
+
         final Uri uri = getIntent().getData();
         int maxSize = Utils.getMaxSize();
         int requestSize = Math.min(calcImageSize(), maxSize);
         bitmap = Utils.decodeSampledBitmapFromUri(this, uri, requestSize);
         imgView.setImageBitmap(bitmap);
-    }
-        @Override
-        public void onClick(View view) {
+
         if (backhome == 0) {
         /* ビットマップ取得 */
             int width = bitmap.getWidth();
@@ -105,33 +99,13 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
             String output = Functions.outputResult(dResult);
 
-            output += "\nmajorH: " + majorHSV[0] + "\nmajorS: " + majorHSV[1] + "\nmajorV: " + majorHSV[2];
-            output += "\nmajorR: " + majorRGB[0] + "\nmajorG: " + majorRGB[1] + "\nmajorB: " + majorRGB[2];
-            //データベースへの保存を行う
-            MyOpenHelper helper = new MyOpenHelper(this);
-            final SQLiteDatabase db = helper.getWritableDatabase();
-            // 現在日時の取得
-            Date now = new Date(System.currentTimeMillis());
-            // 日時のフォーマットオブジェクト作成
-            DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
-            formatter =new SimpleDateFormat("dd日 HH:mm.ss");
-            formatter =new SimpleDateFormat("HH:mm.ss");
-            // フォーマット
-            date = formatter.format(now);
-            ContentValues insertValues = new ContentValues();
-            insertValues.put("date", date);
-            insertValues.put("milk", 0);
-            insertValues.put("r", majorRGB[0]);
-            insertValues.put("g", majorRGB[1]);
-            insertValues.put("b", majorRGB[2]);
-            insertValues.put("resultnumber", dResult);
-            long id = db.insert("person", date, insertValues);
-            chart=1;
-            bubbleinit=1;
-            TextView textView = (TextView) findViewById(R.id.textview1);
+//            output += "\nmajorH: " + majorHSV[0] + "\nmajorS: " + majorHSV[1] + "\nmajorV: " + majorHSV[2];
+//            output += "\nmajorR: " + majorRGB[0] + "\nmajorG: " + majorRGB[1] + "\nmajorB: " + majorRGB[2];
+
+
+            TextView textView = (TextView) findViewById(R.id.resultView);
             // テキストビューのテキストを設定します
             textView.setText(output);
-            button1.setText("もどる");
             backhome = 1;
         } else {
             backhome = 0;
@@ -147,28 +121,51 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         return Math.min(Math.max(metrics.widthPixels, metrics.heightPixels), 2048);
     }
 
-//    /* クリックした時の処理 */
-//    @Override
-//    public void onClick(View view) {
-//        Toast.makeText(this, "ギャラリーへリクエストした", Toast.LENGTH_SHORT).show();
-//
-//        /* ギャラリー呼び出し */
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(intent, REQUEST_GALLERY);
-//
-//        /* ギャラリーから画像ファイル選択 */
-//        if (reqC == REQUEST_GALLERY && resC == RESULT_OK) {
-//            try {
-//                InputStream in = getContentResolver().openInputStream(I.getData());
-//                bitmap = BitmapFactory.decodeStream(in);
-//                in.close();
-//                // 選択した画像を表示
-//                imgView.setImageBitmap(bitmap);
-//            } catch (Exception e) {
-//                //うんち
-//            }
-//        }
-//    }
+    /* クリックした時の処理 */
+    public void ClickHaisetuCancelButton(View view) {
+        switch(haisetuTri) {
+            case 0:
+                Toast.makeText(this, "殺す", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+
+                ika.setVisibility(View.VISIBLE);
+                unkoCheckView.setVisibility(View.VISIBLE);
+                nioi.setVisibility(View.VISIBLE);
+                haisetu.setVisibility(View.VISIBLE);
+                mizupposa.setVisibility(View.VISIBLE);
+                mizupposaView.setVisibility(View.VISIBLE);
+
+                haisetuView.setVisibility(View.INVISIBLE);
+
+                haisetuTri--;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ClickHaisetuSaveButton(View view) {
+        switch(haisetuTri) {
+            case 0:
+
+                ika.setVisibility(View.INVISIBLE);
+                unkoCheckView.setVisibility(View.INVISIBLE);
+                nioi.setVisibility(View.INVISIBLE);
+                haisetu.setVisibility(View.INVISIBLE);
+                mizupposa.setVisibility(View.INVISIBLE);
+                mizupposaView.setVisibility(View.INVISIBLE);
+
+                haisetuView.setVisibility(View.VISIBLE);
+
+                haisetuTri++;
+                break;
+            case 1:
+
+                Toast.makeText(this, "保存した(してない)", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+    }
 }
