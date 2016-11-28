@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -40,6 +41,7 @@ import java.util.Date;
 import java.util.List;
 
 import static android.graphics.Color.rgb;
+import static com.example.simplecropviewsample.R.drawable.boku;
 import static com.example.simplecropviewsample.TestgraphActivity.barlabel;
 import static com.example.simplecropviewsample.TestgraphActivity.bubblelabel;
 
@@ -60,7 +62,7 @@ public static int chart=0;
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                startTestgraphActivity();
+                startTextActivity();
             }
         });
         mTabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -68,19 +70,20 @@ public static int chart=0;
 
         /* Tab1 */
         TabSpec tab1 = mTabHost.newTabSpec("tab1");
-        tab1.setIndicator("TAB1");
+        tab1.setIndicator("Home",ResourcesCompat.getDrawable(getResources(), R.drawable.ic_android_black_24dp, null));
         tab1.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab1);
 
         // Tab2 */
         TabSpec tab2 = mTabHost.newTabSpec("tab2");
-        tab2.setIndicator("TAB2");
+        tab2.setIndicator("Camera",getResources().getDrawable(android.R.drawable.ic_btn_speak_now));
         tab2.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab2);
 
         // Tab3 */
         TabSpec tab3 = mTabHost.newTabSpec("tab3");
-        tab3.setIndicator("TAB3");
+        tab3.setIndicator("Milk",getResources().getDrawable(android.R.drawable.ic_btn_speak_now));
+//        tab3.setIndicator("Milk",ResourcesCompat.getDrawable(getResources(), R.drawable.ic_android_black_24dp, null));
         tab3.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab3);
 
@@ -171,6 +174,7 @@ public static int chart=0;
         boolean mov = c.moveToFirst();
         while (mov) {
             labels.add(c.getString(0));
+
             mov = c.moveToNext();
         }
 //        labels.add("JAN");
@@ -214,7 +218,7 @@ public static int chart=0;
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            group1.add(new BarEntry(c.getInt(1),barlabel));
+            group1.add(new BarEntry(c.getInt(1),barlabel,(boku)));
             barlabel++;
             mov = c.moveToNext();
         }
@@ -290,7 +294,7 @@ public void combine(CombinedChart combinedChart) {
             Toast.makeText(MainTabActivity.this, getXAxisValues().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
 //            Intent dbIntent = new Intent(this,TestgraphActivity.class);
 //            startActivity(dbIntent);
-            startTestgraphActivity();
+            startTextActivity();
 
         }
 

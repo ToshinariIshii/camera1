@@ -54,7 +54,7 @@ public class Tab1Fragment extends Fragment {
 //        combinedChart.getAxisLeft().setDrawGridLines(false);//グラフの線の除去
         combinedChart.getAxisRight().setDrawGridLines(false);//グラフの線の除去
         combinedChart.getXAxis().setDrawGridLines(false);//グラフの線の除去
-        combinedChart.setDescription("11月25日");    // Hide the description
+        combinedChart.setDescription("11月28日");    // Hide the description
         combinedChart.setDescriptionPosition((float)size_x/2,100);
         ((MainTabActivity) getActivity()).combine(combinedChart);
 //        combinedChart.moveViewToX(0);
