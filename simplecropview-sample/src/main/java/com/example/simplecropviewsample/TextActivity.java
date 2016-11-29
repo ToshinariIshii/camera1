@@ -1,11 +1,13 @@
 package com.example.simplecropviewsample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by b1014001 on 2016/11/08.
@@ -69,7 +71,7 @@ public class TextActivity extends AppCompatActivity {
                         + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
                         + "　チェック済: \n" + StrChecked + "\n"
-                        + "　メモ内容: \n　" + editMomoToString + "\n"
+                        + "　メモ内容: \n　　" + editMomoToString + "\n"
                         + "--------------------------------------------------------------\n");
 
                 editMomoToString = editMemo.getText().toString();
@@ -82,10 +84,13 @@ public class TextActivity extends AppCompatActivity {
                 cb4.setVisibility(View.INVISIBLE);
                 cb5.setVisibility(View.INVISIBLE);
                 editMemo.setVisibility(View.INVISIBLE);
-                actTri++;
+                actTri = 1;
                 break;
             case 1:
-
+                Toast.makeText(this, "保存した(してない)", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent();
+                intent2.setClassName("com.example.simplecropviewsample", "com.example.simplecropviewsample.MainTabActivity");
+                startActivity(intent2);
                 break;
             default:
                 break;
@@ -95,6 +100,10 @@ public class TextActivity extends AppCompatActivity {
     public void ClickActCancel(View view) {
         switch(actTri){
             case 0:
+                Toast.makeText(this, "殺す", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent();
+                intent2.setClassName("com.example.simplecropviewsample", "com.example.simplecropviewsample.MainTabActivity");
+                startActivity(intent2);
 
                 break;
             case 1:
@@ -108,7 +117,7 @@ public class TextActivity extends AppCompatActivity {
                 cb4.setVisibility(View.VISIBLE);
                 cb5.setVisibility(View.VISIBLE);
                 editMemo.setVisibility(View.VISIBLE);
-                actTri--;
+                actTri = 0;
                 break;
 
             default:

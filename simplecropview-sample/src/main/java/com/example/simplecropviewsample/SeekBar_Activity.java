@@ -133,9 +133,9 @@ public class SeekBar_Activity extends Fragment {
                 checkView.setText("\n　　　　　　 [内容確認]\n以下の入力内容で保存してもよろしいでしょうか？\n\n"
                         + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
-                        + "摂取物: 「" + StrCheckedButton + "」\n\n"
-                        + "摂取量(主観): 「" + s + "」\n\n"
-                        + "摂取量(測量): 「約 " + milkValue + " ml」\n"
+                        + "摂取物: \n　　　　　「" + StrCheckedButton + "」\n\n"
+                        + "摂取量(主観): \n　　　　　「" + s + "」\n\n"
+                        + "摂取量(測量): \n　　　　　「約 " + milkValue + " ml」\n"
                         + "--------------------------------------------------------------\n");
                 //非表示
                 seekText1.setVisibility(View.INVISIBLE);
@@ -150,7 +150,6 @@ public class SeekBar_Activity extends Fragment {
                 editText.setVisibility(View.INVISIBLE);
                 ml.setVisibility(View.INVISIBLE);
 
-                ////////
 //                fab.setVisibility(View.INVISIBLE);
                 milkGroup.setVisibility(View.INVISIBLE);
 

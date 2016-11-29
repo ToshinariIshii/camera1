@@ -243,4 +243,40 @@ public class Functions {
 		return r;
 	}
 
+
+
+	public static String valueOfHaisetu(int seek){
+		switch (seek){
+			case 0:
+				return "0. ぜんぜん出ていない";
+			case 1:
+				return "1. 少し出た";
+			case 2:
+				return "2. いつもくらい";
+			case 3:
+				return "3. けっこう出た";
+			case 4:
+				return "4. ものすごく出た";
+			default:
+				return "うんちまみれ"; // 例外処理
+		}
+	}
+
+	public static String valueOfMizupposa(int seek){
+		switch (seek){
+			case 0:
+				return "0. ｶｯｽｶｽ";
+			case 1:
+				return "1. 乾き気味";
+			case 2:
+				return "2. いつもくらい";
+			case 3:
+				return "3. 少し水っぽい";
+			case 4:
+				return "4. ものすごく水っぽい";
+			default:
+				return "うんちまみれ"; // 例外処理
+		}
+	}
+
 }
