@@ -37,8 +37,9 @@ public class ResultActivity extends AppCompatActivity{
     public static double hsv[][];// hsv[ピクセル番号][HかSかVか]
     public static double[] majorHSV = {0, 0, 0};// HSVそれぞれの平均値を格納する
     public static int[] majorRGB = {0, 0, 0};
+    public static String output;
     public static int dResult;//discriminationResult 判別結果
-    private static TextView unkoCheckView, nioi, haisetu, mizupposa, resultView, haisetuView, mizupposaView;
+    private static TextView unkoCheckView, nioi, haisetu, mizupposa, resultView, haisetuView, mizupposaView, memo;
     private static ImageView imgView;
     private static EditText hitokotomemo;
 
@@ -86,6 +87,7 @@ public class ResultActivity extends AppCompatActivity{
         mizupposaView = (TextView) findViewById(R.id.mizupposaView);
         resultView = (TextView) findViewById(R.id.resultView);
         hitokotomemo = (EditText) findViewById(R.id.hitokotomemo);
+        memo = (TextView) findViewById(R.id.memo);
 
         nioiGroup = (RadioGroup) findViewById(R.id.nioiGroup);
         // 指定した ID のラジオボタンをチェックします
@@ -130,7 +132,7 @@ public class ResultActivity extends AppCompatActivity{
 
         dResult = Functions.result(majorHSV);
 
-        String output = Functions.outputResult(dResult);
+        output = Functions.outputResult(dResult);
 
 //            output += "\nmajorH: " + majorHSV[0] + "\nmajorS: " + majorHSV[1] + "\nmajorV: " + majorHSV[2];
 //            output += "\nmajorR: " + majorRGB[0] + "\nmajorG: " + majorRGB[1] + "\nmajorB: " + majorRGB[2];
@@ -229,10 +231,10 @@ public class ResultActivity extends AppCompatActivity{
     public void ClickHaisetuCancelButton(View view) {
         switch(haisetuTri) {
             case 0:
-                Toast.makeText(this, "殺す", Toast.LENGTH_SHORT).show();
 //                Intent intent2 = new Intent();
 //                intent2.setClassName("com.example.simplecropviewsample", "com.example.simplecropviewsample.MainTabActivity");
 //                startActivity(intent2);
+                Toast.makeText(this, "入力情報を破棄した", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getApplicationContext(),MainTabActivity.class);
                 startActivity(intent);
                 break;
@@ -249,6 +251,8 @@ public class ResultActivity extends AppCompatActivity{
                 mizupposaSeek.setVisibility(View.VISIBLE);
                 imgView.setVisibility(View.VISIBLE);
                 resultView.setVisibility(View.VISIBLE);
+                memo.setVisibility(View.VISIBLE);
+                hitokotomemo.setVisibility(View.VISIBLE);
 
 
                 unkoCheckView.setVisibility(View.INVISIBLE);
@@ -277,6 +281,8 @@ public class ResultActivity extends AppCompatActivity{
                 haisetuView.setVisibility(View.INVISIBLE);
                 imgView.setVisibility(View.INVISIBLE);
                 resultView.setVisibility(View.INVISIBLE);
+                memo.setVisibility(View.INVISIBLE);
+                hitokotomemo.setVisibility(View.INVISIBLE);
 
                 RadioButton checkedButton = (RadioButton) findViewById(nioiGroup.getCheckedRadioButtonId());
                 StrCheckedButton = checkedButton.getText().toString();
@@ -286,7 +292,7 @@ public class ResultActivity extends AppCompatActivity{
                 unkoCheckView.setText("　　　　　　 [内容確認]\n以下の入力内容で保存してもよろしいでしょうか？\n"
                         + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
-                        + dResult
+                        + output
                         + "　におい:\n　　　　「" + StrCheckedButton + "」\n"
                         + "　排泄量:\n　　　　「" + haisetuS + "」\n"
                         + "　水っぽさ:\n　　　　「" + mizupposaS + "」\n"
@@ -320,8 +326,9 @@ public class ResultActivity extends AppCompatActivity{
 
                 chart=1;
                 bubbleinit=1;
-                Toast.makeText(this, "保存した(してない)", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getApplicationContext(),MainTabActivity.class);
+
+                Toast.makeText(this, "保存した", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),MainTabActivity.class);
                 startActivity(intent);
                 break;
             default:

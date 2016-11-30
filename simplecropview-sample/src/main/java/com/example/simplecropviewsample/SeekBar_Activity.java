@@ -1,5 +1,6 @@
 package com.example.simplecropviewsample;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -157,11 +158,12 @@ public class SeekBar_Activity extends Fragment {
                 cancelButton.setText("戻る");
                 saveButton.setText("保存");
 
-                sbTri++;
+                sbTri = 1;
                 break;
             case 1:
                 ((MainTabActivity)getActivity()).SeekToast1();
                 ((MainTabActivity)getActivity()).DBsave(milkValue);
+                ((MainTabActivity)getActivity()).goHome();
             chart=1;
                 break;
             default:
@@ -173,6 +175,7 @@ public class SeekBar_Activity extends Fragment {
         switch (sbTri) {
             case 0:
                 ((MainTabActivity)getActivity()).SeekToast2();
+                ((MainTabActivity)getActivity()).goHome();
                 break;
             case 1:
                 //非表示
@@ -193,9 +196,9 @@ public class SeekBar_Activity extends Fragment {
                 saveButton.setText("進む");
                 checkView.setVisibility(View.INVISIBLE);
 
-                sbTri--;
+                sbTri = 0;
                 break;
-
+/*
             case 2:
                 checkView.setVisibility(View.INVISIBLE);// checkView1 の非表示
 
@@ -204,6 +207,7 @@ public class SeekBar_Activity extends Fragment {
 
                 sbTri--;
                 break;
+                */
             default:
                 break;
         }

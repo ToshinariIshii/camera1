@@ -248,15 +248,15 @@ public class Functions {
 	public static String valueOfHaisetu(int seek){
 		switch (seek){
 			case 0:
-				return "0. ぜんぜん出ていない";
+				return "1. ぜんぜん出ていない";
 			case 1:
-				return "1. 少し出た";
+				return "2. 少し出た";
 			case 2:
-				return "2. いつもくらい";
+				return "3. いつもくらい";
 			case 3:
-				return "3. けっこう出た";
+				return "4. けっこう出た";
 			case 4:
-				return "4. ものすごく出た";
+				return "5. ものすごく出た";
 			default:
 				return "うんちまみれ"; // 例外処理
 		}
@@ -265,15 +265,15 @@ public class Functions {
 	public static String valueOfMizupposa(int seek){
 		switch (seek){
 			case 0:
-				return "0. ｶｯｽｶｽ";
+				return "1. ｶｯｽｶｽ";
 			case 1:
-				return "1. 乾き気味";
+				return "2. 乾き気味";
 			case 2:
-				return "2. いつもくらい";
+				return "3. いつもくらい";
 			case 3:
-				return "3. 少し水っぽい";
+				return "4. 少し水っぽい";
 			case 4:
-				return "4. ものすごく水っぽい";
+				return "5. ものすごく水っぽい";
 			default:
 				return "うんちまみれ"; // 例外処理
 		}

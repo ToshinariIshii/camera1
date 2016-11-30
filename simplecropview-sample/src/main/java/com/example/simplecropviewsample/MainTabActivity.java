@@ -49,7 +49,6 @@ import java.util.Date;
 import java.util.List;
 
 import static android.graphics.Color.rgb;
-import static com.example.simplecropviewsample.R.drawable.boku;
 import static com.example.simplecropviewsample.SubActivity.selectedText_date;
 import static com.example.simplecropviewsample.TestgraphActivity.barlabel;
 import static com.example.simplecropviewsample.TestgraphActivity.bubblelabel;
@@ -375,11 +374,16 @@ public void combine(CombinedChart combinedChart) {
 
 
     public void SeekToast1() {
-        Toast.makeText(this, "保存した(してない)", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "保存した", Toast.LENGTH_SHORT).show();
     }
 
     public void SeekToast2() {
-        Toast.makeText(this, "保存してない", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "入力情報を破棄した", Toast.LENGTH_SHORT).show();
+    }
+
+    public void goHome(){
+        Intent homeIntent = new Intent(this,MainTabActivity.class);
+        startActivity(homeIntent);
     }
 
     public int countINIT(){//bubblechartとbarchartのデータがあるかの判定

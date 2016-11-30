@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -92,7 +93,7 @@ public class TextActivity extends AppCompatActivity {
                 cb4.setVisibility(View.INVISIBLE);
                 cb5.setVisibility(View.INVISIBLE);
                 editMemo.setVisibility(View.INVISIBLE);
-                actTri++;
+                actTri = 1;
                 break;
             case 1:
                 //データベースへの保存を行う
@@ -116,6 +117,7 @@ public class TextActivity extends AppCompatActivity {
                 insertValues.put("memo",editMomoToString);
                 long id = db.insert("person", date, insertValues);
 
+                Toast.makeText(this, "保存した", Toast.LENGTH_SHORT).show();
                 Intent homeIntent = new Intent(this,MainTabActivity.class);
                 startActivity(homeIntent);
                 break;
@@ -127,6 +129,7 @@ public class TextActivity extends AppCompatActivity {
     public void ClickActCancel(View view) {
         switch(actTri){
             case 0:
+                Toast.makeText(this, "入力情報を破棄した", Toast.LENGTH_SHORT).show();
                 Intent homeIntent = new Intent(this,MainTabActivity.class);
                 startActivity(homeIntent);
                 break;
@@ -140,7 +143,7 @@ public class TextActivity extends AppCompatActivity {
                 cb4.setVisibility(View.VISIBLE);
                 cb5.setVisibility(View.VISIBLE);
                 editMemo.setVisibility(View.VISIBLE);
-                actTri--;
+                actTri = 0;
                 break;
 
             default:

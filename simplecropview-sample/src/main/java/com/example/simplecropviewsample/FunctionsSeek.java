@@ -13,15 +13,15 @@ public class FunctionsSeek {
     public static String valueOfBreastMilk(int seek){
         switch (seek){
             case 0:
-                return "0. ぜんぜん飲んでいない";
+                return "1. ぜんぜん飲んでいない";
             case 1:
-                return "1. 少し飲んだ";
+                return "2. 少し飲んだ";
             case 2:
-                return "2. いつもくらい";
+                return "3. いつもくらい";
             case 3:
-                return "3. けっこう飲んだ";
+                return "4. けっこう飲んだ";
             case 4:
-                return "4. ものすごく飲んだ";
+                return "5. ものすごく飲んだ";
             default:
                 return "うんちまみれ"; // 例外処理
         }

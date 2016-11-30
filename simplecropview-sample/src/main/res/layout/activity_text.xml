@@ -38,7 +38,6 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:inputType="textMultiLine"
         android:maxLength="130"
         android:ems="10"
         android:layout_alignParentLeft="true"
@@ -51,7 +50,8 @@
         android:gravity="top|center_vertical"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewMemo"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:inputType="textPersonName" />
 
     <Button
         android:text="戻る"
