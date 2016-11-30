@@ -3,8 +3,12 @@ package com.example.simplecropviewsample;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -22,6 +26,7 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.CandleStickChart;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -30,6 +35,9 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.BubbleData;
 import com.github.mikephil.charting.data.BubbleDataSet;
 import com.github.mikephil.charting.data.BubbleEntry;
+import com.github.mikephil.charting.data.CandleData;
+import com.github.mikephil.charting.data.CandleDataSet;
+import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -174,7 +182,6 @@ public static int chart=0;
         boolean mov = c.moveToFirst();
         while (mov) {
             labels.add(c.getString(0));
-
             mov = c.moveToNext();
         }
 //        labels.add("JAN");
@@ -202,8 +209,8 @@ public static int chart=0;
         Intent intent = new Intent(this,TextActivity.class);
         startActivity(intent);
     }
-    public void startTestgraphActivity() {
-        Intent intent = new Intent(this,TestgraphActivity.class);
+    public void starttesttestActivity() {
+        Intent intent = new Intent(this,testtext.class);
         startActivity(intent);
     }
 
@@ -218,7 +225,7 @@ public static int chart=0;
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            group1.add(new BarEntry(c.getInt(1),barlabel,boku));
+            group1.add(new BarEntry(c.getInt(1),barlabel));
             barlabel++;
             mov = c.moveToNext();
         }
@@ -229,7 +236,7 @@ public static int chart=0;
 //        group1.add(new BarEntry(180f,4));
 //        group1.add(new BarEntry(90f,5));
         BarDataSet barDataSet = new BarDataSet(group1,"ミルクの量");
-//        barDataSet.setDrawValues(false);
+        barDataSet.setDrawValues(false);
         //barDataSet.setColor(Color.rgb(0, 155, 0));
 //        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         BarData barData = new BarData(getXAxisValues(),barDataSet);
@@ -237,7 +244,37 @@ public static int chart=0;
         db.close();
         return barData;
     }
+    public CandleData CandleData(){
+        bubblelabel=0;
+        List<Integer> colors = new ArrayList();
+        ArrayList<CandleEntry> entries= new ArrayList();
+//        entries.add(new CandleEntry(0, 4.62f, 2.02f, 2.70f, 4.13f));
+//                entries.add(new CandleEntry(1, 5.50f, 2.70f, 3.35f, 4.96f));
+//                entries.add(new CandleEntry(2, 5.25f, 3.02f, 3.50f, 4.50f));
+//                entries.add(new CandleEntry(3, 6f,    3.25f, 4.40f, 5.0f));
+//                entries.add(new CandleEntry(4, 5.57f, 2f,    2.80f, 4.5f));
+        MyOpenHelper helper = new MyOpenHelper(this);
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        // queryメソッドの実行例
+        Cursor c = db.query("person", new String[]{"date","milk","r", "g", "b","resultnumber"}, null,
+                null, null, null, null);
+        boolean mov = c.moveToFirst();
+        while (mov) {
+                entries.add(new CandleEntry(bubblelabel, 4.62f, 2.02f, 2.70f, 4.13f));
+            bubblelabel++;
+            colors.add(rgb(255,0,0
+            ));
+            mov = c.moveToNext();
+        }
+        c.close();
+        db.close();
+        CandleDataSet dataset = new CandleDataSet(entries,"Candle");
+        dataset.setDrawValues(false);
+        dataset.setColors(colors);
 
+        CandleData data = new CandleData(getXAxisValues(),dataset);
+        return data;
+    }
     public BubbleData BubbleData(){
 //        final float[] hsv = new float[]{108,243,135};
         bubblelabel=0;
@@ -284,6 +321,7 @@ public static int chart=0;
         BubbleData bubbleData = new BubbleData(getXAxisValues(),bubbleDataSet);
         return bubbleData;
     }
+
 public void combine(CombinedChart combinedChart) {
     combinedChart.setOnChartValueSelectedListener(this);
     combinedChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -294,8 +332,7 @@ public void combine(CombinedChart combinedChart) {
             Toast.makeText(MainTabActivity.this, getXAxisValues().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
 //            Intent dbIntent = new Intent(this,TestgraphActivity.class);
 //            startActivity(dbIntent);
-            startTextActivity();
-
+            starttesttestActivity();
         }
 
         @Override
@@ -322,6 +359,8 @@ public void combine(CombinedChart combinedChart) {
         insertValues.put("g", 0);
         insertValues.put("b", 0);
         insertValues.put("resultnumber", 0);
+        insertValues.put("memo","no data");
+
         long id = db.insert("person", date, insertValues);
     }
 
@@ -332,7 +371,7 @@ public void combine(CombinedChart combinedChart) {
     }
 
     public void SeekToast2() {
-        Toast.makeText(this, "殺す", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "保存してない", Toast.LENGTH_SHORT).show();
     }
 
     public int countINIT(){//bubblechartとbarchartのデータがあるかの判定

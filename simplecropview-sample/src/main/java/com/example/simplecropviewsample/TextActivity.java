@@ -1,13 +1,22 @@
 package com.example.simplecropviewsample;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static com.example.simplecropviewsample.ResultActivity.dResult;
+import static com.example.simplecropviewsample.ResultActivity.date;
+import static com.example.simplecropviewsample.ResultActivity.majorRGB;
 
 /**
  * Created by b1014001 on 2016/11/08.
@@ -71,11 +80,10 @@ public class TextActivity extends AppCompatActivity {
                         + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
                         + "　チェック済: \n" + StrChecked + "\n"
-                        + "　メモ内容: \n　　" + editMomoToString + "\n"
+                        + "　メモ内容: \n　" + editMomoToString + "\n"
                         + "--------------------------------------------------------------\n");
 
                 editMomoToString = editMemo.getText().toString();
-
                 textViewCheck.setVisibility(View.INVISIBLE);
                 textViewMemo.setVisibility(View.INVISIBLE);
                 cb1.setVisibility(View.INVISIBLE);
@@ -84,13 +92,32 @@ public class TextActivity extends AppCompatActivity {
                 cb4.setVisibility(View.INVISIBLE);
                 cb5.setVisibility(View.INVISIBLE);
                 editMemo.setVisibility(View.INVISIBLE);
-                actTri = 1;
+                actTri++;
                 break;
             case 1:
-                Toast.makeText(this, "保存した(してない)", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent();
-                intent2.setClassName("com.example.simplecropviewsample", "com.example.simplecropviewsample.MainTabActivity");
-                startActivity(intent2);
+                //データベースへの保存を行う
+                MyOpenHelper helper = new MyOpenHelper(this);
+                final SQLiteDatabase db = helper.getWritableDatabase();
+                // 現在日時の取得
+                Date now = new Date(System.currentTimeMillis());
+                // 日時のフォーマットオブジェクト作成
+                DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
+                formatter =new SimpleDateFormat("dd日 HH:mm.ss");
+                formatter =new SimpleDateFormat("HH:mm.ss");
+                // フォーマット
+                date = formatter.format(now);
+                ContentValues insertValues = new ContentValues();
+                insertValues.put("date", date);
+                insertValues.put("milk", 0);
+                insertValues.put("r", 0);
+                insertValues.put("g", 0);
+                insertValues.put("b", 0);
+                insertValues.put("resultnumber", 0);
+                insertValues.put("memo",editMomoToString);
+                long id = db.insert("person", date, insertValues);
+
+                Intent homeIntent = new Intent(this,MainTabActivity.class);
+                startActivity(homeIntent);
                 break;
             default:
                 break;
@@ -100,15 +127,11 @@ public class TextActivity extends AppCompatActivity {
     public void ClickActCancel(View view) {
         switch(actTri){
             case 0:
-                Toast.makeText(this, "殺す", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent();
-                intent2.setClassName("com.example.simplecropviewsample", "com.example.simplecropviewsample.MainTabActivity");
-                startActivity(intent2);
-
+                Intent homeIntent = new Intent(this,MainTabActivity.class);
+                startActivity(homeIntent);
                 break;
             case 1:
                 actCheckView.setVisibility(View.INVISIBLE);
-
                 textViewCheck.setVisibility(View.VISIBLE);
                 textViewMemo.setVisibility(View.VISIBLE);
                 cb1.setVisibility(View.VISIBLE);
@@ -117,7 +140,7 @@ public class TextActivity extends AppCompatActivity {
                 cb4.setVisibility(View.VISIBLE);
                 cb5.setVisibility(View.VISIBLE);
                 editMemo.setVisibility(View.VISIBLE);
-                actTri = 0;
+                actTri--;
                 break;
 
             default:
