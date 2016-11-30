@@ -15,7 +15,6 @@ import com.github.mikephil.charting.data.CombinedData;
 
 import static android.content.Context.WINDOW_SERVICE;
 import static com.example.simplecropviewsample.MainTabActivity.chart;
-import static com.example.simplecropviewsample.R.drawable.boku;
 import static com.example.simplecropviewsample.ResultActivity.bubbleinit;
 
 public class Tab1Fragment extends Fragment {
@@ -58,7 +57,7 @@ public class Tab1Fragment extends Fragment {
 //        combinedChart.getAxisLeft().setDrawGridLines(false);//グラフの線の除去
         combinedChart.getAxisRight().setDrawGridLines(false);//グラフの線の除去
         combinedChart.getXAxis().setDrawGridLines(false);//グラフの線の除去
-        combinedChart.setDescription("11月29日");// Hide the description
+        combinedChart.setDescription("11月30日");// Hide the description
         combinedChart.setDescriptionPosition((float)size_x/2,100);
 
         ((MainTabActivity) getActivity()).combine(combinedChart);

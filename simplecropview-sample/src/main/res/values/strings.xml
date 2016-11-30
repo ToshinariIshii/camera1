@@ -14,6 +14,7 @@
     <string name="cameraText">カメラ画面</string>
     <string name="formsText">フォーム画面</string>
     <string name="homeMenuText">ホーム画面</string>
+    <string name="memo">memo</string>
 
     <string-array name="list">
         <item>(未入力)</item>

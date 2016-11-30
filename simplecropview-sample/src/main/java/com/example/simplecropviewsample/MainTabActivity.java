@@ -50,6 +50,7 @@ import java.util.List;
 
 import static android.graphics.Color.rgb;
 import static com.example.simplecropviewsample.R.drawable.boku;
+import static com.example.simplecropviewsample.SubActivity.selectedText_date;
 import static com.example.simplecropviewsample.TestgraphActivity.barlabel;
 import static com.example.simplecropviewsample.TestgraphActivity.bubblelabel;
 
@@ -71,6 +72,7 @@ public static int chart=0;
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
                 startTextActivity();
+//                startSubActivity();
             }
         });
         mTabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -209,6 +211,10 @@ public static int chart=0;
         Intent intent = new Intent(this,TextActivity.class);
         startActivity(intent);
     }
+    public void startSubActivity() {
+        Intent intent = new Intent(this,SubActivity.class);
+        startActivity(intent);
+    }
     public void starttesttestActivity() {
         Intent intent = new Intent(this,testtext.class);
         startActivity(intent);
@@ -332,7 +338,9 @@ public void combine(CombinedChart combinedChart) {
             Toast.makeText(MainTabActivity.this, getXAxisValues().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
 //            Intent dbIntent = new Intent(this,TestgraphActivity.class);
 //            startActivity(dbIntent);
-            starttesttestActivity();
+
+            selectedText_date=getXAxisValues().get(e.getXIndex());
+            startSubActivity();
         }
 
         @Override

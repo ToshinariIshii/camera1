@@ -88,6 +88,7 @@ public class SeekBar_Activity extends Fragment {
                         seekText1.setText(s);
                     }
 
+                    
                     public void onStartTrackingTouch(SeekBar seekBar) {
                         // ツマミに触れたときに呼ばれる
                     }
