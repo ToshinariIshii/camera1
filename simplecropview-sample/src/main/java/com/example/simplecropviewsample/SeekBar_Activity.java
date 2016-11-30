@@ -36,7 +36,7 @@ public class SeekBar_Activity extends Fragment {
     static int sbTri;
     private EditText editText;
     private RadioGroup milkGroup;
-
+//test
 //    private FloatingActionButton fab;
     static View v;
 
