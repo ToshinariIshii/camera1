@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.simplecropviewsample.ResultActivity"
     android:orientation="vertical"
-    android:background="#66ff66">
+    android:background="#FFFFFf">
 
     <TextView
         android:id="@+id/unkoCheckView"
@@ -30,7 +30,7 @@
         android:id="@+id/resultView"
         android:textSize="14sp"
         android:fontFamily="sans-serif"
-        android:background="@drawable/text_background"
+        android:background="@drawable/lavel_background"
         android:layout_below="@+id/imageView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -58,15 +58,6 @@
         android:textSize="30sp"
         android:textColor="#000000" />
 
-    <TextView
-        android:text="水っぽさ"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mizupposa"
-        android:layout_below="@+id/haisetuSeek"
-        android:textColor="#000000"
-        android:textSize="30sp" />
-
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,24 +66,6 @@
         android:id="@+id/mizupposaSeek"
         android:max="4"
         android:progress="0" />
-
-    <TextView
-        android:text="(未入力)"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/haisetuView"
-        android:textColor="#333333"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/nioiGroup" />
-
-    <TextView
-        android:text="(未入力)"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mizupposaView"
-        android:layout_below="@+id/haisetuSeek"
-        android:layout_centerHorizontal="true"
-        android:textColor="#333333" />
 
     <Button
         android:text="戻る"
@@ -188,6 +161,61 @@
             android:layout_weight="1"
             android:textColor="#000000" />
     </RadioGroup>
+
+    <TextView
+        android:text="(未入力)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/haisetuView"
+        android:textColor="#333333"
+        android:layout_alignBaseline="@+id/haisetu"
+        android:layout_alignBottom="@+id/haisetu"
+        android:layout_toRightOf="@+id/mizupposa"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="(未入力)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mizupposaView"
+        android:textColor="#333333"
+        android:layout_alignBaseline="@+id/mizupposa"
+        android:layout_alignBottom="@+id/mizupposa"
+        android:layout_toRightOf="@+id/mizupposa"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="ひとことメモ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mizupposaSeek"
+        android:id="@+id/memo"
+        android:textSize="30sp" />
+
+    <TextView
+        android:text="水っぽさ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mizupposa"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:layout_below="@+id/haisetuSeek"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:layout_below="@+id/memo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/text_background"
+        android:id="@+id/hitokotomemo" />
 
     <!--android:background="@android:color/background_light" /> -->
 

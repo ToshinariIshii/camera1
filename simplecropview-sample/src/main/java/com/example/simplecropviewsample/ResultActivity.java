@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,6 +21,9 @@ import android.widget.Toast;
 import com.isseiaoki.simplecropview.util.Utils;
 
 public class ResultActivity extends AppCompatActivity{
+
+    public static String StrHitokotomemo = "(未入力)";
+
     public static int pixels[];
     public static double rgb[][];// rgb[ピクセル番号][RかGかBか]
     public static double hsv[][];// hsv[ピクセル番号][HかSかVか]
@@ -28,6 +32,7 @@ public class ResultActivity extends AppCompatActivity{
     public static int dResult;//discriminationResult 判別結果
     private static TextView unkoCheckView, nioi, haisetu, mizupposa, resultView, haisetuView, mizupposaView;
     private static ImageView imgView;
+    private static EditText hitokotomemo;
 
     public static RadioGroup nioiGroup;
     static RadioButton musyuu;
@@ -63,8 +68,8 @@ public class ResultActivity extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight);
-        imgView = (ImageView) findViewById(R.id.imageView);
 
+        imgView = (ImageView) findViewById(R.id.imageView);
         unkoCheckView = (TextView) findViewById(R.id.unkoCheckView);
         nioi = (TextView) findViewById(R.id.nioi);
         haisetu = (TextView) findViewById(R.id.haisetu);
@@ -72,6 +77,7 @@ public class ResultActivity extends AppCompatActivity{
         haisetuView = (TextView) findViewById(R.id.haisetuView);
         mizupposaView = (TextView) findViewById(R.id.mizupposaView);
         resultView = (TextView) findViewById(R.id.resultView);
+        hitokotomemo = (EditText) findViewById(R.id.hitokotomemo);
 
         nioiGroup = (RadioGroup) findViewById(R.id.nioiGroup);
         // 指定した ID のラジオボタンをチェックします
@@ -242,13 +248,16 @@ public class ResultActivity extends AppCompatActivity{
                 RadioButton checkedButton = (RadioButton) findViewById(nioiGroup.getCheckedRadioButtonId());
                 StrCheckedButton = checkedButton.getText().toString();
 
+                StrHitokotomemo = hitokotomemo.getText().toString();
+
                 unkoCheckView.setText("　　　　　　 [内容確認]\n以下の入力内容で保存してもよろしいでしょうか？\n"
                         + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
+                        + dResult
                         + "　におい:\n　　　　「" + StrCheckedButton + "」\n"
                         + "　排泄量:\n　　　　「" + haisetuS + "」\n"
                         + "　水っぽさ:\n　　　　「" + mizupposaS + "」\n"
-                        + "　メモ:\n　" + "うんちたべた" + "\n"
+                        + "　メモ:\n　" + StrHitokotomemo + "\n"
                         + "--------------------------------------------------------------\n");
 
                 haisetuTri = 1;
