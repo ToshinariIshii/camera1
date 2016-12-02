@@ -41,6 +41,7 @@ public class Tab1Fragment extends Fragment {
 ////        String width = "Width = " + size.x;
 ////        String height = "Height = " + size.y;
         double size_x=((MainTabActivity)getActivity()).Windowsize_X();
+        double size_y=((MainTabActivity)getActivity()).Windowsize_Y();
         CombinedChart combinedChart = (CombinedChart)v. findViewById(R.id.CombinedChart);
         CombinedData data = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
 //        if(chart!=0) {
@@ -57,14 +58,14 @@ public class Tab1Fragment extends Fragment {
 //        combinedChart.getAxisLeft().setDrawGridLines(false);//グラフの線の除去
         combinedChart.getAxisRight().setDrawGridLines(false);//グラフの線の除去
         combinedChart.getXAxis().setDrawGridLines(false);//グラフの線の除去
-        combinedChart.setDescription("11月30日");// Hide the description
-        combinedChart.setDescriptionPosition((float)size_x/2,100);
+        combinedChart.setDescription("12月02日");// Hide the description
+        combinedChart.setDescriptionPosition((float)size_x/2,(float)size_y);
 
         ((MainTabActivity) getActivity()).combine(combinedChart);
 //        combinedChart.moveViewToX(0);
 //
 //        combinedChart.getAxisLeft().setDrawLabels(false);
-//        combinedChart.getAxisRight().setDrawLabels(false);
+        combinedChart.getAxisRight().setDrawLabels(false);
 //        combinedChart.getXAxis().setDrawLabels(false);
         combinedChart.getLegend().setEnabled(false);   // Hide the legend
         return v;

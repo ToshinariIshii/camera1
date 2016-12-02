@@ -220,17 +220,53 @@ public static int chart=0;
     }
 
     // this method is used to create data for Bar graph
+//    public BarData barData(){
+//        barlabel=0;
+//        ArrayList<BarEntry> group1 = new ArrayList();
+//        MyOpenHelper helper = new MyOpenHelper(this);
+//        final SQLiteDatabase db = helper.getReadableDatabase();
+//        // queryメソッドの実行例
+//        Cursor c = db.query("person", new String[]{"date", "milkseek", "r", "g", "b", "resultnumber"}, null,
+//                null, null, null, null);
+//        boolean mov = c.moveToFirst();
+//        while (mov) {
+//            group1.add(new BarEntry(c.getInt(1),barlabel));
+//            barlabel++;
+//            mov = c.moveToNext();
+//        }
+////        group1.add(new BarEntry(40f,0));
+////        group1.add(new BarEntry(80f,1));
+////        group1.add(new BarEntry(60f,2));
+////        group1.add(new BarEntry(120f,3));
+////        group1.add(new BarEntry(180f,4));
+////        group1.add(new BarEntry(90f,5));
+//        BarDataSet barDataSet = new BarDataSet(group1,"ミルクの量");
+//        barDataSet.setDrawValues(false);
+//        //barDataSet.setColor(Color.rgb(0, 155, 0));
+////        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+//        BarData barData = new BarData(getXAxisValues(),barDataSet);
+//        c.close();
+//        db.close();
+//        return barData;
+//    }
+    // this method is used to create data for Bar graph
     public BarData barData(){
         barlabel=0;
-        ArrayList<BarEntry> group1 = new ArrayList();
+        ArrayList<BarEntry> group1 = new ArrayList<BarEntry>();
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milkseek", "r", "g", "b", "resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"milkseek"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            group1.add(new BarEntry(c.getInt(1),barlabel));
+            if(barlabel%3==0){
+                group1.add(new BarEntry(new float[]{0f,10f,10f,10f,10f,10f,15f,Float.valueOf(c.getInt(0))}, barlabel));
+            }else if(barlabel%7==0){
+                group1.add(new BarEntry(new float[]{10f,0f,10f,10f,0f,10f,25f,Float.valueOf(c.getInt(0))}, barlabel));
+            }else {
+                group1.add(new BarEntry(new float[]{10f, 10f, 10f, 10f, 10f, 10f, 5f, Float.valueOf(c.getInt(0))}, barlabel));
+            }
             barlabel++;
             mov = c.moveToNext();
         }
@@ -240,45 +276,25 @@ public static int chart=0;
 //        group1.add(new BarEntry(120f,3));
 //        group1.add(new BarEntry(180f,4));
 //        group1.add(new BarEntry(90f,5));
-        BarDataSet barDataSet = new BarDataSet(group1,"ミルクの量");
-        barDataSet.setDrawValues(false);
+        BarDataSet barDataSet = new BarDataSet(group1,"");
+//        BarDataSet barDataSet = new BarDataSet(group1,"ミルクの量");
+//        barDataSet.setDrawValues(false);
+        int[] colors = new int[8];
+        colors[0]=Color.rgb(255, 0, 0);
+        colors[1]=Color.rgb(0, 255, 0);
+        colors[2]=Color.rgb(180, 0, 100);
+        colors[3]=Color.rgb(0, 0, 0);
+        colors[4]=Color.rgb(125, 125, 0);
+        colors[5]=Color.rgb(0, 125, 125);
+        colors[6]=Color.rgb(255, 255, 255);
+        colors[7]=Color.rgb(50, 125, 50);
         //barDataSet.setColor(Color.rgb(0, 155, 0));
-//        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        barDataSet.setStackLabels(new String[]{"メモ","嘔吐", "咳が多い", "発疹","機嫌が悪い","元気がない","空白","ミルク"});
+        barDataSet.setColors(colors);
         BarData barData = new BarData(getXAxisValues(),barDataSet);
         c.close();
         db.close();
         return barData;
-    }
-    public CandleData CandleData(){
-        bubblelabel=0;
-        List<Integer> colors = new ArrayList();
-        ArrayList<CandleEntry> entries= new ArrayList();
-//        entries.add(new CandleEntry(0, 4.62f, 2.02f, 2.70f, 4.13f));
-//                entries.add(new CandleEntry(1, 5.50f, 2.70f, 3.35f, 4.96f));
-//                entries.add(new CandleEntry(2, 5.25f, 3.02f, 3.50f, 4.50f));
-//                entries.add(new CandleEntry(3, 6f,    3.25f, 4.40f, 5.0f));
-//                entries.add(new CandleEntry(4, 5.57f, 2f,    2.80f, 4.5f));
-        MyOpenHelper helper = new MyOpenHelper(this);
-        final SQLiteDatabase db = helper.getReadableDatabase();
-        // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date","milkseek","r", "g", "b","resultnumber"}, null,
-                null, null, null, null);
-        boolean mov = c.moveToFirst();
-        while (mov) {
-                entries.add(new CandleEntry(bubblelabel, 4.62f, 2.02f, 2.70f, 4.13f));
-            bubblelabel++;
-            colors.add(rgb(255,0,0
-            ));
-            mov = c.moveToNext();
-        }
-        c.close();
-        db.close();
-        CandleDataSet dataset = new CandleDataSet(entries,"Candle");
-        dataset.setDrawValues(false);
-        dataset.setColors(colors);
-
-        CandleData data = new CandleData(getXAxisValues(),dataset);
-        return data;
     }
     public BubbleData BubbleData(){
 //        final float[] hsv = new float[]{108,243,135};
@@ -297,7 +313,7 @@ public static int chart=0;
 //                bubble.add(new BubbleEntry(bubblelabel,0,0));
 //            }else {
 //            if(bubblelabel==0) {
-                bubble.add(new BubbleEntry(bubblelabel, 1, 1f));
+                bubble.add(new BubbleEntry(bubblelabel, 1, 0f));
                 colors.add(rgb(255, 255, 255));
             }else {
                 if (c.getInt(5) == 0) {

@@ -31,7 +31,8 @@ public class SubActivity extends AppCompatActivity {
     ImageButton bt;
     int color_flag = 0;
     int r = 128, g = 128, b = 128;
-    public static String selectedText_date ="";//date
+    public static String selectedText_date;//date
+public  static int [] SelectedColor =new int[3];
 
     private static final int[] milks = {
             ic_milk_vertical_0_150px,
@@ -61,12 +62,14 @@ public class SubActivity extends AppCompatActivity {
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date","milk","r", "g", "b","resultnumber","memo"}, null,
+        Cursor c = db.query("person", new String[]{"date","milkseek","r", "g", "b","resultnumber","memo"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            if(c.getString(0)==selectedText_date){
-
+            if(c.getString(0).equals(selectedText_date)){
+        SelectedColor[0]=c.getInt(2);
+        SelectedColor[1]=c.getInt(3);
+        SelectedColor[2]=c.getInt(4);
             }
             mov = c.moveToNext();
         }
@@ -111,7 +114,8 @@ public class SubActivity extends AppCompatActivity {
 
         GradientDrawable d = new GradientDrawable();
 //        d.setColor(Color.parseColor(selectedColorCode));
-        d.setColor(rgb(255,0,0));
+        d.setColor(rgb(255,255,255));
+        d.setColor(rgb(SelectedColor[0],SelectedColor[1],SelectedColor[2]));
         d.setShape(GradientDrawable.OVAL);
         bt.setBackgroundDrawable(d);
         //bt.setBackgroundColor(Color.parseColor("#ffffff"));
