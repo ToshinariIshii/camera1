@@ -70,10 +70,7 @@ public  static int [] SelectedColor ={255,255,255};
         SelectedColor[0]=c.getInt(2);
         SelectedColor[1]=c.getInt(3);
         SelectedColor[2]=c.getInt(4);
-            }else{
-                SelectedColor[0]=0;
-                SelectedColor[1]=0;
-                SelectedColor[2]=0;
+            break;
             }
             mov = c.moveToNext();
         }
@@ -118,7 +115,6 @@ public  static int [] SelectedColor ={255,255,255};
 
         GradientDrawable d = new GradientDrawable();
 //        d.setColor(Color.parseColor(selectedColorCode));
-        d.setColor(rgb(255,255,255));
         d.setColor(rgb(SelectedColor[0],SelectedColor[1],SelectedColor[2]));
         d.setShape(GradientDrawable.OVAL);
         bt.setBackgroundDrawable(d);
