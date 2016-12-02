@@ -32,7 +32,7 @@ public class SubActivity extends AppCompatActivity {
     int color_flag = 0;
     int r = 128, g = 128, b = 128;
     public static String selectedText_date;//date
-public  static int [] SelectedColor =new int[3];
+public  static int [] SelectedColor ={255,255,255};
 
     private static final int[] milks = {
             ic_milk_vertical_0_150px,
@@ -70,6 +70,10 @@ public  static int [] SelectedColor =new int[3];
         SelectedColor[0]=c.getInt(2);
         SelectedColor[1]=c.getInt(3);
         SelectedColor[2]=c.getInt(4);
+            }else{
+                SelectedColor[0]=0;
+                SelectedColor[1]=0;
+                SelectedColor[2]=0;
             }
             mov = c.moveToNext();
         }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.CombinedData;
 
 import static android.content.Context.WINDOW_SERVICE;
@@ -59,12 +60,14 @@ public class Tab1Fragment extends Fragment {
         combinedChart.getAxisRight().setDrawGridLines(false);//グラフの線の除去
         combinedChart.getXAxis().setDrawGridLines(false);//グラフの線の除去
         combinedChart.setDescription("12月02日");// Hide the description
-        combinedChart.setDescriptionPosition((float)size_x/2,(float)size_y);
-
+        combinedChart.setDescriptionPosition((float)size_x/2,50);
+        combinedChart.getAxisLeft().setAxisMinValue(0);
+        XAxis xAxis = combinedChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         ((MainTabActivity) getActivity()).combine(combinedChart);
 //        combinedChart.moveViewToX(0);
 //
-//        combinedChart.getAxisLeft().setDrawLabels(false);
+        combinedChart.getAxisLeft().setDrawLabels(false);
         combinedChart.getAxisRight().setDrawLabels(false);
 //        combinedChart.getXAxis().setDrawLabels(false);
         combinedChart.getLegend().setEnabled(false);   // Hide the legend

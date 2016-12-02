@@ -199,6 +199,7 @@ public static int chart=0;
 //        labels.add("JUNE");
         c.close();
         db.close();
+
         return labels;
     }
 
@@ -278,7 +279,7 @@ public static int chart=0;
 //        group1.add(new BarEntry(90f,5));
         BarDataSet barDataSet = new BarDataSet(group1,"");
 //        BarDataSet barDataSet = new BarDataSet(group1,"ミルクの量");
-//        barDataSet.setDrawValues(false);
+        barDataSet.setDrawValues(false);
         int[] colors = new int[8];
         colors[0]=Color.rgb(255, 0, 0);
         colors[1]=Color.rgb(0, 255, 0);
