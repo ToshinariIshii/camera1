@@ -239,7 +239,7 @@ public class ResultActivity extends AppCompatActivity{
                 startActivity(intent);
                 break;
             case 1:
-
+//
 //                ika.setVisibility(View.VISIBLE);
                 nioi.setVisibility(View.VISIBLE);
                 haisetu.setVisibility(View.VISIBLE);

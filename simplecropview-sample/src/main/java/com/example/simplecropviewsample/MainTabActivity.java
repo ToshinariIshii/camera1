@@ -384,9 +384,9 @@ public void combine(CombinedChart combinedChart) {
         ContentValues insertValues = new ContentValues();
         insertValues.put("date", date);
         insertValues.put("milkseek", milkseek);
-        insertValues.put("r", 0);
-        insertValues.put("g", 0);
-        insertValues.put("b", 0);
+        insertValues.put("r", 255);
+        insertValues.put("g", 255);
+        insertValues.put("b", 255);
         insertValues.put("resultnumber", 0);
         insertValues.put("memo","no data");
 
