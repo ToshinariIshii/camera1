@@ -43,16 +43,16 @@ public class Tab1Fragment extends Fragment {
         double size_x=((MainTabActivity)getActivity()).Windowsize_X();
         CombinedChart combinedChart = (CombinedChart)v. findViewById(R.id.CombinedChart);
         CombinedData data = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
-        if(chart!=0) {
+//        if(chart!=0) {
             data.setData(((MainTabActivity) getActivity()).barData());
-            data.setData(((MainTabActivity) getActivity()).CandleData());
-
-            if(bubbleinit==1) {
+//            data.setData(((MainTabActivity) getActivity()).CandleData());
+//
+//            if(bubbleinit==1) {
                 data.setData(((MainTabActivity) getActivity()).BubbleData());
-            }
-        }
+//            }
+//        }
         combinedChart.setData(data);
-        combinedChart.animateY(5000);//アニメーション
+//        combinedChart.animateY(5000);//アニメーション
         combinedChart.setVisibleXRangeMaximum(10);
 //        combinedChart.getAxisLeft().setDrawGridLines(false);//グラフの線の除去
         combinedChart.getAxisRight().setDrawGridLines(false);//グラフの線の除去

@@ -15,10 +15,10 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table person("
-                + "date text," + "milk integer,"
+                + "date text," + "milkseek integer,"
                 +"r integer,"+"g integer,"+"b integer,"
                 +"resultnumber integer,"+"memo text"+");");
-        db.execSQL("INSERT INTO person(date,milk,r,g,b,resultnumber,memo) values ('開始日','0','1','1','1','0','no data');");
+        db.execSQL("INSERT INTO person(date,milkseek,r,g,b,resultnumber,memo) values ('開始日','0','255','255','255','0','no data');");
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

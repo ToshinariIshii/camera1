@@ -315,7 +315,7 @@ public class ResultActivity extends AppCompatActivity{
                 date = formatter.format(now);
                 ContentValues insertValues = new ContentValues();
                 insertValues.put("date", date);
-                insertValues.put("milk", 0);
+                insertValues.put("milkseek", 0);
                 insertValues.put("r", majorRGB[0]);
                 insertValues.put("g", majorRGB[1]);
                 insertValues.put("b", majorRGB[2]);
@@ -323,9 +323,6 @@ public class ResultActivity extends AppCompatActivity{
                 insertValues.put("memo",StrHitokotomemo);
 
                 long id = db.insert("person", date, insertValues);
-
-                chart=1;
-                bubbleinit=1;
 
                 Toast.makeText(this, "保存した", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(),MainTabActivity.class);

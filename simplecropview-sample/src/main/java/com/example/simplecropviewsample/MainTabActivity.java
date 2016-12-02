@@ -79,19 +79,19 @@ public static int chart=0;
 
         /* Tab1 */
         TabSpec tab1 = mTabHost.newTabSpec("tab1");
-        tab1.setIndicator("Home",ResourcesCompat.getDrawable(getResources(), R.drawable.ic_android_black_24dp, null));
+        tab1.setIndicator("Home");
         tab1.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab1);
 
         // Tab2 */
         TabSpec tab2 = mTabHost.newTabSpec("tab2");
-        tab2.setIndicator("Camera",getResources().getDrawable(android.R.drawable.ic_btn_speak_now));
+        tab2.setIndicator("Camera");
         tab2.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab2);
 
         // Tab3 */
         TabSpec tab3 = mTabHost.newTabSpec("tab3");
-        tab3.setIndicator("Milk",getResources().getDrawable(android.R.drawable.ic_btn_speak_now));
+        tab3.setIndicator("Milk");
 //        tab3.setIndicator("Milk",ResourcesCompat.getDrawable(getResources(), R.drawable.ic_android_black_24dp, null));
         tab3.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab3);
@@ -178,7 +178,7 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date", "milkseek", "r", "g", "b", "resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
@@ -226,7 +226,7 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date", "milkseek", "r", "g", "b", "resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
@@ -261,7 +261,7 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date","milk","r", "g", "b","resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date","milkseek","r", "g", "b","resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
@@ -289,23 +289,28 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date","milk","r", "g", "b","resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date","milkseek","r", "g", "b","resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            if(c.getInt(5)==0){
+            if(bubblelabel==0) {
 //                bubble.add(new BubbleEntry(bubblelabel,0,0));
 //            }else {
 //            if(bubblelabel==0) {
-                bubble.add(new BubbleEntry(bubblelabel, c.getInt(5), 0f));
-            }else{
-                bubble.add(new BubbleEntry(bubblelabel, c.getInt(5), 1f));
-            }
+                bubble.add(new BubbleEntry(bubblelabel, 1, 1f));
+                colors.add(rgb(255, 255, 255));
+            }else {
+                if (c.getInt(5) == 0) {
+                    bubble.add(new BubbleEntry(bubblelabel, 1, 0f));
+                    colors.add(rgb(255, 255, 255));
+                } else {
+                    bubble.add(new BubbleEntry(bubblelabel, 9, 1f));
 //            if(bubblelabel%2==0) {
 //            colors.add(Color.HSVToColor(hsv));
-                colors.add(rgb(c.getInt(2), c.getInt(3), c.getInt(4)));
+                    colors.add(rgb(c.getInt(2), c.getInt(3), c.getInt(4)));
 //            colors.add(rgb((int)R,(int)G,(int)B));
-//            }
+                }
+            }
             bubblelabel++;
             mov = c.moveToNext();
         }
@@ -348,7 +353,7 @@ public void combine(CombinedChart combinedChart) {
         }
     });
 }
-    public void DBsave(int milk) {//DBの保存機能の設定予定いいいいいい
+    public void DBsave(int milkseek) {//DBの保存機能の設定予定いいいいいい
         MyOpenHelper helper = new MyOpenHelper(this);
     final SQLiteDatabase db = helper.getReadableDatabase();
         // 現在日時の取得
@@ -361,7 +366,7 @@ public void combine(CombinedChart combinedChart) {
         String date = formatter.format(now);
         ContentValues insertValues = new ContentValues();
         insertValues.put("date", date);
-        insertValues.put("milk", milk);
+        insertValues.put("milkseek", milkseek);
         insertValues.put("r", 0);
         insertValues.put("g", 0);
         insertValues.put("b", 0);
@@ -393,7 +398,7 @@ public void combine(CombinedChart combinedChart) {
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date", "milkseek", "r", "g", "b", "resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
