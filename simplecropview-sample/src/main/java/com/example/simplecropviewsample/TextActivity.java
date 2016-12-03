@@ -23,9 +23,10 @@ import static com.example.simplecropviewsample.ResultActivity.date;
 
 public class TextActivity extends AppCompatActivity {
     /* 渡す値 */
-    public static boolean outocheck, kigencheck, sekicheck, genkicheck, hassincheck;
-    public static String realTime, editMomoToString; // 桁数の関係でStringにした "yyyyMMddHHmm"
-    public static int outo=0, kigen=0, seki=0, genki=0, hassin=0;
+    boolean outocheck, kigencheck, sekicheck, genkicheck, hassincheck;
+    public static String realTime; // 桁数の関係でStringにした "yyyyMMddHHmm"
+    String editMomoToString;
+    int outo=0, kigen=0, seki=0, genki=0, hassin=0;
 
     public static TextView textViewCheck, textViewMemo, actCheckView;
     public static CheckBox cb1,cb2,cb3,cb4,cb5;
@@ -46,7 +47,11 @@ public class TextActivity extends AppCompatActivity {
         cb4 = (CheckBox) findViewById(R.id.checkBox4);
         cb5 = (CheckBox) findViewById(R.id.checkBox5);
         editMemo = (EditText) findViewById(R.id.editMemo);
-
+        outocheck = cb1.isChecked();
+        kigencheck = cb2.isChecked();
+        sekicheck = cb3.isChecked();
+        genkicheck = cb4.isChecked();
+        hassincheck = cb5.isChecked();
         actTri = 0;//初期化
 
         actCheckView.setVisibility(View.INVISIBLE);
@@ -80,8 +85,12 @@ public class TextActivity extends AppCompatActivity {
                 if(hassincheck) hassin=1;
 
 
-                if(editMemo.getText().toString() == null) editMomoToString = "(未入力)";
-                else editMomoToString = editMemo.getText().toString();
+//                if(editMemo.getText().toString() == null) editMomoToString = "(未入力)";
+//                else editMomoToString = editMemo.getText().toString();
+                editMomoToString=editMemo.getText().toString();
+                if(editMomoToString.length()==0){
+                    editMomoToString="(未入力)";
+                }
 
                 actCheckView.setText("　　　　　　 [内容確認]\n以下の入力内容で保存してもよろしいでしょうか？\n"
                         + "--------------------------------------------------------------\n"
@@ -90,7 +99,6 @@ public class TextActivity extends AppCompatActivity {
                         + "　メモ内容: \n　" + editMomoToString + "\n"
                         + "--------------------------------------------------------------\n");
 
-                editMomoToString = editMemo.getText().toString();
                 textViewCheck.setVisibility(View.INVISIBLE);
                 textViewMemo.setVisibility(View.INVISIBLE);
                 cb1.setVisibility(View.INVISIBLE);

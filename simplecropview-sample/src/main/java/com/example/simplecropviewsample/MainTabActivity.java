@@ -422,7 +422,7 @@ public void combine(CombinedChart combinedChart) {
         insertValues.put("g", 255);
         insertValues.put("b", 255);
         insertValues.put("resultnumber", 0);
-        insertValues.put("memo","milk data");
+        insertValues.put("memo","(未入力)");
 
         long id = db.insert("person", date, insertValues);
     }

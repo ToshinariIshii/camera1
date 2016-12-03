@@ -53,7 +53,7 @@ public class ResultActivity extends AppCompatActivity{
     String haisetuS = "(未入力)";
     String mizupposaS = "(未入力)";
 
-    public static String StrCheckedButton = "(未入力)";
+    public static String StrCheckedButton;
 
     public static Bitmap bitmap;
     //    private static int backhome = 0;//ホームに戻る
@@ -286,9 +286,10 @@ public class ResultActivity extends AppCompatActivity{
 
                 RadioButton checkedButton = (RadioButton) findViewById(nioiGroup.getCheckedRadioButtonId());
                 StrCheckedButton = checkedButton.getText().toString();
-
                 StrHitokotomemo = hitokotomemo.getText().toString();
-
+                if(StrHitokotomemo.length() ==0){
+                StrHitokotomemo="(未入力)";
+                }
                 unkoCheckView.setText("　　　　　　 [内容確認]\n以下の入力内容で保存してもよろしいでしょうか？\n"
                         + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
