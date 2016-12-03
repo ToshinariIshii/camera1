@@ -15,9 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.example.simplecropviewsample.ResultActivity.dResult;
 import static com.example.simplecropviewsample.ResultActivity.date;
-import static com.example.simplecropviewsample.ResultActivity.majorRGB;
 
 /**
  * Created by b1014001 on 2016/11/08.
@@ -25,8 +23,9 @@ import static com.example.simplecropviewsample.ResultActivity.majorRGB;
 
 public class TextActivity extends AppCompatActivity {
     /* 渡す値 */
-    public static boolean outo, kigen, seki, genki, hassin;
+    public static boolean outocheck, kigencheck, sekicheck, genkicheck, hassincheck;
     public static String realTime, editMomoToString; // 桁数の関係でStringにした "yyyyMMddHHmm"
+    public static int outo=0, kigen=0, seki=0, genki=0, hassin=0;
 
     public static TextView textViewCheck, textViewMemo, actCheckView;
     public static CheckBox cb1,cb2,cb3,cb4,cb5;
@@ -60,19 +59,26 @@ public class TextActivity extends AppCompatActivity {
                 actCheckView.setVisibility(View.VISIBLE);
 
                 realTime = FunctionsSeek.realTime(1);
-                outo = cb1.isChecked();
-                kigen = cb2.isChecked();
-                seki = cb3.isChecked();
-                genki = cb4.isChecked();
-                hassin = cb5.isChecked();
+                outocheck = cb1.isChecked();
+                kigencheck = cb2.isChecked();
+                sekicheck = cb3.isChecked();
+                genkicheck = cb4.isChecked();
+                hassincheck = cb5.isChecked();
                 editMomoToString = editMemo.getText().toString();
 
                 String StrChecked = "　　　　　";
-                if(outo) StrChecked += cb1.getText().toString() + "\n　　　　　";
-                if(kigen) StrChecked += cb2.getText().toString() + "\n　　　　　";
-                if(seki) StrChecked += cb3.getText().toString() + "\n　　　　　";
-                if(genki) StrChecked += cb4.getText().toString() + "\n　　　　　";
-                if(hassin) StrChecked += cb5.getText().toString() + "\n　　　　　";
+                if(outocheck) StrChecked += cb1.getText().toString() + "\n　　　　　";
+                if(kigencheck) StrChecked += cb2.getText().toString() + "\n　　　　　";
+                if(sekicheck) StrChecked += cb3.getText().toString() + "\n　　　　　";
+                if(genkicheck) StrChecked += cb4.getText().toString() + "\n　　　　　";
+                if(hassincheck) StrChecked += cb5.getText().toString() + "\n　　　　　";
+
+                if(outocheck) outo=1;
+                if(kigencheck) kigen=1;
+                if(sekicheck) seki=1;
+                if(genkicheck) genki=1;
+                if(hassincheck) hassin=1;
+
 
                 if(editMemo.getText().toString() == null) editMomoToString = "(未入力)";
                 else editMomoToString = editMemo.getText().toString();
@@ -109,11 +115,17 @@ public class TextActivity extends AppCompatActivity {
                 date = formatter.format(now);
                 ContentValues insertValues = new ContentValues();
                 insertValues.put("date", date);
-                insertValues.put("milk", 0);
-                insertValues.put("r", 0);
-                insertValues.put("g", 0);
-                insertValues.put("b", 0);
+                insertValues.put("milkseek", 0);
+                insertValues.put("milkvalue", 0);
+                insertValues.put("r", 255);
+                insertValues.put("g", 255);
+                insertValues.put("b", 255);
                 insertValues.put("resultnumber", 0);
+                insertValues.put("outo", outo);
+                insertValues.put("seki", seki);
+                insertValues.put("hassin", hassin);
+                insertValues.put("kigen", kigen);
+                insertValues.put("genki", genki);
                 insertValues.put("memo",editMomoToString);
                 long id = db.insert("person", date, insertValues);
 

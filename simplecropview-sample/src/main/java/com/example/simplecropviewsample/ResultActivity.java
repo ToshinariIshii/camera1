@@ -316,10 +316,14 @@ public class ResultActivity extends AppCompatActivity{
                 ContentValues insertValues = new ContentValues();
                 insertValues.put("date", date);
                 insertValues.put("milkseek", 0);
+                insertValues.put("milkvalue", 0);
                 insertValues.put("r", majorRGB[0]);
                 insertValues.put("g", majorRGB[1]);
                 insertValues.put("b", majorRGB[2]);
                 insertValues.put("resultnumber", dResult);
+                insertValues.put("resultsmell", StrCheckedButton);
+                insertValues.put("resultamount", haisetuS);
+                insertValues.put("resultmizu", mizupposaS);
                 insertValues.put("memo",StrHitokotomemo);
 
                 long id = db.insert("person", date, insertValues);

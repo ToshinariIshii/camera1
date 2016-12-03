@@ -370,7 +370,7 @@ public void combine(CombinedChart combinedChart) {
         }
     });
 }
-    public void DBsave(int milkseek) {//DBの保存機能の設定予定いいいいいい
+    public void DBsave(String milkkind,int milkseek,int milkvalue) {//DBの保存機能の設定予定いいいいいい
         MyOpenHelper helper = new MyOpenHelper(this);
     final SQLiteDatabase db = helper.getReadableDatabase();
         // 現在日時の取得
@@ -383,12 +383,14 @@ public void combine(CombinedChart combinedChart) {
         String date = formatter.format(now);
         ContentValues insertValues = new ContentValues();
         insertValues.put("date", date);
+        insertValues.put("milkkind", milkkind);
         insertValues.put("milkseek", milkseek);
+        insertValues.put("milkvalue", milkseek);
         insertValues.put("r", 255);
         insertValues.put("g", 255);
         insertValues.put("b", 255);
         insertValues.put("resultnumber", 0);
-        insertValues.put("memo","no data");
+        insertValues.put("memo","milk data");
 
         long id = db.insert("person", date, insertValues);
     }
@@ -408,10 +410,9 @@ public void combine(CombinedChart combinedChart) {
         startActivity(homeIntent);
     }
 
-    public int countINIT(){//bubblechartとbarchartのデータがあるかの判定
-        int i=0;
-        int milkcount=0;
-        int resultcount=0;
+    public int countINIT() {//bubblechartとbarchartのデータがあるかの判定
+        int i = 0;
+        int resultcount = 0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
@@ -419,22 +420,15 @@ public void combine(CombinedChart combinedChart) {
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            if(c.getInt(1)>0){
-                milkcount=1;
-            }
-            if(c.getInt(5)>0){
-                resultcount=2;
+            if (c.getInt(5) > 0) {
+                resultcount = 1;
             }
             mov = c.moveToNext();
         }
         c.close();
         db.close();
-        if(milkcount>0 && resultcount>0){
-            i=3;
-        }else if(milkcount>0 && resultcount==0){//milkのみでーたある
-            i=1;
-        }else if(milkcount==0&&resultcount>0){//画像１ッ回取ってる
-            i=2;
+        if (resultcount > 0) {
+            i = 1;
         }
         return i;
     }

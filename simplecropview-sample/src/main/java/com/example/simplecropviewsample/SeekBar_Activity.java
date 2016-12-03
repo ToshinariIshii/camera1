@@ -51,7 +51,9 @@ public class SeekBar_Activity extends Fragment {
         v = inflater.inflate(R.layout.activity_seek, container, false);
         View vtabhost = inflater.inflate(R.layout.activity_tabhost, container, false);
         sbTri = 0;//初期化
-
+        milkValue=0;
+        SeekMilkValue=0;
+        StrCheckedButton="";
         seekBar = (SeekBar)v.findViewById(R.id.SeekBar01);
         background1= (TextView)v. findViewById(R.id.background1);
         background2= (TextView)v. findViewById(R.id.background2);
@@ -162,7 +164,7 @@ public class SeekBar_Activity extends Fragment {
                 break;
             case 1:
                 ((MainTabActivity)getActivity()).SeekToast1();
-                ((MainTabActivity)getActivity()).DBsave(milkValue);
+                ((MainTabActivity)getActivity()).DBsave(StrCheckedButton,SeekMilkValue,milkValue);
                 ((MainTabActivity)getActivity()).goHome();
             chart=1;
                 break;

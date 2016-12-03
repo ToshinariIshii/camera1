@@ -26,13 +26,9 @@ public class Tab1Fragment extends Fragment {
     		ViewGroup container,
     		Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab1_fragment, container, false);
-        if(((MainTabActivity) getActivity()).countINIT()==3){
-            chart=1;
-            bubbleinit=1;
-        }else if(((MainTabActivity) getActivity()).countINIT()==2){
-            bubbleinit=1;
-        }else if(((MainTabActivity) getActivity()).countINIT()==1){
-            chart=1;
+        if (((MainTabActivity) getActivity()).countINIT() == 1) {
+            chart = 1;
+            bubbleinit = 1;
         }
 //        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 //        // ディスプレイのインスタンス生成
@@ -45,32 +41,32 @@ public class Tab1Fragment extends Fragment {
         double size_y=((MainTabActivity)getActivity()).Windowsize_Y();
         CombinedChart combinedChart = (CombinedChart)v. findViewById(R.id.CombinedChart);
         CombinedData data = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
-//        if(chart!=0) {
+//        if(chart==1) {
             data.setData(((MainTabActivity) getActivity()).barData());
 //            data.setData(((MainTabActivity) getActivity()).CandleData());
 //
-//            if(bubbleinit==1) {
+            if (bubbleinit == 1) {
                 data.setData(((MainTabActivity) getActivity()).BubbleData());
-//            }
+            }
 //        }
-        combinedChart.setData(data);
+                combinedChart.setData(data);
 //        combinedChart.animateY(5000);//アニメーション
-        combinedChart.setVisibleXRangeMaximum(10);
+                combinedChart.setVisibleXRangeMaximum(10);
 //        combinedChart.getAxisLeft().setDrawGridLines(false);//グラフの線の除去
-        combinedChart.getAxisRight().setDrawGridLines(false);//グラフの線の除去
-        combinedChart.getXAxis().setDrawGridLines(false);//グラフの線の除去
-        combinedChart.setDescription("12月02日");// Hide the description
-        combinedChart.setDescriptionPosition((float)size_x/2,50);
-        combinedChart.getAxisLeft().setAxisMinValue(0);
-        XAxis xAxis = combinedChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        ((MainTabActivity) getActivity()).combine(combinedChart);
+                combinedChart.getAxisRight().setDrawGridLines(false);//グラフの線の除去
+                combinedChart.getXAxis().setDrawGridLines(false);//グラフの線の除去
+                combinedChart.setDescription("12月02日");// Hide the description
+                combinedChart.setDescriptionPosition((float) size_x / 2, 50);
+                combinedChart.getAxisLeft().setAxisMinValue(0);
+                XAxis xAxis = combinedChart.getXAxis();
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                ((MainTabActivity) getActivity()).combine(combinedChart);
 //        combinedChart.moveViewToX(0);
 //
-        combinedChart.getAxisLeft().setDrawLabels(false);
-        combinedChart.getAxisRight().setDrawLabels(false);
+                combinedChart.getAxisLeft().setDrawLabels(false);
+                combinedChart.getAxisRight().setDrawLabels(false);
 //        combinedChart.getXAxis().setDrawLabels(false);
-        combinedChart.getLegend().setEnabled(false);   // Hide the legend
-        return v;
-    }
+                combinedChart.getLegend().setEnabled(false);   // Hide the legend
+                return v;
+            }
 }
