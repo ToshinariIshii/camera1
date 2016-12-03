@@ -257,17 +257,44 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"milkseek"}, null,
+        Cursor c = db.query("person", new String[]{"milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
+        //各チェックボックスから値を取得しグラフに表示(チェック入れられていないものは白色に
         while (mov) {
-            if(barlabel%3==0){
-                group1.add(new BarEntry(new float[]{0f,10f,10f,10f,10f,10f,15f,Float.valueOf(c.getInt(0))}, barlabel));
-            }else if(barlabel%7==0){
-                group1.add(new BarEntry(new float[]{10f,0f,10f,10f,0f,10f,25f,Float.valueOf(c.getInt(0))}, barlabel));
-            }else {
-                group1.add(new BarEntry(new float[]{10f, 10f, 10f, 10f, 10f, 10f, 5f, Float.valueOf(c.getInt(0))}, barlabel));
+            float outotrue=0,outofalth=0,sekitrue=0,sekifalth=0,hassintrue=0,hassinfalth=0,kigentrue=0,kigenfalth=0,genkitrue=0,genkifalth=0,memotrue=0,memofalth=0;
+            if(c.getInt(1)==1){
+                outotrue=0.1f;
+            }else{
+                outofalth=0.1f;
             }
+            if(c.getInt(2)==1){
+                sekitrue=0.1f;
+            }else{
+                sekifalth=0.1f;
+            }
+            if(c.getInt(3)==1){
+                hassintrue=0.1f;
+            }else{
+                hassinfalth=0.1f;
+            }
+            if(c.getInt(4)==1){
+                kigentrue=0.1f;
+            }else{
+                kigenfalth=0.1f;
+            }
+            if(c.getInt(5)==1){
+                genkitrue=0.1f;
+            }else{
+                genkifalth=0.1f;
+            }
+            if(c.getString(6).equals("(未入力)")){
+                memofalth=0.1f;
+            }else{
+                memotrue=0.1f;
+            }
+            group1.add(new BarEntry(new float[]{memotrue, memofalth, outotrue, outofalth, sekitrue, sekifalth,
+                    hassintrue, hassinfalth, kigentrue, kigenfalth, genkitrue, genkifalth, Float.valueOf(c.getInt(0))}, barlabel));
             barlabel++;
             mov = c.moveToNext();
         }
@@ -280,15 +307,20 @@ public static int chart=0;
         BarDataSet barDataSet = new BarDataSet(group1,"");
 //        BarDataSet barDataSet = new BarDataSet(group1,"ミルクの量");
         barDataSet.setDrawValues(false);
-        int[] colors = new int[8];
+        int[] colors = new int[13];
         colors[0]=Color.rgb(255, 0, 0);
-        colors[1]=Color.rgb(0, 255, 0);
-        colors[2]=Color.rgb(180, 0, 100);
-        colors[3]=Color.rgb(0, 0, 0);
-        colors[4]=Color.rgb(125, 125, 0);
-        colors[5]=Color.rgb(0, 125, 125);
-        colors[6]=Color.rgb(255, 255, 255);
-        colors[7]=Color.rgb(50, 125, 50);
+        colors[1]=Color.rgb(255, 255, 255);
+        colors[2]=Color.rgb(0, 255, 0);
+        colors[3]=Color.rgb(255, 255, 255);
+        colors[4]=Color.rgb(180, 0, 100);
+        colors[5]=Color.rgb(255, 255, 255);
+        colors[6]=Color.rgb(125, 125, 0);
+        colors[7]=Color.rgb(255, 255, 255);
+        colors[8]=Color.rgb(0, 125, 125);
+        colors[9]=Color.rgb(255, 255, 255);
+        colors[10]=Color.rgb(0, 255, 255);
+        colors[11]=Color.rgb(255, 255, 255);
+        colors[12]=Color.rgb(50, 125, 50);
         //barDataSet.setColor(Color.rgb(0, 155, 0));
         barDataSet.setStackLabels(new String[]{"メモ","嘔吐", "咳が多い", "発疹","機嫌が悪い","元気がない","空白","ミルク"});
         barDataSet.setColors(colors);

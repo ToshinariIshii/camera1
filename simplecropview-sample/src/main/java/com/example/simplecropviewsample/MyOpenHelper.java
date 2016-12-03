@@ -19,7 +19,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
                 +"r integer,"+"g integer,"+"b integer,"+"resultnumber integer,"
                 +"resultsmell text,"+"resultamount text,"+"resultmizu integer,"
                 +"outo integer,"+"seki integer,"+"hassin integer,"+"kigen integer,"+"genki integer,"+"memo text"+");");
-        db.execSQL("INSERT INTO person(date,milkseek,milkvalue,r,g,b,resultnumber,memo) values ('開始日','0','0','255','255','255','','no data');");
+        db.execSQL("INSERT INTO person(date,milkseek,milkvalue,r,g,b,resultnumber,memo) values ('開始日','0','0','255','255','255','','(未入力)');");
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
