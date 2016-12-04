@@ -3,6 +3,7 @@
     android:id="@android:id/tabhost"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -12,7 +13,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"/>        
+            android:layout_weight="0"
+             android:background="@color/colorAccent" />
 		 <!-- TabHostの仕様上必要 -->
         <FrameLayout
             android:id="@android:id/tabcontent"
@@ -24,13 +26,16 @@
             android:id="@+id/realtabcontent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
+            android:layout_weight="1">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:src="@android:drawable/ic_menu_edit"
+                app:elevation="0dp"
+                android:layout_marginRight="15dp"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
     </LinearLayout>
 </TabHost>

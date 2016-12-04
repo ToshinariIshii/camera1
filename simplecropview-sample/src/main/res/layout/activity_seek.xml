@@ -10,39 +10,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.simplecropviewsample.SeekBar_Activity"
-    android:background="#FFFFFF">
+    >
 
     <TextView
-        android:text="TextView"
         android:id="@+id/checkView1"
-        android:layout_alignTop="@+id/seekText"
-        android:layout_centerHorizontal="true"
-        android:layout_height="400dp"
         android:background="@drawable/lavel_background"
         android:textSize="18sp"
-        android:layout_width="350dp" />
-
-    <SeekBar
-        android:id="@+id/SeekBar01"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:progress="0"
-        android:max="5"
-        android:layout_marginTop="0dp"
-        android:layout_below="@+id/seekText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/seekText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text=" "
+        android:layout_width="450dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
-        android:textSize="24sp" />
+        android:layout_height="450dp" />
 
     <EditText
         android:layout_height="wrap_content"
@@ -52,19 +30,9 @@
         android:id="@+id/editText"
         android:background="@drawable/text_background"
         android:layout_width="100dp"
-        android:layout_marginTop="250dp"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:text="母乳の摂取量(見た感覚で)"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/breastMilkView1"
-        android:layout_marginTop="0dp"
-        android:textSize="24sp" />
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/milkView2"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:text=" ml"
@@ -88,99 +56,142 @@
         android:layout_toStartOf="@+id/editText"
         android:layout_marginTop="200dp" />
 
+    <RadioGroup android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/breastMilkView1"
+        android:orientation="horizontal"
+        android:id="@+id/milkGroup">
+    <RadioButton
+        android:text="なし"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cancelButton1"
+        android:layout_alignStart="@+id/cancelButton1"
+        android:layout_marginStart="14dp"
+        android:id="@+id/RadioButton1"
+        android:textColor="@android:color/black"
+        android:scrollbarSize="10dp" />
+
+        <RadioButton android:text="母乳"
+            android:id="@+id/RadioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:textColor="@android:color/black" />
+
+        <RadioButton android:text="粉ミルク"
+            android:id="@+id/RadioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:textColor="@android:color/black" />
+
+        <RadioButton android:text="両方"
+            android:id="@+id/RadioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:textColor="@android:color/black" />
+    </RadioGroup>
+
     <TextView
-        android:text="粉ミルクの摂取量(おおよそ)"
+        android:text="だいたいの摂取量(任意)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/milkView2"
+        android:layout_marginTop="20dp"
+        android:textSize="24sp"
+        android:layout_below="@+id/SeekBar01"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/seekText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:textSize="18sp"
+        android:layout_below="@+id/milkView1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="30dp" />
+
+    <SeekBar
+        android:id="@+id/SeekBar01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:progress="0"
+        android:max="4"
+        android:layout_below="@+id/seekText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="摂取させたもの"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/breastMilkView1"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:text="見た感覚での摂取量"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/milkView1"
         android:textSize="24sp"
-        android:layout_marginTop="100dp"
-        android:layout_below="@+id/SeekBar01"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/milkGroup"
+        android:layout_alignLeft="@+id/milkView2"
+        android:layout_alignStart="@+id/milkView2"
+        android:layout_marginTop="20dp" />
 
     <Button
-        android:text="キャンセル"
+        android:text="戻る"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="51dp"
         android:id="@+id/cancelButton1"
-        android:layout_below="@+id/editText"
-        android:layout_toLeftOf="@+id/editText"
-        android:layout_toStartOf="@+id/editText" />
+        android:layout_alignBottom="@+id/checkView1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp" />
 
     <Button
         android:text="進む"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/saveButton1"
-        android:layout_alignBaseline="@+id/cancelButton1"
-        android:layout_alignBottom="@+id/cancelButton1"
-        android:layout_toRightOf="@+id/editText"
-        android:layout_toEndOf="@+id/editText" />
+        android:layout_alignBottom="@+id/checkView1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp" />
+
+    <TextView
+        android:text="ひとことメモ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/yaku"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/seekMemo"
+        android:layout_marginTop="20dp"
+        android:textSize="24sp" />
 
     <EditText
         android:layout_width="wrap_content"
-        android:inputType="textMultiLine"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/memo"
-        android:layout_alignTop="@+id/checkView1"
-        android:layout_alignRight="@+id/checkView1"
-        android:layout_alignEnd="@+id/checkView1"
-        android:layout_alignLeft="@+id/checkView1"
-        android:layout_alignStart="@+id/checkView1"
-        android:layout_height="150dp"
+        android:layout_below="@+id/seekMemo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/seekEditMemo"
         android:background="@drawable/text_background"
-        android:layout_above="@+id/cancelButton1" />
-
-    <TextView
-        android:text="体温:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cancelButton1"
-        android:layout_alignStart="@+id/cancelButton1"
-        android:id="@+id/degree"
-        android:layout_alignBottom="@+id/spinner2"
-        android:layout_alignTop="@+id/spinner2"
-        android:textSize="36sp" />
-
-    <TextView
-        android:text="体重:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/degree"
-        android:layout_alignLeft="@+id/degree"
-        android:layout_alignStart="@+id/degree"
-        android:layout_marginTop="19dp"
-        android:id="@+id/textView5"
-        android:textSize="36sp"
-        android:layout_alignRight="@+id/degree"
-        android:layout_alignEnd="@+id/degree" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner3"
-        android:layout_alignLeft="@+id/spinner2"
-        android:layout_alignStart="@+id/spinner2"
-        android:layout_alignTop="@+id/textView5"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignRight="@+id/spinner2"
-        android:layout_alignEnd="@+id/spinner2"
-        android:background="#CCCCCC" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner2"
-
-
-        android:entries="@array/list"
-        android:background="#CCCCCC"
-        android:textColor
-
-        android:layout_alignTop="@+id/checkView1"
-        android:layout_alignLeft="@+id/ml"
-        android:layout_alignStart="@+id/ml" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#000000" />
 
 </RelativeLayout>

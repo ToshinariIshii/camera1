@@ -16,13 +16,12 @@ public class Tab2Fragment extends Fragment {
     		ViewGroup container,
     		Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab2_fragment, container, false);
-        ImageButton btn = (ImageButton)v.findViewById(R.id.CameraButton);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
                 ((MainTabActivity) getActivity()).startCamera2Activity();
-            }
-        });
+//            }
+//        });
         return v;
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SimpleCrop</string>
+    <string name="app_name">WAGAKO</string>
     <string name="button_allow">Allow</string>
     <string name="button_deny">Deny</string>
     <string name="permission_pick_rationale">READ_EXTERNAL_STORAGE permission is needed to pick image.</string>
@@ -14,8 +14,10 @@
     <string name="cameraText">カメラ画面</string>
     <string name="formsText">フォーム画面</string>
     <string name="homeMenuText">ホーム画面</string>
+    <string name="memo">memo</string>
 
     <string-array name="list">
+        <item>(未入力)</item>
         <item>35.0</item>
         <item>35.1</item>
         <item>35.2</item>

@@ -9,12 +9,4 @@
         android:text="TAB2の内容（フラグメント）"
         android:id="@+id/textView" />
 
-    <ImageButton
-        android:src="@drawable/camera"
-        android:layout_width="239dp"
-        android:layout_height="107dp"
-        android:id="@+id/CameraButton"
-        android:layout_marginTop="13dp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -1,11 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_text">
 
     <TextView
-        android:text="TextView"
+        android:text="くそ"
+        android:id="@+id/actCheckView"
+        android:background="@drawable/lavel_background"
+        android:textSize="18sp"
         android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_height="450dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:maxLength="130"
+        android:ems="10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/editMemo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/text_background"
+        android:textColor="@android:color/black"
+        android:gravity="top|center_vertical"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
-</LinearLayout>
+        android:layout_below="@+id/textViewMemo"
+        android:singleLine="true"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:text="戻る"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/actCancelButton"
+        android:layout_alignBottom="@+id/actCheckView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignTop="@+id/actSaveButton"
+        android:onClick="ClickActCancel" />
+
+    <Button
+        android:text="進む"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/actSaveButton"
+        android:layout_marginBottom="30dp"
+        android:layout_alignBottom="@+id/actCheckView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:onClick="ClickActSave" />
+
+    <TextView
+        android:text="チェック項目"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textViewCheck"
+        android:textSize="36sp"
+        android:layout_marginLeft="10dp" />
+
+    <CheckBox
+        android:text="咳が多い"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox3"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignLeft="@+id/checkBox"
+        android:layout_alignStart="@+id/checkBox"
+        android:layout_marginTop="10dp" />
+
+    <CheckBox
+        android:text="嘔吐"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/textViewCheck"
+        android:layout_alignLeft="@+id/actCancelButton"
+        android:layout_alignStart="@+id/actCancelButton"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp" />
+
+    <CheckBox
+        android:text="機嫌が悪い"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:id="@+id/checkBox2"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/textViewCheck"
+        android:layout_toRightOf="@+id/checkBox3"
+        android:layout_toEndOf="@+id/checkBox3"
+        android:layout_marginTop="10dp" />
+
+    <CheckBox
+        android:text="元気がない"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox4"
+        android:textColor="@android:color/black"
+        android:layout_alignBaseline="@+id/checkBox3"
+        android:layout_alignBottom="@+id/checkBox3"
+        android:layout_alignLeft="@+id/checkBox2"
+        android:layout_alignStart="@+id/checkBox2" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox5"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/checkBox3"
+        android:layout_alignLeft="@+id/checkBox3"
+        android:layout_alignStart="@+id/checkBox3"
+        android:text="発疹" />
+
+    <TextView
+        android:text="ひとことメモ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewMemo"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/checkBox5"
+        android:layout_alignLeft="@+id/textViewCheck"
+        android:layout_alignStart="@+id/textViewCheck" />
+
+</RelativeLayout>
