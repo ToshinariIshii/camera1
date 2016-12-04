@@ -402,27 +402,27 @@ public void combine(CombinedChart combinedChart) {
         }
     });
 }
-    public void DBsave(String milkkind,int milkseek,int milkvalue) {//DBの保存機能の設定予定いいいいいい
+    public void DBsave(String milkkind,int milkseek,int milkvalue,String StrHitokotomemo) {//DBの保存機能の設定予定いいいいいい
         MyOpenHelper helper = new MyOpenHelper(this);
     final SQLiteDatabase db = helper.getReadableDatabase();
         // 現在日時の取得
         Date now = new Date(System.currentTimeMillis());
         // 日時のフォーマットオブジェクト作成
-        DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
-        formatter =new SimpleDateFormat("dd日 HH:mm.ss");
-        formatter =new SimpleDateFormat("HH:mm.ss");
-        // フォーマット
+        DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm");
+//        formatter =new SimpleDateFormat("dd日 HH:mm.ss");
+//        formatter =new SimpleDateFormat("HH:mm.ss");
+//        // フォーマット
         String date = formatter.format(now);
         ContentValues insertValues = new ContentValues();
         insertValues.put("date", date);
         insertValues.put("milkkind", milkkind);
         insertValues.put("milkseek", milkseek);
-        insertValues.put("milkvalue", milkseek);
+        insertValues.put("milkvalue", milkvalue);
         insertValues.put("r", 255);
         insertValues.put("g", 255);
         insertValues.put("b", 255);
         insertValues.put("resultnumber", 0);
-        insertValues.put("memo","(未入力)");
+        insertValues.put("memo",StrHitokotomemo);
 
         long id = db.insert("person", date, insertValues);
     }

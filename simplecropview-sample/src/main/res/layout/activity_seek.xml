@@ -13,7 +13,6 @@
     >
 
     <TextView
-        android:text="TextView"
         android:id="@+id/checkView1"
         android:background="@drawable/lavel_background"
         android:textSize="18sp"
@@ -22,25 +21,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_height="450dp" />
-
-    <TextView
-        android:id="@+id/background1"
-        android:layout_width="450dp"
-        android:background="@drawable/background1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_height="160dp" />
-
-    <TextView
-        android:layout_width="450dp"
-        android:id="@+id/background2"
-        android:background="@drawable/background2"
-        android:layout_below="@+id/background1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_height="185dp" />
 
     <EditText
         android:layout_height="wrap_content"
@@ -76,29 +56,10 @@
         android:layout_toStartOf="@+id/editText"
         android:layout_marginTop="200dp" />
 
-    <Button
-        android:text="戻る"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/cancelButton1"
-        android:layout_below="@+id/editText"
-        android:layout_toLeftOf="@+id/editText"
-        android:layout_toStartOf="@+id/editText" />
-
-    <Button
-        android:text="進む"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/saveButton1"
-        android:layout_alignBaseline="@+id/cancelButton1"
-        android:layout_alignBottom="@+id/cancelButton1"
-        android:layout_toRightOf="@+id/editText"
-        android:layout_toEndOf="@+id/editText" />
-
     <RadioGroup android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_below="@+id/breastMilkView1"
+        android:orientation="horizontal"
         android:id="@+id/milkGroup">
     <RadioButton
         android:text="なし"
@@ -106,8 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/cancelButton1"
         android:layout_alignStart="@+id/cancelButton1"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
         android:id="@+id/RadioButton1"
         android:textColor="@android:color/black"
         android:scrollbarSize="10dp" />
@@ -116,24 +76,21 @@
             android:id="@+id/RadioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
             android:textColor="@android:color/black" />
 
         <RadioButton android:text="粉ミルク"
             android:id="@+id/RadioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
             android:textColor="@android:color/black" />
 
         <RadioButton android:text="両方"
             android:id="@+id/RadioButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
             android:textColor="@android:color/black" />
     </RadioGroup>
 
@@ -142,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/milkView2"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:textSize="24sp"
         android:layout_below="@+id/SeekBar01"
         android:layout_marginLeft="10dp" />
@@ -185,9 +142,56 @@
         android:layout_height="wrap_content"
         android:id="@+id/milkView1"
         android:textSize="24sp"
-        android:layout_alignTop="@+id/background2"
+        android:layout_below="@+id/milkGroup"
+        android:layout_alignLeft="@+id/milkView2"
+        android:layout_alignStart="@+id/milkView2"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:text="戻る"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancelButton1"
+        android:layout_alignBottom="@+id/checkView1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp" />
+
+    <Button
+        android:text="進む"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveButton1"
+        android:layout_alignBottom="@+id/checkView1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp" />
+
+    <TextView
+        android:text="ひとことメモ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/yaku"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/seekMemo"
+        android:layout_marginTop="20dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/seekMemo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/seekEditMemo"
+        android:background="@drawable/text_background"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#000000" />
 
 </RelativeLayout>

@@ -309,9 +309,9 @@ public class ResultActivity extends AppCompatActivity{
                 // 現在日時の取得
                 Date now = new Date(System.currentTimeMillis());
                 // 日時のフォーマットオブジェクト作成
-                DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
-                formatter =new SimpleDateFormat("dd日 HH:mm.ss");
-                formatter =new SimpleDateFormat("HH:mm.ss");
+                DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm");
+//                formatter =new SimpleDateFormat("dd日 HH:mm.ss");
+//                formatter =new SimpleDateFormat("HH:mm.ss");
                 // フォーマット
                 date = formatter.format(now);
                 ContentValues insertValues = new ContentValues();

@@ -55,7 +55,7 @@ public class Tab1Fragment extends Fragment {
 //        combinedChart.getAxisLeft().setDrawGridLines(false);//グラフの線の除去
                 combinedChart.getAxisRight().setDrawGridLines(false);//グラフの線の除去
                 combinedChart.getXAxis().setDrawGridLines(false);//グラフの線の除去
-                combinedChart.setDescription("12月02日");// Hide the description
+                combinedChart.setDescription("");// Hide the description
                 combinedChart.setDescriptionPosition((float) size_x / 2, 50);
                 combinedChart.getAxisLeft().setAxisMinValue(0);
                 XAxis xAxis = combinedChart.getXAxis();

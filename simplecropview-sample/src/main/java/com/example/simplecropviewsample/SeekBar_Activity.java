@@ -1,10 +1,6 @@
 package com.example.simplecropviewsample;
 
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,16 +24,17 @@ public class SeekBar_Activity extends Fragment {
     public static String realTime; // 桁数の関係でStringにした "yyyyMMddHHmm"
     public static int SeekMilkValue = 0; // シークバーで選択した0~4の整数
     public static int milkValue = 0; // 「約 ○○ ml」で入力した整数
-    public static String StrCheckedButton; // 母乳 or ミルク
+    public static String StrCheckedButton, StrHitokotomemo = "(未入力)"; // 母乳 or ミルク
 
     private SeekBar seekBar;
-    private TextView seekText1, background1, background2, breastMilk, checkView, yaku, ml, milkView,milkView2;//seek, breastMilk, check, yaku, ml, milk
+    private TextView seekText1, background1, background2,
+            breastMilk, checkView, yaku, ml, milkView,milkView2, seekMemo;//seek, breastMilk, check, yaku, ml, milk
     private Button cancelButton;
     private Button saveButton;
     static int sbTri;
-    private EditText editText;
+    private EditText editText, seekEditMemo;
     private RadioGroup milkGroup;
-//test
+    //test
 //    private FloatingActionButton fab;
     static View v;
 
@@ -51,12 +48,10 @@ public class SeekBar_Activity extends Fragment {
         v = inflater.inflate(R.layout.activity_seek, container, false);
         View vtabhost = inflater.inflate(R.layout.activity_tabhost, container, false);
         sbTri = 0;//初期化
-        milkValue=0;
-        SeekMilkValue=0;
-        StrCheckedButton="";
+
         seekBar = (SeekBar)v.findViewById(R.id.SeekBar01);
-        background1= (TextView)v. findViewById(R.id.background1);
-        background2= (TextView)v. findViewById(R.id.background2);
+        //background1= (TextView)v. findViewById(R.id.background1);
+        //background2= (TextView)v. findViewById(R.id.background2);
         seekText1 = (TextView)v. findViewById(R.id.seekText);
         checkView = (TextView)v. findViewById(R.id.checkView1);
         breastMilk = (TextView)v. findViewById(R.id.breastMilkView1);
@@ -68,6 +63,9 @@ public class SeekBar_Activity extends Fragment {
         cancelButton = (Button)v. findViewById(R.id.cancelButton1);
         saveButton = (Button)v. findViewById(R.id.saveButton1);
         editText = (EditText)v. findViewById(R.id.editText);
+
+        seekMemo = (TextView)v. findViewById(R.id.seekMemo);
+        seekEditMemo = (EditText)v. findViewById(R.id.seekEditMemo);
 
         milkGroup = (RadioGroup)v.findViewById(R.id.milkGroup);
         // 指定した ID のラジオボタンをチェックします
@@ -91,7 +89,7 @@ public class SeekBar_Activity extends Fragment {
                         seekText1.setText(s);
                     }
 
-                    
+
                     public void onStartTrackingTouch(SeekBar seekBar) {
                         // ツマミに触れたときに呼ばれる
                     }
@@ -132,18 +130,24 @@ public class SeekBar_Activity extends Fragment {
                 RadioButton checkedButton = (RadioButton)v. findViewById(milkGroup.getCheckedRadioButtonId());
                 StrCheckedButton = checkedButton.getText().toString();
 
+                if(seekEditMemo.getText().toString().length() == 0)
+                    StrHitokotomemo = "(未入力)";
+                else
+                    StrHitokotomemo = seekEditMemo.getText().toString();
+
 
                 checkView.setText("\n　　　　　　 [内容確認]\n以下の入力内容で保存してもよろしいでしょうか？\n\n"
                         + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
-                        + "摂取物: 「" + StrCheckedButton + "」\n\n"
-                        + "摂取量(主観): 「" + s + "」\n\n"
-                        + "摂取量(測量): 「約 " + milkValue + " ml」\n"
+                        + "　摂取物: 「" + StrCheckedButton + "」\n\n"
+                        + "　摂取量(主観): 「" + s + "」\n\n"
+                        + "　摂取量(測量): 「約 " + milkValue + " ml」\n"
+                        + "　メモ:\n　" + StrHitokotomemo + "\n"
                         + "--------------------------------------------------------------\n");
                 //非表示
                 seekText1.setVisibility(View.INVISIBLE);
-                background1.setVisibility(View.INVISIBLE);
-                background2.setVisibility(View.INVISIBLE);
+                //background1.setVisibility(View.INVISIBLE);
+                //background2.setVisibility(View.INVISIBLE);
                 breastMilk.setVisibility(View.INVISIBLE);
                 yaku.setVisibility(View.INVISIBLE);
                 milkView.setVisibility(View.INVISIBLE);
@@ -152,6 +156,9 @@ public class SeekBar_Activity extends Fragment {
                 seekBar.setVisibility(View.INVISIBLE);
                 editText.setVisibility(View.INVISIBLE);
                 ml.setVisibility(View.INVISIBLE);
+
+                seekMemo.setVisibility(View.INVISIBLE);
+                seekEditMemo.setVisibility(View.INVISIBLE);
 
                 ////////
 //                fab.setVisibility(View.INVISIBLE);
@@ -164,9 +171,9 @@ public class SeekBar_Activity extends Fragment {
                 break;
             case 1:
                 ((MainTabActivity)getActivity()).SeekToast1();
-                ((MainTabActivity)getActivity()).DBsave(StrCheckedButton,SeekMilkValue,milkValue);
+                ((MainTabActivity)getActivity()).DBsave(StrCheckedButton,SeekMilkValue,milkValue,StrHitokotomemo);
                 ((MainTabActivity)getActivity()).goHome();
-            chart=1;
+                chart=1;
                 break;
             default:
                 break;
@@ -182,8 +189,8 @@ public class SeekBar_Activity extends Fragment {
             case 1:
                 //非表示
                 seekText1.setVisibility(View.VISIBLE);
-                background1.setVisibility(View.VISIBLE);
-                background2.setVisibility(View.VISIBLE);
+                //background1.setVisibility(View.VISIBLE);
+                //background2.setVisibility(View.VISIBLE);
                 breastMilk.setVisibility(View.VISIBLE);
                 checkView.setVisibility(View.VISIBLE);
                 yaku.setVisibility(View.VISIBLE);
@@ -193,6 +200,8 @@ public class SeekBar_Activity extends Fragment {
                 editText.setVisibility(View.VISIBLE);
                 ml.setVisibility(View.VISIBLE);
                 milkGroup.setVisibility(View.VISIBLE);
+                seekMemo.setVisibility(View.VISIBLE);
+                seekEditMemo.setVisibility(View.VISIBLE);
 
                 cancelButton.setText("戻る");
                 saveButton.setText("進む");
