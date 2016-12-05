@@ -116,7 +116,7 @@ public class TextActivity extends AppCompatActivity {
                 // 現在日時の取得
                 Date now = new Date(System.currentTimeMillis());
                 // 日時のフォーマットオブジェクト作成
-                DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm");
+                DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
 //                formatter =new SimpleDateFormat("dd日 HH:mm.ss");
 //                formatter =new SimpleDateFormat("HH:mm.ss");
                 // フォーマット

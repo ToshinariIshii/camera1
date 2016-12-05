@@ -309,7 +309,7 @@ public class ResultActivity extends AppCompatActivity{
                 // 現在日時の取得
                 Date now = new Date(System.currentTimeMillis());
                 // 日時のフォーマットオブジェクト作成
-                DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm");
+                DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
 //                formatter =new SimpleDateFormat("dd日 HH:mm.ss");
 //                formatter =new SimpleDateFormat("HH:mm.ss");
                 // フォーマット
@@ -323,8 +323,8 @@ public class ResultActivity extends AppCompatActivity{
                 insertValues.put("b", majorRGB[2]);
                 insertValues.put("resultnumber", dResult);
                 insertValues.put("resultsmell", StrCheckedButton);
-                insertValues.put("resultamount", haisetuS);
-                insertValues.put("resultmizu", mizupposaS);
+                insertValues.put("resultamount", haisetuValue);
+                insertValues.put("resultmizu", mizupposaValue);
                 insertValues.put("memo",StrHitokotomemo);
 
                 long id = db.insert("person", date, insertValues);
