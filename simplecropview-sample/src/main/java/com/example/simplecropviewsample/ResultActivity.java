@@ -53,6 +53,7 @@ public class ResultActivity extends AppCompatActivity{
     String haisetuS = "(未入力)";
     String mizupposaS = "(未入力)";
 
+    String pass = Camera2Activity.name;
     public static String StrCheckedButton;
 
     public static Bitmap bitmap;
@@ -320,6 +321,7 @@ public class ResultActivity extends AppCompatActivity{
                 insertValues.put("date_hour", date_hour);
                 insertValues.put("milkseek", 0);
                 insertValues.put("milkvalue", 0);
+                insertValues.put("imagepass", pass);
                 insertValues.put("r", majorRGB[0]);
                 insertValues.put("g", majorRGB[1]);
                 insertValues.put("b", majorRGB[2]);

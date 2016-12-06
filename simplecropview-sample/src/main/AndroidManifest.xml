@@ -34,6 +34,7 @@
         <activity android:name=".TestgraphActivity" />
         <activity android:name=".testtext" />
         <activity android:name=".SubActivity" />
+        <activity android:name=".PoopImageView"/>
     </application>
 
 </manifest>

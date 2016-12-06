@@ -16,7 +16,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table person("
                 + "date text," + "date_hour text,"+ "date_day text,"+"milkkind text,"+ "milkseek integer,"+"milkvalue integer,"
-                +"r integer,"+"g integer,"+"b integer,"+"resultnumber integer,"
+                + "imagepass text,"+"r integer,"+"g integer,"+"b integer,"+"resultnumber integer,"
                 +"resultsmell text,"+"resultamount integer,"+"resultmizu integer,"
                 +"outo integer,"+"seki integer,"+"hassin integer,"+"kigen integer,"+"genki integer,"+"memo text"+");");
 
