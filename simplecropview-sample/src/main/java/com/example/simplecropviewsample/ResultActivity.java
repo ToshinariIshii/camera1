@@ -53,7 +53,7 @@ public class ResultActivity extends AppCompatActivity{
     String haisetuS = "(未入力)";
     String mizupposaS = "(未入力)";
 
-    public static String StrCheckedButton = "(未入力)";
+    public static String StrCheckedButton;
 
     public static Bitmap bitmap;
     //    private static int backhome = 0;//ホームに戻る
@@ -87,7 +87,7 @@ public class ResultActivity extends AppCompatActivity{
         mizupposaView = (TextView) findViewById(R.id.mizupposaView);
         resultView = (TextView) findViewById(R.id.resultView);
         hitokotomemo = (EditText) findViewById(R.id.hitokotomemo);
-        memo = (TextView) findViewById(R.id.hitokotomemo);
+        memo = (TextView) findViewById(R.id.memo);
 
         nioiGroup = (RadioGroup) findViewById(R.id.nioiGroup);
         // 指定した ID のラジオボタンをチェックします
@@ -239,7 +239,7 @@ public class ResultActivity extends AppCompatActivity{
                 startActivity(intent);
                 break;
             case 1:
-
+//
 //                ika.setVisibility(View.VISIBLE);
                 nioi.setVisibility(View.VISIBLE);
                 haisetu.setVisibility(View.VISIBLE);
@@ -286,10 +286,10 @@ public class ResultActivity extends AppCompatActivity{
 
                 RadioButton checkedButton = (RadioButton) findViewById(nioiGroup.getCheckedRadioButtonId());
                 StrCheckedButton = checkedButton.getText().toString();
-
-                if(hitokotomemo.getText().toString().length() == 0) StrHitokotomemo = "(未入力)";
-                else StrHitokotomemo = hitokotomemo.getText().toString();
-
+                StrHitokotomemo = hitokotomemo.getText().toString();
+                if(StrHitokotomemo.length() ==0){
+                StrHitokotomemo="(未入力)";
+                }
                 unkoCheckView.setText("　　　　　　 [内容確認]\n以下の入力内容で保存してもよろしいでしょうか？\n"
                         + "--------------------------------------------------------------\n"
                         + FunctionsSeek.realTime(2) + "\n\n"
@@ -310,23 +310,26 @@ public class ResultActivity extends AppCompatActivity{
                 Date now = new Date(System.currentTimeMillis());
                 // 日時のフォーマットオブジェクト作成
                 DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
-                formatter =new SimpleDateFormat("dd日 HH:mm.ss");
-                formatter =new SimpleDateFormat("HH:mm.ss");
                 // フォーマット
                 date = formatter.format(now);
+                formatter = new SimpleDateFormat("MM/dd HH");
+                String date_hour = formatter.format(now);
+
                 ContentValues insertValues = new ContentValues();
                 insertValues.put("date", date);
-                insertValues.put("milk", 0);
+                insertValues.put("date_hour", date_hour);
+                insertValues.put("milkseek", 0);
+                insertValues.put("milkvalue", 0);
                 insertValues.put("r", majorRGB[0]);
                 insertValues.put("g", majorRGB[1]);
                 insertValues.put("b", majorRGB[2]);
                 insertValues.put("resultnumber", dResult);
+                insertValues.put("resultsmell", StrCheckedButton);
+                insertValues.put("resultamount", haisetuValue);
+                insertValues.put("resultmizu", mizupposaValue);
                 insertValues.put("memo",StrHitokotomemo);
 
                 long id = db.insert("person", date, insertValues);
-
-                chart=1;
-                bubbleinit=1;
 
                 Toast.makeText(this, "保存した", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(),MainTabActivity.class);

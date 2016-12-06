@@ -79,24 +79,22 @@ public static int chart=0;
 
         /* Tab1 */
         TabSpec tab1 = mTabHost.newTabSpec("tab1");
-        tab1.setIndicator("Home",ResourcesCompat.getDrawable(getResources(), R.drawable.ic_android_black_24dp, null));
+        tab1.setIndicator("Home");
         tab1.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab1);
 
         // Tab2 */
         TabSpec tab2 = mTabHost.newTabSpec("tab2");
-        tab2.setIndicator("Camera",getResources().getDrawable(android.R.drawable.ic_btn_speak_now));
+        tab2.setIndicator("Camera");
         tab2.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab2);
 
         // Tab3 */
         TabSpec tab3 = mTabHost.newTabSpec("tab3");
-        tab3.setIndicator("Milk",getResources().getDrawable(android.R.drawable.ic_btn_speak_now));
+        tab3.setIndicator("Milk");
 //        tab3.setIndicator("Milk",ResourcesCompat.getDrawable(getResources(), R.drawable.ic_android_black_24dp, null));
         tab3.setContent(new DummyTabFactory(this));
         mTabHost.addTab(tab3);
-
-
         mTabHost.setOnTabChangedListener(this);
 
         onTabChanged("tab1");
@@ -178,27 +176,46 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
             labels.add(c.getString(0));
             mov = c.moveToNext();
         }
-//        labels.add("JAN");
-//        labels.add("FEB");
-//        labels.add("MAR");
-//        labels.add("APR");
-//        labels.add("MAY");
-//        labels.add("JUNE");
-//        labels.add("JAN");
-//        labels.add("FEB");
-//        labels.add("MAR");
-//        labels.add("APR");
-//        labels.add("MAY");
-//        labels.add("JUNE");
+
         c.close();
         db.close();
+
+        return labels;
+    }
+
+    // creating list of x-axis values
+    public ArrayList<String> getXAxisValues_hour() {
+        ArrayList<String> labels = new ArrayList();
+        MyOpenHelper helper = new MyOpenHelper(this);
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        // queryメソッドの実行例
+        Cursor c = db.query("person", new String[]{"date_hour"}, null,
+                null, null, null, null);
+        boolean mov = c.moveToFirst();
+        String hikaku="";
+//        labels.add("12/6 7");
+//        labels.add("12/6 8");
+//        labels.add("12/6 9");
+        while (mov) {
+            if(c.getString(0).equals(hikaku)) {
+
+            }else {
+                labels.add(c.getString(0));
+                hikaku=c.getString(0);
+            }
+            mov = c.moveToNext();
+        }
+
+        c.close();
+        db.close();
+
         return labels;
     }
 
@@ -222,64 +239,199 @@ public static int chart=0;
     // this method is used to create data for Bar graph
     public BarData barData(){
         barlabel=0;
-        ArrayList<BarEntry> group1 = new ArrayList();
+        ArrayList<BarEntry> group1 = new ArrayList<BarEntry>();
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
+        //各チェックボックスから値を取得しグラフに表示(チェック入れられていないものは白色に
         while (mov) {
-            group1.add(new BarEntry(c.getInt(1),barlabel));
+            float outotrue=0,outofalth=0,sekitrue=0,sekifalth=0,hassintrue=0,hassinfalth=0,kigentrue=0,kigenfalth=0,genkitrue=0,genkifalth=0,memotrue=0,memofalth=0;
+            if(c.getInt(1)==1){
+                outotrue=0.1f;
+            }else{
+                outofalth=0.1f;
+            }
+            if(c.getInt(2)==1){
+                sekitrue=0.1f;
+            }else{
+                sekifalth=0.1f;
+            }
+            if(c.getInt(3)==1){
+                hassintrue=0.1f;
+            }else{
+                hassinfalth=0.1f;
+            }
+            if(c.getInt(4)==1){
+                kigentrue=0.1f;
+            }else{
+                kigenfalth=0.1f;
+            }
+            if(c.getInt(5)==1){
+                genkitrue=0.1f;
+            }else{
+                genkifalth=0.1f;
+            }
+            if(c.getString(6).equals("(未入力)")){
+                memofalth=0.1f;
+            }else{
+                memotrue=0.1f;
+            }
+            group1.add(new BarEntry(new float[]{memotrue, memofalth, outotrue, outofalth, sekitrue, sekifalth,
+                    hassintrue, hassinfalth, kigentrue, kigenfalth, genkitrue, genkifalth, Float.valueOf(c.getInt(0))}, barlabel));
             barlabel++;
             mov = c.moveToNext();
         }
-//        group1.add(new BarEntry(40f,0));
-//        group1.add(new BarEntry(80f,1));
-//        group1.add(new BarEntry(60f,2));
-//        group1.add(new BarEntry(120f,3));
-//        group1.add(new BarEntry(180f,4));
-//        group1.add(new BarEntry(90f,5));
-        BarDataSet barDataSet = new BarDataSet(group1,"ミルクの量");
+        BarDataSet barDataSet = new BarDataSet(group1,"");
         barDataSet.setDrawValues(false);
-        //barDataSet.setColor(Color.rgb(0, 155, 0));
-//        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        int[] colors = new int[13];
+        colors[0]=Color.rgb(0, 255, 0);
+        colors[1]=Color.rgb(191, 191, 191);
+        colors[2]=Color.rgb(255, 221, 102);
+        colors[3]=Color.rgb(191, 191, 191);
+        colors[4]=Color.rgb(0, 112, 192);
+        colors[5]=Color.rgb(191, 191, 191);
+        colors[6]=Color.rgb(255, 127, 127);
+        colors[7]=Color.rgb(191, 191, 191);
+        colors[8]=Color.rgb(255, 0, 0);
+        colors[9]=Color.rgb(191, 191, 191);
+        colors[10]=Color.rgb(157, 195, 230);
+        colors[11]=Color.rgb(191, 191, 191);
+        colors[12]=Color.rgb(0, 0, 255);
+        barDataSet.setStackLabels(new String[]{"メモ","嘔吐", "咳が多い", "発疹","機嫌が悪い","元気がない","空白","ミルク"});
+        barDataSet.setColors(colors);
         BarData barData = new BarData(getXAxisValues(),barDataSet);
         c.close();
         db.close();
         return barData;
     }
-    public CandleData CandleData(){
-        bubblelabel=0;
-        List<Integer> colors = new ArrayList();
-        ArrayList<CandleEntry> entries= new ArrayList();
-//        entries.add(new CandleEntry(0, 4.62f, 2.02f, 2.70f, 4.13f));
-//                entries.add(new CandleEntry(1, 5.50f, 2.70f, 3.35f, 4.96f));
-//                entries.add(new CandleEntry(2, 5.25f, 3.02f, 3.50f, 4.50f));
-//                entries.add(new CandleEntry(3, 6f,    3.25f, 4.40f, 5.0f));
-//                entries.add(new CandleEntry(4, 5.57f, 2f,    2.80f, 4.5f));
+    // this method is used to create data for Bar graph
+    public BarData barData_hour(){
+        barlabel=0;
+        ArrayList<BarEntry> group1 = new ArrayList<BarEntry>();
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date","milk","r", "g", "b","resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date_hour","milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
                 null, null, null, null);
+        float outotrue=0,outofalth=0.1f,sekitrue=0,sekifalth=0.1f,hassintrue=0,hassinfalth=0.1f,kigentrue=0
+                ,kigenfalth=0.1f,genkitrue=0,genkifalth=0.1f,memotrue=0,memofalth=0.1f;
+        int hikaku=0;
+        String hikaku_date="";
+        int milkseekvalue=0;
         boolean mov = c.moveToFirst();
+        //各チェックボックスから値を取得しグラフに表示(チェック入れられていないものは白色に
         while (mov) {
-                entries.add(new CandleEntry(bubblelabel, 4.62f, 2.02f, 2.70f, 4.13f));
-            bubblelabel++;
-            colors.add(rgb(255,0,0
-            ));
+                if (c.getInt(1) != 0) {
+                    milkseekvalue+=c.getInt(1);
+                }
+            if (c.getInt(2) == 1) {
+                outotrue = 0.1f;
+                outofalth = 0;
+            }
+            if (c.getInt(3) == 1) {
+                sekitrue = 0.1f;
+                sekifalth = 0;
+            }
+            if (c.getInt(4) == 1) {
+                hassintrue = 0.1f;
+                hassinfalth = 0;
+            }
+            if (c.getInt(5) == 1) {
+                kigentrue = 0.1f;
+                kigenfalth = 0;
+            }
+            if (c.getInt(6) == 1) {
+                genkitrue = 0.1f;
+                genkifalth = 0;
+            }
+            if (c.getString(7).equals("(未入力)")) {
+
+            } else {
+                memotrue = 0.1f;
+                memofalth = 0;
+            }
+            if(c.getString(0).equals(hikaku_date)) {
+
+            }else {
+            group1.add(new BarEntry(new float[]{memotrue, memofalth, outotrue, outofalth, sekitrue, sekifalth,
+                    hassintrue, hassinfalth, kigentrue, kigenfalth, genkitrue, genkifalth, milkseekvalue}, barlabel));
+
+                hikaku_date=c.getString(0);
+                    outotrue = 0.1f;
+                    outofalth = 0f;
+                    sekitrue = 0;
+                    sekifalth = 0.1f;
+                    hassintrue = 0;
+                    hassinfalth = 0.1f;
+                    kigentrue = 0;
+                    kigenfalth = 0.1f;
+                    genkitrue = 0;
+                    genkifalth = 0.1f;
+                    memotrue = 0;
+                    memofalth = 0.1f;
+                    milkseekvalue=0;
+                    if (c.getInt(1) != 0) {
+                        milkseekvalue+=c.getInt(1);
+                    }
+                    if (c.getInt(2) == 1) {
+                        outotrue = 0.1f;
+                        outofalth = 0;
+                    }
+                    if (c.getInt(3) == 1) {
+                        sekitrue = 0.1f;
+                        sekifalth = 0;
+                    }
+                    if (c.getInt(4) == 1) {
+                        hassintrue = 0.1f;
+                        hassinfalth = 0;
+                    }
+                    if (c.getInt(5) == 1) {
+                        kigentrue = 0.1f;
+                        kigenfalth = 0;
+                    }
+                    if (c.getInt(6) == 1) {
+                        genkitrue = 0.1f;
+                        genkifalth = 0;
+                    }
+                    if (c.getString(7).equals("(未入力)")) {
+
+                    } else {
+                        memotrue = 0.1f;
+                        memofalth = 0;
+                    }
+            barlabel++;
+            }
             mov = c.moveToNext();
         }
+
+        BarDataSet barDataSet = new BarDataSet(group1,"");
+        barDataSet.setDrawValues(false);
+        int[] colors = new int[13];
+        colors[0]=Color.rgb(0, 255, 0);
+        colors[1]=Color.rgb(191, 191, 191);
+        colors[2]=Color.rgb(255, 221, 102);
+        colors[3]=Color.rgb(191, 191, 191);
+        colors[4]=Color.rgb(0, 112, 192);
+        colors[5]=Color.rgb(191, 191, 191);
+        colors[6]=Color.rgb(255, 127, 127);
+        colors[7]=Color.rgb(191, 191, 191);
+        colors[8]=Color.rgb(255, 0, 0);
+        colors[9]=Color.rgb(191, 191, 191);
+        colors[10]=Color.rgb(157, 195, 230);
+        colors[11]=Color.rgb(191, 191, 191);
+        colors[12]=Color.rgb(0, 0, 255);
+        barDataSet.setStackLabels(new String[]{"メモ","嘔吐", "咳が多い", "発疹","機嫌が悪い","元気がない","空白","ミルク"});
+        barDataSet.setColors(colors);
+        BarData barData = new BarData(getXAxisValues_hour(),barDataSet);
         c.close();
         db.close();
-        CandleDataSet dataset = new CandleDataSet(entries,"Candle");
-        dataset.setDrawValues(false);
-        dataset.setColors(colors);
-
-        CandleData data = new CandleData(getXAxisValues(),dataset);
-        return data;
+        return barData;
     }
+
+
     public BubbleData BubbleData(){
 //        final float[] hsv = new float[]{108,243,135};
         bubblelabel=0;
@@ -289,23 +441,28 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date","milk","r", "g", "b","resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date","milkseek","r", "g", "b","resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            if(c.getInt(5)==0){
+            if(bubblelabel==0) {
 //                bubble.add(new BubbleEntry(bubblelabel,0,0));
 //            }else {
 //            if(bubblelabel==0) {
-                bubble.add(new BubbleEntry(bubblelabel, c.getInt(5), 0f));
-            }else{
-                bubble.add(new BubbleEntry(bubblelabel, c.getInt(5), 1f));
-            }
+                bubble.add(new BubbleEntry(bubblelabel, 1, 0f));
+                colors.add(rgb(255, 255, 255));
+            }else {
+                if (c.getInt(5) == 0) {
+                    bubble.add(new BubbleEntry(bubblelabel, 1, 0f));
+                    colors.add(rgb(255, 255, 255));
+                } else {
+                    bubble.add(new BubbleEntry(bubblelabel, 9, 1f));
 //            if(bubblelabel%2==0) {
 //            colors.add(Color.HSVToColor(hsv));
-                colors.add(rgb(c.getInt(2), c.getInt(3), c.getInt(4)));
+                    colors.add(rgb(c.getInt(2), c.getInt(3), c.getInt(4)));
 //            colors.add(rgb((int)R,(int)G,(int)B));
-//            }
+                }
+            }
             bubblelabel++;
             mov = c.moveToNext();
         }
@@ -348,25 +505,31 @@ public void combine(CombinedChart combinedChart) {
         }
     });
 }
-    public void DBsave(int milk) {//DBの保存機能の設定予定いいいいいい
+    public void DBsave(String milkkind,int milkseek,int milkvalue,String StrHitokotomemo) {//DBの保存機能の設定予定いいいいいい
         MyOpenHelper helper = new MyOpenHelper(this);
     final SQLiteDatabase db = helper.getReadableDatabase();
         // 現在日時の取得
         Date now = new Date(System.currentTimeMillis());
         // 日時のフォーマットオブジェクト作成
         DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
-        formatter =new SimpleDateFormat("dd日 HH:mm.ss");
-        formatter =new SimpleDateFormat("HH:mm.ss");
-        // フォーマット
+//        formatter =new SimpleDateFormat("dd日 HH:mm.ss");
+//        formatter =new SimpleDateFormat("HH:mm.ss");
+//        // フォーマット
         String date = formatter.format(now);
+        formatter = new SimpleDateFormat("MM/dd HH");
+        String date_hour = formatter.format(now);
+
         ContentValues insertValues = new ContentValues();
         insertValues.put("date", date);
-        insertValues.put("milk", milk);
-        insertValues.put("r", 0);
-        insertValues.put("g", 0);
-        insertValues.put("b", 0);
+        insertValues.put("date_hour", date_hour);
+        insertValues.put("milkkind", milkkind);
+        insertValues.put("milkseek", milkseek);
+        insertValues.put("milkvalue", milkvalue);
+        insertValues.put("r", 255);
+        insertValues.put("g", 255);
+        insertValues.put("b", 255);
         insertValues.put("resultnumber", 0);
-        insertValues.put("memo","no data");
+        insertValues.put("memo",StrHitokotomemo);
 
         long id = db.insert("person", date, insertValues);
     }
@@ -386,33 +549,25 @@ public void combine(CombinedChart combinedChart) {
         startActivity(homeIntent);
     }
 
-    public int countINIT(){//bubblechartとbarchartのデータがあるかの判定
-        int i=0;
-        int milkcount=0;
-        int resultcount=0;
+    public int countINIT() {//bubblechartとbarchartのデータがあるかの判定
+        int i = 0;
+        int resultcount = 0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date", "milk", "r", "g", "b", "resultnumber"}, null,
+        Cursor c = db.query("person", new String[]{"date", "milkseek", "r", "g", "b", "resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {
-            if(c.getInt(1)>0){
-                milkcount=1;
-            }
-            if(c.getInt(5)>0){
-                resultcount=2;
+            if (c.getInt(5) > 0) {
+                resultcount = 1;
             }
             mov = c.moveToNext();
         }
         c.close();
         db.close();
-        if(milkcount>0 && resultcount>0){
-            i=3;
-        }else if(milkcount>0 && resultcount==0){//milkのみでーたある
-            i=1;
-        }else if(milkcount==0&&resultcount>0){//画像１ッ回取ってる
-            i=2;
+        if (resultcount > 0) {
+            i = 1;
         }
         return i;
     }

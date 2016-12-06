@@ -34,7 +34,7 @@ public class SeekBar_Activity extends Fragment {
     static int sbTri;
     private EditText editText, seekEditMemo;
     private RadioGroup milkGroup;
-//test
+    //test
 //    private FloatingActionButton fab;
     static View v;
 
@@ -89,7 +89,7 @@ public class SeekBar_Activity extends Fragment {
                         seekText1.setText(s);
                     }
 
-                    
+
                     public void onStartTrackingTouch(SeekBar seekBar) {
                         // ツマミに触れたときに呼ばれる
                     }
@@ -171,9 +171,9 @@ public class SeekBar_Activity extends Fragment {
                 break;
             case 1:
                 ((MainTabActivity)getActivity()).SeekToast1();
-                ((MainTabActivity)getActivity()).DBsave(milkValue);
+                ((MainTabActivity)getActivity()).DBsave(StrCheckedButton,SeekMilkValue,milkValue,StrHitokotomemo);
                 ((MainTabActivity)getActivity()).goHome();
-            chart=1;
+                chart=1;
                 break;
             default:
                 break;

@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/cancelButton1"
         android:layout_alignStart="@+id/cancelButton1"
-        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
         android:id="@+id/RadioButton1"
         android:textColor="@android:color/black"
         android:scrollbarSize="10dp" />
@@ -76,21 +76,21 @@
             android:id="@+id/RadioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
             android:textColor="@android:color/black" />
 
         <RadioButton android:text="粉ミルク"
             android:id="@+id/RadioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
             android:textColor="@android:color/black" />
 
         <RadioButton android:text="両方"
             android:id="@+id/RadioButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
             android:textColor="@android:color/black" />
     </RadioGroup>
 

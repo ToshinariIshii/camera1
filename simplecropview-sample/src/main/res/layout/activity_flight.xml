@@ -161,6 +161,15 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
+        android:text="ひとことメモ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mizupposaSeek"
+        android:id="@+id/memo"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
+    <TextView
         android:text="水っぽさ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -168,27 +177,6 @@
         android:textColor="#000000"
         android:textSize="30sp"
         android:layout_below="@+id/haisetuSeek"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="ひとことメモ"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mizupposaSeek"
-        android:id="@+id/hitokotomemo"
-        android:textColor="@android:color/black"
-        android:textSize="30sp" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:background="@drawable/text_background"
-        android:textColor="#000000"
-        android:id="@+id/editHitokotomemo"
-        android:layout_below="@+id/hitokotomemo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -214,6 +202,18 @@
         android:layout_alignRight="@+id/nioiGroup"
         android:layout_alignEnd="@+id/nioiGroup"
         android:layout_marginEnd="16dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:background="@drawable/text_background"
+        android:textColor="@android:color/black"
+        android:id="@+id/hitokotomemo"
+        android:layout_below="@+id/memo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <!--android:background="@android:color/background_light" /> -->
 
