@@ -76,11 +76,12 @@ public class Tab1Fragment extends Fragment {
         });
 
         CombinedData data = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
-        CombinedData data_hour = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues_hour());
+        CombinedData data_hour = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues_hour_haribote());
         CombinedData data_day = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
 //        if(chart==1) {
             data.setData(((MainTabActivity) getActivity()).barData());
-        data_hour.setData(((MainTabActivity) getActivity()).barData_hour());
+        data_hour.setData(((MainTabActivity) getActivity()).barData_hourHARIBOTE());
+//        data_hour.setData(((MainTabActivity) getActivity()).barData_hour());
 //        data_day.setData(((MainTabActivity) getActivity()).barData());
 //            data.setData(((MainTabActivity) getActivity()).CandleData());
 //
@@ -119,7 +120,7 @@ public class Tab1Fragment extends Fragment {
         combinedChart_hour.getAxisLeft().setAxisMinValue(0);
         XAxis xAxis_hour = combinedChart_hour.getXAxis();
         xAxis_hour.setPosition(XAxis.XAxisPosition.BOTTOM);
-        ((MainTabActivity) getActivity()).combine(combinedChart_hour);
+//        ((MainTabActivity) getActivity()).combine(combinedChart_hour);
 //        combinedChart.moveViewToX(0);
         combinedChart_hour.getAxisLeft().setDrawLabels(false);
         combinedChart_hour.getAxisRight().setDrawLabels(false);
@@ -137,7 +138,7 @@ public class Tab1Fragment extends Fragment {
         combinedChart_day.getAxisLeft().setAxisMinValue(0);
         XAxis xAxis_day = combinedChart_day.getXAxis();
         xAxis_day.setPosition(XAxis.XAxisPosition.BOTTOM);
-        ((MainTabActivity) getActivity()).combine(combinedChart_day);
+//        ((MainTabActivity) getActivity()).combine(combinedChart_day);
 //        combinedChart.moveViewToX(0);
         combinedChart_day.getAxisLeft().setDrawLabels(false);
         combinedChart_day.getAxisRight().setDrawLabels(false);

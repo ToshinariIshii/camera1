@@ -55,6 +55,9 @@ import static com.example.simplecropviewsample.TestgraphActivity.bubblelabel;
 
 public class MainTabActivity extends FragmentActivity implements TabHost.OnTabChangeListener, OnChartValueSelectedListener {
 public static int chart=0;
+    public static float outotrueP=0,outofalthP=0.1f,sekitrueP=0,sekifalthP=0.1f,hassintrueP=0,hassinfalthP=0.1f,kigentrueP=0
+            ,kigenfalthP=0.1f,genkitrueP=0,genkifalthP=0.1f,memotrueP=0,memofalthP=0.1f,milkseekvalue=0;
+    public static String hikaku_date="";
 	// TabHost
     private TabHost mTabHost;
     // Last selected tabId
@@ -190,19 +193,45 @@ public static int chart=0;
         return labels;
     }
 
+//    // creating list of x-axis values
+//    public ArrayList<String> getXAxisValues_hour() {
+//        ArrayList<String> labels = new ArrayList();
+//        MyOpenHelper helper = new MyOpenHelper(this);
+//        final SQLiteDatabase db = helper.getReadableDatabase();
+//        // queryメソッドの実行例
+//        Cursor c = db.query("person", new String[]{"date_hour"}, null,
+//                null, null, null, null);
+//        boolean mov = c.moveToFirst();
+//        String hikaku="";
+////        labels.add("12/6 7");
+////        labels.add("12/6 8");
+////        labels.add("12/6 9");
+//        while (mov) {
+//            if(c.getString(0).equals(hikaku)) {
+//
+//            }else {
+//                labels.add(c.getString(0));
+//                hikaku=c.getString(0);
+//            }
+//            mov = c.moveToNext();
+//        }
+//
+//        c.close();
+//        db.close();
+//
+//        return labels;
+//    }
+
     // creating list of x-axis values
-    public ArrayList<String> getXAxisValues_hour() {
+    public ArrayList<String> getXAxisValues_hour_haribote() {
         ArrayList<String> labels = new ArrayList();
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date_hour"}, null,
+        Cursor c = db.query("haribote", new String[]{"date_hour"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         String hikaku="";
-//        labels.add("12/6 7");
-//        labels.add("12/6 8");
-//        labels.add("12/6 9");
         while (mov) {
             if(c.getString(0).equals(hikaku)) {
 
@@ -218,7 +247,6 @@ public static int chart=0;
 
         return labels;
     }
-
     public void startCamera2Activity() {
         Intent intent = new Intent(this,Camera2Activity.class);
         startActivity(intent);
@@ -250,34 +278,34 @@ public static int chart=0;
         while (mov) {
             float outotrue=0,outofalth=0,sekitrue=0,sekifalth=0,hassintrue=0,hassinfalth=0,kigentrue=0,kigenfalth=0,genkitrue=0,genkifalth=0,memotrue=0,memofalth=0;
             if(c.getInt(1)==1){
-                outotrue=0.1f;
+                outotrue=0.11f;
             }else{
-                outofalth=0.1f;
+                outofalth=0.11f;
             }
             if(c.getInt(2)==1){
-                sekitrue=0.1f;
+                sekitrue=0.11f;
             }else{
-                sekifalth=0.1f;
+                sekifalth=0.11f;
             }
             if(c.getInt(3)==1){
-                hassintrue=0.1f;
+                hassintrue=0.11f;
             }else{
-                hassinfalth=0.1f;
+                hassinfalth=0.11f;
             }
             if(c.getInt(4)==1){
-                kigentrue=0.1f;
+                kigentrue=0.11f;
             }else{
-                kigenfalth=0.1f;
+                kigenfalth=0.11f;
             }
             if(c.getInt(5)==1){
-                genkitrue=0.1f;
+                genkitrue=0.11f;
             }else{
-                genkifalth=0.1f;
+                genkifalth=0.11f;
             }
             if(c.getString(6).equals("(未入力)")){
-                memofalth=0.1f;
+                memofalth=0.11f;
             }else{
-                memotrue=0.1f;
+                memotrue=0.11f;
             }
             group1.add(new BarEntry(new float[]{memotrue, memofalth, outotrue, outofalth, sekitrue, sekifalth,
                     hassintrue, hassinfalth, kigentrue, kigenfalth, genkitrue, genkifalth, Float.valueOf(c.getInt(0))}, barlabel));
@@ -297,9 +325,9 @@ public static int chart=0;
         colors[7]=Color.rgb(191, 191, 191);
         colors[8]=Color.rgb(255, 0, 0);
         colors[9]=Color.rgb(191, 191, 191);
-        colors[10]=Color.rgb(157, 195, 230);
+        colors[10]=Color.rgb(255, 0, 255);
         colors[11]=Color.rgb(191, 191, 191);
-        colors[12]=Color.rgb(0, 0, 255);
+        colors[12]=Color.rgb(157, 195, 230);
         barDataSet.setStackLabels(new String[]{"メモ","嘔吐", "咳が多い", "発疹","機嫌が悪い","元気がない","空白","ミルク"});
         barDataSet.setColors(colors);
         BarData barData = new BarData(getXAxisValues(),barDataSet);
@@ -307,106 +335,54 @@ public static int chart=0;
         db.close();
         return barData;
     }
-    // this method is used to create data for Bar graph
-    public BarData barData_hour(){
+
+    public BarData barData_hourHARIBOTE(){
         barlabel=0;
         ArrayList<BarEntry> group1 = new ArrayList<BarEntry>();
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date_hour","milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
+        Cursor c = db.query("haribote", new String[]{"milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
                 null, null, null, null);
-        float outotrue=0,outofalth=0.1f,sekitrue=0,sekifalth=0.1f,hassintrue=0,hassinfalth=0.1f,kigentrue=0
-                ,kigenfalth=0.1f,genkitrue=0,genkifalth=0.1f,memotrue=0,memofalth=0.1f;
-        int hikaku=0;
-        String hikaku_date="";
-        int milkseekvalue=0;
         boolean mov = c.moveToFirst();
         //各チェックボックスから値を取得しグラフに表示(チェック入れられていないものは白色に
         while (mov) {
-                if (c.getInt(1) != 0) {
-                    milkseekvalue+=c.getInt(1);
-                }
-            if (c.getInt(2) == 1) {
-                outotrue = 0.1f;
-                outofalth = 0;
+            float outotrue=0,outofalth=0,sekitrue=0,sekifalth=0,hassintrue=0,hassinfalth=0,kigentrue=0,kigenfalth=0,genkitrue=0,genkifalth=0,memotrue=0,memofalth=0;
+            if(c.getInt(1)==1){
+                outotrue=0.11f;
+            }else{
+                outofalth=0.11f;
             }
-            if (c.getInt(3) == 1) {
-                sekitrue = 0.1f;
-                sekifalth = 0;
+            if(c.getInt(2)==1){
+                sekitrue=0.11f;
+            }else{
+                sekifalth=0.11f;
             }
-            if (c.getInt(4) == 1) {
-                hassintrue = 0.1f;
-                hassinfalth = 0;
+            if(c.getInt(3)==1){
+                hassintrue=0.11f;
+            }else{
+                hassinfalth=0.11f;
             }
-            if (c.getInt(5) == 1) {
-                kigentrue = 0.1f;
-                kigenfalth = 0;
+            if(c.getInt(4)==1){
+                kigentrue=0.11f;
+            }else{
+                kigenfalth=0.11f;
             }
-            if (c.getInt(6) == 1) {
-                genkitrue = 0.1f;
-                genkifalth = 0;
+            if(c.getInt(5)==1){
+                genkitrue=0.11f;
+            }else{
+                genkifalth=0.11f;
             }
-            if (c.getString(7).equals("(未入力)")) {
-
-            } else {
-                memotrue = 0.1f;
-                memofalth = 0;
+            if(c.getString(6).equals("(未入力)")){
+                memofalth=0.11f;
+            }else{
+                memotrue=0.11f;
             }
-            if(c.getString(0).equals(hikaku_date)) {
-
-            }else {
             group1.add(new BarEntry(new float[]{memotrue, memofalth, outotrue, outofalth, sekitrue, sekifalth,
-                    hassintrue, hassinfalth, kigentrue, kigenfalth, genkitrue, genkifalth, milkseekvalue}, barlabel));
-
-                hikaku_date=c.getString(0);
-                    outotrue = 0.1f;
-                    outofalth = 0f;
-                    sekitrue = 0;
-                    sekifalth = 0.1f;
-                    hassintrue = 0;
-                    hassinfalth = 0.1f;
-                    kigentrue = 0;
-                    kigenfalth = 0.1f;
-                    genkitrue = 0;
-                    genkifalth = 0.1f;
-                    memotrue = 0;
-                    memofalth = 0.1f;
-                    milkseekvalue=0;
-                    if (c.getInt(1) != 0) {
-                        milkseekvalue+=c.getInt(1);
-                    }
-                    if (c.getInt(2) == 1) {
-                        outotrue = 0.1f;
-                        outofalth = 0;
-                    }
-                    if (c.getInt(3) == 1) {
-                        sekitrue = 0.1f;
-                        sekifalth = 0;
-                    }
-                    if (c.getInt(4) == 1) {
-                        hassintrue = 0.1f;
-                        hassinfalth = 0;
-                    }
-                    if (c.getInt(5) == 1) {
-                        kigentrue = 0.1f;
-                        kigenfalth = 0;
-                    }
-                    if (c.getInt(6) == 1) {
-                        genkitrue = 0.1f;
-                        genkifalth = 0;
-                    }
-                    if (c.getString(7).equals("(未入力)")) {
-
-                    } else {
-                        memotrue = 0.1f;
-                        memofalth = 0;
-                    }
+                    hassintrue, hassinfalth, kigentrue, kigenfalth, genkitrue, genkifalth, Float.valueOf(c.getInt(0))}, barlabel));
             barlabel++;
-            }
             mov = c.moveToNext();
         }
-
         BarDataSet barDataSet = new BarDataSet(group1,"");
         barDataSet.setDrawValues(false);
         int[] colors = new int[13];
@@ -420,16 +396,190 @@ public static int chart=0;
         colors[7]=Color.rgb(191, 191, 191);
         colors[8]=Color.rgb(255, 0, 0);
         colors[9]=Color.rgb(191, 191, 191);
-        colors[10]=Color.rgb(157, 195, 230);
+        colors[10]=Color.rgb(255, 0, 255);
         colors[11]=Color.rgb(191, 191, 191);
-        colors[12]=Color.rgb(0, 0, 255);
+        colors[12]=Color.rgb(157, 195, 230);
         barDataSet.setStackLabels(new String[]{"メモ","嘔吐", "咳が多い", "発疹","機嫌が悪い","元気がない","空白","ミルク"});
         barDataSet.setColors(colors);
-        BarData barData = new BarData(getXAxisValues_hour(),barDataSet);
+        BarData barData = new BarData(getXAxisValues_hour_haribote(),barDataSet);
         c.close();
         db.close();
         return barData;
     }
+
+//    // this method is used to create data for Bar graph
+//    public BarData barData_hour(){
+//        barlabel=0;
+//        ArrayList<BarEntry> group1 = new ArrayList<BarEntry>();
+//        MyOpenHelper helper = new MyOpenHelper(this);
+//        final SQLiteDatabase db = helper.getReadableDatabase();
+//        // queryメソッドの実行例
+//        Cursor c = db.query("person", new String[]{"date_hour","milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
+//                null, null, null, null);
+////        public static float outotrue=0,outofalth=0.1f,sekitrue=0,sekifalth=0.1f,hassintrue=0,hassinfalth=0.1f,kigentrue=0
+////                ,kigenfalth=0.1f,genkitrue=0,genkifalth=0.1f,memotrue=0,memofalth=0.1f;
+//        int hikaku=0;
+////        String hikaku_date="";
+////        int milkseekvalue=0;
+//        boolean mov = c.moveToFirst();
+//        //各チェックボックスから値を取得しグラフに表示(チェック入れられていないものは白色に
+//        while (mov) {
+////                if (c.getInt(1) != 0) {
+////                    milkseekvalue =milkseekvalue + c.getInt(1);
+////                }
+////            if (c.getInt(2) == 1) {
+////                outotrueP = 0.1f;
+////                outofalthP = 0;
+////            }
+////            if (c.getInt(3) == 1) {
+////                sekitrueP = 0.1f;
+////                sekifalthP = 0;
+////            }
+////            if (c.getInt(4) == 1) {
+////                hassintrueP = 0.1f;
+////                hassinfalthP = 0;
+////            }
+////            if (c.getInt(5) == 1) {
+////                kigentrueP = 0.1f;
+////                kigenfalthP = 0;
+////            }
+////            if (c.getInt(6) == 1) {
+////                genkitrueP = 0.1f;
+////                genkifalthP = 0;
+////            }
+////            if (c.getString(7).equals("(未入力)")) {
+////
+////            } else {
+////                memotrueP = 0.1f;
+////                memofalthP = 0;
+////            }
+////
+//            if(c.getString(0).equals(hikaku_date)) {
+//            }else{
+//                group1.add(new BarEntry(new float[]{memotrueP, memofalthP, outotrueP, outofalthP, sekitrueP, sekifalthP,
+//                        hassintrueP, hassinfalthP, kigentrueP, kigenfalthP, genkitrueP, genkifalthP, milkseekvalue}, barlabel));
+//                hikaku_date=c.getString(0);
+//                outotrueP = 0;
+//                outofalthP = 0.1f;
+//                sekitrueP = 0;
+//                sekifalthP = 0.1f;
+//                hassintrueP = 0;
+//                hassinfalthP = 0.1f;
+//                kigentrueP = 0;
+//                kigenfalthP = 0.1f;
+//                genkitrueP = 0;
+//                genkifalthP = 0.1f;
+//                memotrueP = 0;
+//                memofalthP = 0.1f;
+//                milkseekvalue=0;
+//                barlabel++;
+//            }
+//                if (c.getInt(1) != 0) {
+//                    milkseekvalue =milkseekvalue + c.getInt(1);
+//                }
+//                if (c.getInt(2) == 1) {
+//                    outotrueP = 0.1f;
+//                    outofalthP = 0;
+//                }
+//                if (c.getInt(3) == 1) {
+//                    sekitrueP = 0.1f;
+//                    sekifalthP = 0;
+//                }
+//                if (c.getInt(4) == 1) {
+//                    hassintrueP = 0.1f;
+//                    hassinfalthP = 0;
+//                }
+//                if (c.getInt(5) == 1) {
+//                    kigentrueP = 0.1f;
+//                    kigenfalthP = 0;
+//                }
+//                if (c.getInt(6) == 1) {
+//                    genkitrueP = 0.1f;
+//                    genkifalthP = 0;
+//                }
+//                if (c.getString(7).equals("(未入力)")) {
+//
+//                } else {
+//                    memotrueP = 0.1f;
+//                    memofalthP = 0;
+//                }
+//
+////            if(c.getString(0).equals(hikaku_date)) {
+////            }else{
+////            group1.add(new BarEntry(new float[]{memotrue, memofalth, outotrue, outofalth, sekitrue, sekifalth,
+////                    hassintrue, hassinfalth, kigentrue, kigenfalth, genkitrue, genkifalth, milkseekvalue}, barlabel));
+//
+////                hikaku_date=c.getString(0);
+////                    outotrue = 0;
+////                    outofalth = 0.1f;
+////                    sekitrue = 0;
+////                    sekifalth = 0.1f;
+////                    hassintrue = 0;
+////                    hassinfalth = 0.1f;
+////                    kigentrue = 0;
+////                    kigenfalth = 0.1f;
+////                    genkitrue = 0;
+////                    genkifalth = 0.1f;
+////                    memotrue = 0;
+////                    memofalth = 0.1f;
+////                    milkseekvalue=0;
+////                    if (c.getInt(1) != 0) {
+////                        milkseekvalue+=c.getInt(1);
+////                    }
+////                    if (c.getInt(2) == 1) {
+////                        outotrue = 0.1f;
+////                        outofalth = 0;
+////                    }
+////                    if (c.getInt(3) == 1) {
+////                        sekitrue = 0.1f;
+////                        sekifalth = 0;
+////                    }
+////                    if (c.getInt(4) == 1) {
+////                        hassintrue = 0.1f;
+////                        hassinfalth = 0;
+////                    }
+////                    if (c.getInt(5) == 1) {
+////                        kigentrue = 0.1f;
+////                        kigenfalth = 0;
+////                    }
+////                    if (c.getInt(6) == 1) {
+////                        genkitrue = 0.1f;
+////                        genkifalth = 0;
+////                    }
+////                    if (c.getString(7).equals("(未入力)")) {
+////
+////                    } else {
+////                        memotrue = 0.1f;
+////                        memofalth = 0;
+////                    }
+////            barlabel++;
+////            }
+//            mov = c.moveToNext();
+//        }
+//
+//        BarDataSet barDataSet = new BarDataSet(group1,"");
+//        barDataSet.setDrawValues(false);
+//        int[] colors = new int[13];
+//        colors[0]=Color.rgb(0, 255, 0);
+//        colors[1]=Color.rgb(191, 191, 191);
+//        colors[2]=Color.rgb(255, 221, 102);
+//        colors[3]=Color.rgb(191, 191, 191);
+//        colors[4]=Color.rgb(0, 112, 192);
+//        colors[5]=Color.rgb(191, 191, 191);
+//        colors[6]=Color.rgb(255, 127, 127);
+//        colors[7]=Color.rgb(191, 191, 191);
+//        colors[8]=Color.rgb(255, 0, 0);
+//        colors[9]=Color.rgb(191, 191, 191);
+//        colors[10]=Color.rgb(157, 195, 230);
+//        colors[11]=Color.rgb(191, 191, 191);
+//        colors[12]=Color.rgb(0, 0, 255);
+//        barDataSet.setStackLabels(new String[]{"メモ","嘔吐", "咳が多い", "発疹","機嫌が悪い","元気がない","空白","ミルク"});
+//        barDataSet.setColors(colors);
+//        BarData barData = new BarData(getXAxisValues_hour(),barDataSet);
+//        c.close();
+//        db.close();
+//        return barData;
+//    }
 
 
     public BubbleData BubbleData(){
