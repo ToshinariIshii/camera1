@@ -19,7 +19,14 @@ public class MyOpenHelper extends SQLiteOpenHelper {
                 +"r integer,"+"g integer,"+"b integer,"+"resultnumber integer,"
                 +"resultsmell text,"+"resultamount integer,"+"resultmizu integer,"
                 +"outo integer,"+"seki integer,"+"hassin integer,"+"kigen integer,"+"genki integer,"+"memo text"+");");
-        db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,memo) values ('開始日','開始日','開始日','0','0','255','255','255','','(未入力)');");
+        db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,memo) " +
+                "values ('開始日','開始日','開始日','0','0','255','255','255','','(未入力)');");
+//        db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,memo) " +
+//                "values ('開始日','開始日','開始日','0','0','255','255','255','','(未入力)');");
+//        db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,memo) " +
+//                "values ('開始日','12/06 10','開始日','5','0','255','255','255','','(未入力)');");
+//        db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,memo) " +
+//                "values ('開始日','12/06 10','開始日','5','0','255','255','255','','(未入力)');");
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

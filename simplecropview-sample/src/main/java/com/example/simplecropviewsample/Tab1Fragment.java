@@ -44,6 +44,9 @@ public class Tab1Fragment extends Fragment {
         final CombinedChart combinedChart_hour = (CombinedChart)v. findViewById(R.id.CombinedChart_hour);
         final CombinedChart combinedChart_day = (CombinedChart)v. findViewById(R.id.CombinedChart_day);
 
+        combinedChart_hour.setVisibility(View.INVISIBLE);
+        combinedChart_day.setVisibility(View.INVISIBLE);
+
         Button button_ivent = (Button)v.findViewById(R.id.button_ivent);
         button_ivent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,18 +76,18 @@ public class Tab1Fragment extends Fragment {
         });
 
         CombinedData data = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
-        CombinedData data_hour = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
+        CombinedData data_hour = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues_hour());
         CombinedData data_day = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
 //        if(chart==1) {
             data.setData(((MainTabActivity) getActivity()).barData());
-        data_hour.setData(((MainTabActivity) getActivity()).barData());
-        data_day.setData(((MainTabActivity) getActivity()).barData());
+        data_hour.setData(((MainTabActivity) getActivity()).barData_hour());
+//        data_day.setData(((MainTabActivity) getActivity()).barData());
 //            data.setData(((MainTabActivity) getActivity()).CandleData());
 //
             if (bubbleinit == 1) {
                 data.setData(((MainTabActivity) getActivity()).BubbleData());
-                data_hour.setData(((MainTabActivity) getActivity()).BubbleData());
-                data_day.setData(((MainTabActivity) getActivity()).BubbleData());
+//                data_hour.setData(((MainTabActivity) getActivity()).BubbleData());
+//                data_day.setData(((MainTabActivity) getActivity()).BubbleData());
             }
 
                 combinedChart.setData(data);

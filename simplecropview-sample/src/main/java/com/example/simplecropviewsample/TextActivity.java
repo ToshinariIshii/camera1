@@ -117,12 +117,18 @@ public class TextActivity extends AppCompatActivity {
                 Date now = new Date(System.currentTimeMillis());
                 // 日時のフォーマットオブジェクト作成
                 DateFormat formatter = new SimpleDateFormat("MM/dd HH:mm.ss");
+
 //                formatter =new SimpleDateFormat("dd日 HH:mm.ss");
 //                formatter =new SimpleDateFormat("HH:mm.ss");
                 // フォーマット
                 date = formatter.format(now);
+                formatter = new SimpleDateFormat("MM/dd HH");
+                String date_hour = formatter.format(now);
+
+
                 ContentValues insertValues = new ContentValues();
                 insertValues.put("date", date);
+                insertValues.put("date_hour", date_hour);
                 insertValues.put("milkseek", 0);
                 insertValues.put("milkvalue", 0);
                 insertValues.put("r", 255);
