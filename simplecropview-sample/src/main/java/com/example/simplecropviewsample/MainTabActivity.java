@@ -368,7 +368,7 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
+        Cursor c = db.query("haribote", new String[]{"milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         //各チェックボックスから値を取得しグラフに表示(チェック入れられていないものは白色に
@@ -732,7 +732,7 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("person", new String[]{"date_hour","milkseek","r", "g", "b","resultnumber"}, null,
+        Cursor c = db.query("haribote", new String[]{"date_hour","milkseek","r", "g", "b","resultnumber"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         while (mov) {

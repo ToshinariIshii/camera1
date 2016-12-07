@@ -75,7 +75,8 @@ public class ResultActivity extends AppCompatActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+        haisetuTri = 0;
+//
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight);
 
