@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by b1014001 on 2016/11/10.
  */
-
+//
 public class MyOpenHelper extends SQLiteOpenHelper {
     public MyOpenHelper(Context context) {
         super(context, "DateMilkHSVDB", null, 1);
@@ -56,7 +56,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
                 "  values ('12/02 19:27.19','12/02 19','開始日','0','0','191','153','49','5','0','0','0','0','0','(未入力)');");
         db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,outo,seki,hassin,kigen,genki,memo)" +
-                "  values ('12/02 20:15.38','12/02 20','開始日','5','150','255','255','255','0','0','0','0','0','(未入力)');");
+                "  values ('12/02 20:15.38','12/02 20','開始日','4','140','255','255','255','0','0','0','0','0','(未入力)');");
 
         db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,outo,seki,hassin,kigen,genki,memo)" +
                 " values ('12/03 2:20.11','12/03 2','開始日','2','75','255','255','255','0','0','0','0','0','(未入力)');");
@@ -75,7 +75,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
                 "  values ('12/03 19:27.19','12/03 19','開始日','0','0','201','190','134','2','0','0','0','0','0','(未入力)');");
         db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,outo,seki,hassin,kigen,genki,memo)" +
-                "  values ('12/03 20:15.38','12/03 20','開始日','5','150','255','255','255','0','0','0','0','0','(未入力)');");
+                "  values ('12/03 20:15.38','12/03 20','開始日','4','140','255','255','255','0','0','0','0','0','(未入力)');");
 
         db.execSQL("INSERT INTO person(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
                 " values ('12/04 2:20.11','12/04 2','開始日','0','0','210','200','74','4','0','0','0','0','0','(未入力)');");
@@ -223,7 +223,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO haribote(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
                 "  values ('12/02 19:27.19','12/02 19','開始日','0','0','191','153','49','5','0','0','0','0','0','(未入力)');");
         db.execSQL("INSERT INTO haribote(date,date_hour,date_day,milkseek,milkvalue,r,g,b,outo,seki,hassin,kigen,genki,memo)" +
-                "  values ('12/02 20:15.38','12/02 20','開始日','5','150','255','255','255','0','0','0','0','0','(未入力)');");
+                "  values ('12/02 20:15.38','12/02 20','開始日','4','140','255','255','255','0','0','0','0','0','(未入力)');");
 
         db.execSQL("INSERT INTO haribote(date,date_hour,date_day,milkseek,milkvalue,r,g,b,outo,seki,hassin,kigen,genki,memo)" +
                 " values ('12/03 2:20.11','12/03 2','開始日','2','75','255','255','255','0','0','0','0','0','(未入力)');");
@@ -242,7 +242,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO haribote(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
                 "  values ('12/03 19:27.19','12/03 19','開始日','0','0','201','190','134','2','0','0','0','0','0','(未入力)');");
         db.execSQL("INSERT INTO haribote(date,date_hour,date_day,milkseek,milkvalue,r,g,b,outo,seki,hassin,kigen,genki,memo)" +
-                "  values ('12/03 20:15.38','12/03 20','開始日','5','150','255','255','255','0','0','0','0','0','(未入力)');");
+                "  values ('12/03 20:15.38','12/03 20','開始日','4','140','255','255','255','0','0','0','0','0','(未入力)');");
 
         db.execSQL("INSERT INTO haribote(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
                 " values ('12/04 2:20.11','12/04 2','開始日','0','0','210','200','74','4','0','0','0','0','0','(未入力)');");
@@ -365,7 +365,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO hariboteday(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
                 "  values ('12/01 12:26.31','12/09 12','12/5','4','0','191','153','49','5','0','0','0','0','0','(ダミー)');");
         db.execSQL("INSERT INTO hariboteday(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
-                "  values ('12/01 12:26.31','12/09 12','12/6','5','0','210','200','74','4','0','0','0','0','0','(ダミー)');");
+                "  values ('12/01 12:26.31','12/09 12','12/6','4','0','210','200','74','4','0','0','0','0','0','(ダミー)');");
         db.execSQL("INSERT INTO hariboteday(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
                 "  values ('12/01 12:26.31','12/09 12','12/7','3','0','191','153','49','5','0','0','0','0','0','(ダミー)');");
         db.execSQL("INSERT INTO hariboteday(date,date_hour,date_day,milkseek,milkvalue,r,g,b,resultnumber,outo,seki,hassin,kigen,genki,memo)" +
