@@ -247,6 +247,32 @@ public static int chart=0;
 
         return labels;
     }
+    // creating list of x-axis values
+    public ArrayList<String> getXAxisValues_day_haribote() {
+        ArrayList<String> labels = new ArrayList();
+        MyOpenHelper helper = new MyOpenHelper(this);
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        // queryメソッドの実行例
+        Cursor c = db.query("hariboteday", new String[]{"date_day"}, null,
+                null, null, null, null);
+        boolean mov = c.moveToFirst();
+        String hikaku="";
+        while (mov) {
+            if(c.getString(0).equals(hikaku)) {
+
+            }else {
+                labels.add(c.getString(0));
+                hikaku=c.getString(0);
+            }
+            mov = c.moveToNext();
+        }
+
+        c.close();
+        db.close();
+
+        return labels;
+    }
+
     public void startCamera2Activity() {
         Intent intent = new Intent(this,Camera2Activity.class);
         startActivity(intent);
@@ -342,7 +368,7 @@ public static int chart=0;
         MyOpenHelper helper = new MyOpenHelper(this);
         final SQLiteDatabase db = helper.getReadableDatabase();
         // queryメソッドの実行例
-        Cursor c = db.query("haribote", new String[]{"milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
+        Cursor c = db.query("person", new String[]{"milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
                 null, null, null, null);
         boolean mov = c.moveToFirst();
         //各チェックボックスから値を取得しグラフに表示(チェック入れられていないものは白色に
@@ -406,7 +432,76 @@ public static int chart=0;
         db.close();
         return barData;
     }
-
+    public BarData barData_dayHARIBOTE(){
+        barlabel=0;
+        ArrayList<BarEntry> group1 = new ArrayList<BarEntry>();
+        MyOpenHelper helper = new MyOpenHelper(this);
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        // queryメソッドの実行例
+        Cursor c = db.query("hariboteday", new String[]{"milkseek","outo","seki","hassin","kigen","genki","memo"}, null,
+                null, null, null, null);
+        boolean mov = c.moveToFirst();
+        //各チェックボックスから値を取得しグラフに表示(チェック入れられていないものは白色に
+        while (mov) {
+            float outotrue=0,outofalth=0,sekitrue=0,sekifalth=0,hassintrue=0,hassinfalth=0,kigentrue=0,kigenfalth=0,genkitrue=0,genkifalth=0,memotrue=0,memofalth=0;
+            if(c.getInt(1)==1){
+                outotrue=0.11f;
+            }else{
+                outofalth=0.11f;
+            }
+            if(c.getInt(2)==1){
+                sekitrue=0.11f;
+            }else{
+                sekifalth=0.11f;
+            }
+            if(c.getInt(3)==1){
+                hassintrue=0.11f;
+            }else{
+                hassinfalth=0.11f;
+            }
+            if(c.getInt(4)==1){
+                kigentrue=0.11f;
+            }else{
+                kigenfalth=0.11f;
+            }
+            if(c.getInt(5)==1){
+                genkitrue=0.11f;
+            }else{
+                genkifalth=0.11f;
+            }
+            if(c.getString(6).equals("(未入力)")){
+                memofalth=0.11f;
+            }else{
+                memotrue=0.11f;
+            }
+            group1.add(new BarEntry(new float[]{memotrue, memofalth, outotrue, outofalth, sekitrue, sekifalth,
+                    hassintrue, hassinfalth, kigentrue, kigenfalth, genkitrue, genkifalth, Float.valueOf(c.getInt(0))}, barlabel));
+            barlabel++;
+            mov = c.moveToNext();
+        }
+        BarDataSet barDataSet = new BarDataSet(group1,"");
+        barDataSet.setDrawValues(false);
+        int[] colors = new int[13];
+        colors[0]=Color.rgb(0, 255, 0);
+        colors[1]=Color.rgb(191, 191, 191);
+        colors[2]=Color.rgb(255, 221, 102);
+        colors[3]=Color.rgb(191, 191, 191);
+        colors[4]=Color.rgb(0, 112, 192);
+        colors[5]=Color.rgb(191, 191, 191);
+        colors[6]=Color.rgb(255, 127, 127);
+        colors[7]=Color.rgb(191, 191, 191);
+        colors[8]=Color.rgb(255, 0, 0);
+        colors[9]=Color.rgb(191, 191, 191);
+        colors[10]=Color.rgb(255, 0, 255);
+        colors[11]=Color.rgb(191, 191, 191);
+        colors[12]=Color.rgb(157, 195, 230);
+        barDataSet.setStackLabels(new String[]{"メモ","嘔吐", "咳が多い", "発疹","機嫌が悪い","元気がない","空白","ミルク"});
+        barDataSet.setColors(colors);
+        BarData barData = new BarData(getXAxisValues_day_haribote(),barDataSet);
+        c.close();
+        db.close();
+        return barData;
+    }
 //    // this method is used to create data for Bar graph
 //    public BarData barData_hour(){
 //        barlabel=0;
@@ -616,12 +711,6 @@ public static int chart=0;
             bubblelabel++;
             mov = c.moveToNext();
         }
-//        bubble.add(new BubbleEntry(0,10f, 3));
-//        bubble.add(new BubbleEntry(1,20f, 6));
-//        bubble.add(new BubbleEntry(2,30f, 9));
-//        bubble.add(new BubbleEntry(3,40f, 12));
-//        bubble.add(new BubbleEntry(4,50f, 15));
-//        bubble.add(new BubbleEntry(5,60f, 18));
         c.close();
         db.close();
         BubbleDataSet bubbleDataSet = new BubbleDataSet( bubble ,"色");
@@ -634,6 +723,96 @@ public static int chart=0;
         return bubbleData;
     }
 
+    public BubbleData BubbleData_hourHARIBOTE(){
+//        final float[] hsv = new float[]{108,243,135};
+        bubblelabel=0;
+        List<Integer> colors = new ArrayList();
+        ArrayList<BubbleEntry> bubble = new ArrayList();
+
+        MyOpenHelper helper = new MyOpenHelper(this);
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        // queryメソッドの実行例
+        Cursor c = db.query("person", new String[]{"date_hour","milkseek","r", "g", "b","resultnumber"}, null,
+                null, null, null, null);
+        boolean mov = c.moveToFirst();
+        while (mov) {
+            if(bubblelabel==0) {
+//                bubble.add(new BubbleEntry(bubblelabel,0,0));
+//            }else {
+//            if(bubblelabel==0) {
+                bubble.add(new BubbleEntry(bubblelabel, 1, 0f));
+                colors.add(rgb(255, 255, 255));
+            }else {
+                if (c.getInt(5) == 0) {
+                    bubble.add(new BubbleEntry(bubblelabel, 1, 0f));
+                    colors.add(rgb(255, 255, 255));
+                } else {
+                    bubble.add(new BubbleEntry(bubblelabel, 9, 1f));
+//            if(bubblelabel%2==0) {
+//            colors.add(Color.HSVToColor(hsv));
+                    colors.add(rgb(c.getInt(2), c.getInt(3), c.getInt(4)));
+//            colors.add(rgb((int)R,(int)G,(int)B));
+                }
+            }
+            bubblelabel++;
+            mov = c.moveToNext();
+        }
+        c.close();
+        db.close();
+        BubbleDataSet bubbleDataSet = new BubbleDataSet( bubble ,"色");
+        bubbleDataSet.setDrawValues(false);
+//        bubbleDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        bubbleDataSet.setColors(colors);
+        BubbleDataSet dataSet = bubbleDataSet; // get a dataset
+        dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);//右のy軸を基準に
+        BubbleData bubbleData = new BubbleData(getXAxisValues(),bubbleDataSet);
+        return bubbleData;
+    }
+    public BubbleData BubbleData_dayHARIBOTE(){
+//        final float[] hsv = new float[]{108,243,135};
+        bubblelabel=0;
+        List<Integer> colors = new ArrayList();
+        ArrayList<BubbleEntry> bubble = new ArrayList();
+
+        MyOpenHelper helper = new MyOpenHelper(this);
+        final SQLiteDatabase db = helper.getReadableDatabase();
+        // queryメソッドの実行例
+        Cursor c = db.query("hariboteday", new String[]{"date_hour","milkseek","r", "g", "b","resultnumber"}, null,
+                null, null, null, null);
+        boolean mov = c.moveToFirst();
+        while (mov) {
+            if(bubblelabel==0) {
+//                bubble.add(new BubbleEntry(bubblelabel,0,0));
+//            }else {
+//            if(bubblelabel==0) {
+                bubble.add(new BubbleEntry(bubblelabel, 1, 0f));
+                colors.add(rgb(255, 255, 255));
+            }else {
+                if (c.getInt(5) == 0) {
+                    bubble.add(new BubbleEntry(bubblelabel, 1, 0f));
+                    colors.add(rgb(255, 255, 255));
+                } else {
+                    bubble.add(new BubbleEntry(bubblelabel, 9, 1f));
+//            if(bubblelabel%2==0) {
+//            colors.add(Color.HSVToColor(hsv));
+                    colors.add(rgb(c.getInt(2), c.getInt(3), c.getInt(4)));
+//            colors.add(rgb((int)R,(int)G,(int)B));
+                }
+            }
+            bubblelabel++;
+            mov = c.moveToNext();
+        }
+        c.close();
+        db.close();
+        BubbleDataSet bubbleDataSet = new BubbleDataSet( bubble ,"色");
+        bubbleDataSet.setDrawValues(false);
+//        bubbleDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        bubbleDataSet.setColors(colors);
+        BubbleDataSet dataSet = bubbleDataSet; // get a dataset
+        dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);//右のy軸を基準に
+        BubbleData bubbleData = new BubbleData(getXAxisValues(),bubbleDataSet);
+        return bubbleData;
+    }
 public void combine(CombinedChart combinedChart) {
     combinedChart.setOnChartValueSelectedListener(this);
     combinedChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {

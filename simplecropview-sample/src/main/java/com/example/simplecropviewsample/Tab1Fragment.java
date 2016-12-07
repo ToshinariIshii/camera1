@@ -77,18 +77,18 @@ public class Tab1Fragment extends Fragment {
 
         CombinedData data = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
         CombinedData data_hour = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues_hour_haribote());
-        CombinedData data_day = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues());
+        CombinedData data_day = new CombinedData(((MainTabActivity)getActivity()).getXAxisValues_day_haribote());
 //        if(chart==1) {
             data.setData(((MainTabActivity) getActivity()).barData());
         data_hour.setData(((MainTabActivity) getActivity()).barData_hourHARIBOTE());
-//        data_hour.setData(((MainTabActivity) getActivity()).barData_hour());
+        data_day.setData(((MainTabActivity) getActivity()).barData_dayHARIBOTE());
 //        data_day.setData(((MainTabActivity) getActivity()).barData());
 //            data.setData(((MainTabActivity) getActivity()).CandleData());
 //
             if (bubbleinit == 1) {
                 data.setData(((MainTabActivity) getActivity()).BubbleData());
-//                data_hour.setData(((MainTabActivity) getActivity()).BubbleData());
-//                data_day.setData(((MainTabActivity) getActivity()).BubbleData());
+                data_hour.setData(((MainTabActivity) getActivity()).BubbleData_hourHARIBOTE());
+                data_day.setData(((MainTabActivity) getActivity()).BubbleData_dayHARIBOTE());
             }
 
                 combinedChart.setData(data);
@@ -116,12 +116,18 @@ public class Tab1Fragment extends Fragment {
         combinedChart_hour.getAxisRight().setDrawGridLines(false);//グラフの線の除去
         combinedChart_hour.getXAxis().setDrawGridLines(false);//グラフの線の除去
         combinedChart_hour.setDescription("");// Hide the description
+//        combinedChart.setHighlightPerTapEnabled(false);
+//        combinedChart.setHighlightPerTapEnabled(false);
+        combinedChart_hour.setHighlightPerTapEnabled(false);
+        combinedChart_day.setHighlightPerTapEnabled(false);
+        combinedChart_day.setHighlightPerDragEnabled(false);
+
         combinedChart_hour.setDescriptionPosition((float) size_x / 2, 50);
         combinedChart_hour.getAxisLeft().setAxisMinValue(0);
         XAxis xAxis_hour = combinedChart_hour.getXAxis();
         xAxis_hour.setPosition(XAxis.XAxisPosition.BOTTOM);
 //        ((MainTabActivity) getActivity()).combine(combinedChart_hour);
-//        combinedChart.moveViewToX(0);
+        combinedChart_hour.moveViewToX(10);
         combinedChart_hour.getAxisLeft().setDrawLabels(false);
         combinedChart_hour.getAxisRight().setDrawLabels(false);
 //        combinedChart.getXAxis().setDrawLabels(false);
