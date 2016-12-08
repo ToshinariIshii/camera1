@@ -1,21 +1,16 @@
 package com.example.simplecropviewsample;
 
-import android.graphics.Canvas;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.CombinedData;
 
-import static android.content.Context.WINDOW_SERVICE;
 import static com.example.simplecropviewsample.MainTabActivity.chart;
 import static com.example.simplecropviewsample.ResultActivity.bubbleinit;
 
@@ -127,7 +122,7 @@ public class Tab1Fragment extends Fragment {
         XAxis xAxis_hour = combinedChart_hour.getXAxis();
         xAxis_hour.setPosition(XAxis.XAxisPosition.BOTTOM);
 //        ((MainTabActivity) getActivity()).combine(combinedChart_hour);
-        combinedChart_hour.moveViewToX(10);
+        combinedChart.moveViewToX(1000);
         combinedChart_hour.getAxisLeft().setDrawLabels(false);
         combinedChart_hour.getAxisRight().setDrawLabels(false);
 //        combinedChart.getXAxis().setDrawLabels(false);

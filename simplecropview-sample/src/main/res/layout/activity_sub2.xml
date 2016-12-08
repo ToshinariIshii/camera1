@@ -12,10 +12,10 @@
         android:padding="16dp" >
 
         <TextView
-            android:id="@+id/selected_text"
+            android:id="@+id/show_date"
             android:textSize="20sp"
             android:textColor="#000"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -28,25 +28,37 @@
                 android:id="@+id/picture"
                 android:layout_height="127dp"
                 android:layout_width="126dp"
-
+                android:layout_weight="1"
                 android:visibility="visible"
                 android:layout_alignParentBottom="true"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/layout1">
+
+            <ImageView
+                android:id="@+id/selected_milk"
+                android:layout_weight="0.5"
+                android:layout_height="170dp"
+                android:layout_width="0dp"
                 android:scaleType="fitCenter" />
 
             <ImageView
                 android:id="@+id/selected_photo2"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="170dp"
                 android:scaleType="fitCenter" />
 
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/selected_comment"
-            android:textSize="30sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,8 +66,33 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:text="臭い : "
-                android:id="@+id/showSmell"
+                android:id="@+id/show_milk_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/selected_milk_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/selected_comment"
+            android:textSize="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/show_smell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -72,14 +109,13 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:text="量 : "
-                android:id="@+id/showAmount"
+                android:id="@+id/show_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/selected_amount"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -90,8 +126,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:text="状態 : "
-                android:id="@+id/showStatus"
+                android:id="@+id/show_mizu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -106,6 +141,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:id="@+id/show_gero" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:id="@+id/show_seki" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:id="@+id/show_hassin" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:id="@+id/show_kigen" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:id="@+id/show_genki" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
             <ImageView
@@ -161,7 +243,10 @@
             android:layout_height="wrap_content" />
 
 
+
     </LinearLayout>
+
+
 
 
 

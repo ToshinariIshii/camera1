@@ -178,7 +178,7 @@ public class Functions {
 
 		if(majorHSV[2] < 20*255/100)// うんこ黒かったら9に分類
 			return 9;
-		if((majorHSV[0] < 30 || majorHSV[0] > 200) && majorHSV[1] > 17*255/100)// うんこ赤かったら8に分類
+		if((majorHSV[0] < 30 || majorHSV[0] > 300) && majorHSV[1] > 40*255/100 && majorHSV[2] > 60*255/100)// うんこ赤かったら8に分類
 			return 8;
 		if(majorHSV[1] >= 0 && majorHSV[1] < 25*255/100 && majorHSV[2] > 75*255/100)// 白さと明度に応じて1 ~ 4判別
 			return 1;
